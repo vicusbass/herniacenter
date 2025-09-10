@@ -9,7 +9,7 @@ const { text, icon: Icon, class: className = '' } = Astro.props;
 ---
 
 <button
-  class={`h-11 w-full rounded-4xl flex items-center justify-center space-x-5 bg-main-btn font-medium text-white transition-colors hover:opacity-90 ${className}`}
+  class={`h-12 w-full rounded-4xl flex items-center justify-center space-x-5 bg-main-btn text-2xl font-medium text-white transition-colors hover:opacity-90 ${className}`}
 >
   {Icon && <Icon class="h-6 w-6" />}
   <span>{text}</span>
