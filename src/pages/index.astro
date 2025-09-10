@@ -1,16 +1,170 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<Layout title="Hernia Center - Chirurgie minim invazivă a herniilor">
+  <!-- Hero Section -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Hero Content -->
+      <div class="space-y-6">
+        <h1 class="text-4xl lg:text-6xl font-bold text-blue-900 leading-tight">
+          chirurgia<br>
+          minim invazivă<br>
+          a herniilor
+        </h1>
+        
+        <div class="flex items-center space-x-2">
+          <div class="bg-green-500 text-white px-4 py-2 rounded-md flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+            <span>WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="bg-gray-100 rounded-lg h-96 flex items-center justify-center">
+        <span class="text-gray-400">Doctor Image Placeholder</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of Hernias Section -->
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-blue-300 text-6xl font-light">01.</span>
+        <h2 class="text-3xl font-bold text-blue-900 mt-4">tipuri de hernii</h2>
+      </div>
+
+      <!-- Hernia Types Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">01</div>
+          <h3 class="text-blue-900 font-medium">hernie inghinală</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">02</div>
+          <h3 class="text-blue-900 font-medium">hernie ombilicală</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">03</div>
+          <h3 class="text-blue-900 font-medium">hernie hiatală</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">04</div>
+          <h3 class="text-blue-900 font-medium">hernie incizională</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">05</div>
+          <h3 class="text-blue-900 font-medium">hernii complexe</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">06</div>
+          <h3 class="text-blue-900 font-medium">diastazis abdominal</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">07</div>
+          <h3 class="text-blue-900 font-medium">hernie de linia albă</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg text-center">
+          <div class="text-blue-900 font-semibold mb-2">08</div>
+          <h3 class="text-blue-900 font-medium">hernie Spiegeliană</h3>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="bg-blue-900 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors">
+          citește mai mult →
+        </button>
+      </div>
+    </div>
+
+    <!-- Large "hernia cen" Background Text -->
+    <div class="relative overflow-hidden">
+      <div class="text-[12rem] lg:text-[20rem] font-bold text-red-200 opacity-30 text-center leading-none mt-8">
+        hernia cen
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-blue-300 text-6xl font-light">02.</span>
+        <h2 class="text-3xl font-bold text-blue-900 mt-4">beneficii</h2>
+      </div>
+
+      <!-- Benefits Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-gray-50 p-8 rounded-lg">
+          <div class="text-blue-900 font-semibold mb-2">01</div>
+          <h3 class="text-xl font-bold text-blue-900 mb-4">tehnici moderne</h3>
+          <p class="text-gray-600">Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu instrumentar de finețe și tehnologii atraumatice.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg">
+          <div class="text-blue-900 font-semibold mb-2">02</div>
+          <h3 class="text-xl font-bold text-blue-900 mb-4">minim invaziv</h3>
+          <p class="text-gray-600">Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg">
+          <div class="text-blue-900 font-semibold mb-2">03</div>
+          <h3 class="text-xl font-bold text-blue-900 mb-4">recuperare rapidă</h3>
+          <p class="text-gray-600">Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi.</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg">
+          <div class="text-blue-900 font-semibold mb-2">04</div>
+          <h3 class="text-xl font-bold text-blue-900 mb-4">spital modern</h3>
+          <p class="text-gray-600">Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere private și zone de relaxare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-blue-300 text-6xl font-light">03.</span>
+        <h2 class="text-3xl font-bold text-blue-900 mt-4">ce zice lumea</h2>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+            <div>
+              <div class="font-semibold">Nistor Sabina</div>
+              <div class="text-yellow-400">★★★★★</div>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm">Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand cu încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr. Hossu, dl. dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională și o carieră cât mai lungă!</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+            <div>
+              <div class="font-semibold">Mihai Chis</div>
+              <div class="text-yellow-400">★★★★★</div>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm">Dr.Drasoveanu Radu si Dr Hossu, oameni deosebiti si medici desavarsiti care au reusit impreuna cu toata echipa din cadrul Spitalului Medicover Suceagu sa imi ofere cea mai placuta experienta pe care o poti avea la un spital, chiar daca a fost vorba de o operatie de hernie inghinala bilaterala. Multumesc Dr.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+            <div>
+              <div class="font-semibold">Alexandra Alexandrescu</div>
+              <div class="text-yellow-400">★★★★★</div>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm">Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand cu încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr. Hossu, dl. dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională și o carieră cât mai lungă!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

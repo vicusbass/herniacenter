@@ -1,0 +1,66 @@
+---
+import Logo from '../assets/logo.svg';
+---
+
+<header class="bg-white shadow-sm">
+  <!-- Top navigation bar -->
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <div class="flex h-8 w-8 items-center justify-center">
+          <Logo />
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden items-center space-x-8 lg:flex">
+        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Spitalul</a>
+        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Despre Dr. Trif</a>
+        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Intervenții</a>
+        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Blog</a>
+        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Contact</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="lg:hidden">
+        <button
+          class="mobile-menu-toggle flex h-8 w-8 items-center justify-center bg-blue-900"
+          aria-label="Toggle menu"
+        >
+          <div class="grid grid-cols-2 gap-1">
+            <div class="h-2 w-2 bg-white"></div>
+            <div class="h-2 w-2 bg-white"></div>
+            <div class="h-2 w-2 bg-white"></div>
+            <div class="h-2 w-2 bg-white"></div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu mt-4 hidden border-t border-gray-200 pb-4 lg:hidden">
+      <div class="flex flex-col space-y-3 pt-4">
+        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Spitalul</a>
+        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Despre Dr. Trif</a>
+        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Intervenții</a>
+        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Blog</a>
+        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (toggleButton && mobileMenu) {
+      toggleButton.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

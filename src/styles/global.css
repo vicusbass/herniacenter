@@ -1,9 +1,46 @@
-@import '@fontsource/darker-grotesque';
+@import '@fontsource-variable/darker-grotesque';
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: 'Darker Grotesque', sans-serif;
+  --font-sans: 'Darker Grotesque Variable', sans-serif;
+  
+  /* Custom color palette */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  
+  --color-red-200: #fecaca;
+  
+  --color-yellow-400: #facc15;
+  
+  /* Text body color */
+  --color-text-body: #374151;
 }
 
 @layer base {
@@ -15,14 +52,36 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background-color: var(--color-bg-primary);
-    @apply font-sans text-xl font-normal text-[var(--color-text-body)];
-    /* Debug: force Amiko to test */
-    font-family: 'Amiko', sans-serif !important;
+    @apply font-sans text-lg font-normal text-gray-700;
   }
-
-  h2 {
-    @apply text-3xl font-light text-black md:text-4xl lg:text-5xl;
-    font-family: var(--font-heading);
+  
+  /* Container responsive styles */
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1200px;
+    }
   }
 }
