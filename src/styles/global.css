@@ -1,0 +1,28 @@
+@import '@fontsource/darker-grotesque';
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Darker Grotesque', sans-serif;
+}
+
+@layer base {
+  html {
+    overflow-y: scroll; /* Always show vertical scrollbar */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-bg-primary);
+    @apply font-sans text-xl font-normal text-[var(--color-text-body)];
+    /* Debug: force Amiko to test */
+    font-family: 'Amiko', sans-serif !important;
+  }
+
+  h2 {
+    @apply text-3xl font-light text-black md:text-4xl lg:text-5xl;
+    font-family: var(--font-heading);
+  }
+}
