@@ -1,39 +1,60 @@
 ---
 import Logo from '../assets/logo.svg';
+import MenuIcon from '../assets/menu.svg';
 ---
 
-<header class="bg-white shadow-sm">
+<header class="border-custom border-b bg-white">
   <!-- Top navigation bar -->
-  <nav class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <div class="flex h-8 w-8 items-center justify-center">
+  <nav class="relative max-w-full px-0">
+    <div class="grid grid-cols-8">
+      <!-- Logo Square -->
+      <div class="flex aspect-square items-center justify-center">
+        <div class="flex h-12 w-12 items-center justify-center">
           <Logo />
         </div>
       </div>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden items-center space-x-8 lg:flex">
-        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Spitalul</a>
-        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Despre Dr. Trif</a>
-        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Intervenții</a>
-        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Blog</a>
-        <a href="#" class="font-medium text-blue-900 hover:text-blue-700">Contact</a>
+      <!-- Desktop Navigation - Spans 6 columns with flex layout -->
+      <div
+        class="border-custom col-span-6 hidden items-center justify-evenly space-x-8 border-r border-l lg:flex"
+      >
+        <a
+          href="#"
+          class="rounded-md px-4 py-2 text-lg font-medium transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+          >Spitalul</a
+        >
+        <a
+          href="#"
+          class="rounded-md px-4 py-2 text-lg font-medium transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+          >Despre</a
+        >
+        <a
+          href="#"
+          class="rounded-md px-4 py-2 text-lg font-medium transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+          >Intervenții</a
+        >
+        <a
+          href="#"
+          class="rounded-md px-4 py-2 text-lg font-medium transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+          >Blog</a
+        >
+        <a
+          href="#"
+          class="rounded-md px-4 py-2 text-lg font-medium transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+          >Contact</a
+        >
       </div>
 
-      <!-- Mobile menu button -->
-      <div class="lg:hidden">
+      <!-- Empty spaces for mobile - spans 6 columns -->
+      <div class="col-span-6 lg:hidden"></div>
+
+      <!-- Hamburger menu button -->
+      <div class="border-custom flex aspect-square items-center justify-center">
         <button
-          class="mobile-menu-toggle flex h-8 w-8 items-center justify-center bg-blue-900"
+          class="mobile-menu-toggle flex h-12 w-12 items-center justify-center"
           aria-label="Toggle menu"
         >
-          <div class="grid grid-cols-2 gap-1">
-            <div class="h-2 w-2 bg-white"></div>
-            <div class="h-2 w-2 bg-white"></div>
-            <div class="h-2 w-2 bg-white"></div>
-            <div class="h-2 w-2 bg-white"></div>
-          </div>
+          <MenuIcon />
         </button>
       </div>
     </div>
@@ -41,11 +62,11 @@ import Logo from '../assets/logo.svg';
     <!-- Mobile Navigation Menu -->
     <div class="mobile-menu mt-4 hidden border-t border-gray-200 pb-4 lg:hidden">
       <div class="flex flex-col space-y-3 pt-4">
-        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Spitalul</a>
-        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Despre Dr. Trif</a>
-        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Intervenții</a>
-        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Blog</a>
-        <a href="#" class="py-2 font-medium text-blue-900 hover:text-blue-700">Contact</a>
+        <a href="#" class="py-2 font-medium hover:text-blue-700">Spitalul</a>
+        <a href="#" class="py-2 font-medium hover:text-blue-700">Despre Dr. Trif</a>
+        <a href="#" class="py-2 font-medium hover:text-blue-700">Intervenții</a>
+        <a href="#" class="py-2 font-medium hover:text-blue-700">Blog</a>
+        <a href="#" class="py-2 font-medium hover:text-blue-700">Contact</a>
       </div>
     </div>
   </nav>
