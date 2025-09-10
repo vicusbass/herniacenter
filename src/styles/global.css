@@ -20,6 +20,7 @@
   --color-green-400: #4ade80;
   --color-green-500: #22c55e;
   --color-green-600: #16a34a;
+  --color-green-main-btn: #2aa81a;
 
   --color-gray-50: #f9fafb;
   --color-gray-100: #f3f4f6;
@@ -47,6 +48,8 @@
 
   /* Text body color */
   --color-text-body: #374151;
+  /* Use it for numbering h2 headings */
+  --color-heading-number: #cfdce5;
 }
 
 @layer base {
@@ -70,5 +73,10 @@
   /* Custom border utility */
   .border-custom {
     border-color: var(--color-border-custom);
+  }
+
+  /* WhatsApp button utility */
+  .bg-main-btn {
+    background-color: var(--color-green-main-btn);
   }
 }
