@@ -9,13 +9,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="grid grid-cols-8">
       <div class="aspect-square"></div>
       <div class="border-custom aspect-square border-r border-b border-l"></div>
-      <div class="border-custom flex aspect-square items-center justify-center border-r border-b">
-        <h1 class="px-4 text-center text-4xl leading-tight font-bold">
-          chirurgia<br />
-          minim invazivă<br />
-          a herniilor
-        </h1>
-      </div>
+      <div class="border-custom aspect-square border-r border-b"></div>
       <div class="border-custom aspect-square border-r border-b"></div>
       <div class="border-custom aspect-square border-r border-b"></div>
       <div class="border-custom aspect-square border-r border-b"></div>
@@ -24,11 +18,37 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- Row 2 -->
-    <div class="grid grid-cols-8">
+    <div class="relative grid grid-cols-8">
       <div class="aspect-square"></div>
-      <div
-        class="border-custom flex aspect-square items-center justify-center border-r border-b border-l"
-      >
+      <div class="border-custom aspect-square border-r border-b border-l"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="aspect-square"></div>
+
+      <!-- H1 positioned with absolute positioning -->
+      <h1 class="absolute top-1/2 left-[25%] -translate-y-1/2 text-5xl leading-tight font-bold">
+        chirurgia<br />
+        minim invazivă<br />
+        a herniilor
+      </h1>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="relative grid grid-cols-8">
+      <div class="aspect-square"></div>
+      <div class="border-custom aspect-square border-r border-b border-l"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="border-custom aspect-square border-r border-b"></div>
+      <div class="aspect-square"></div>
+
+      <!-- WhatsApp button positioned -->
+      <div class="absolute top-4 left-[12.5%]">
         <button
           class="flex items-center space-x-2 rounded-full bg-green-500 px-6 py-3 text-white transition-colors hover:bg-green-600"
         >
@@ -40,24 +60,6 @@ import Layout from '../layouts/Layout.astro';
           <span class="text-sm">WhatsApp</span>
         </button>
       </div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="aspect-square"></div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="grid grid-cols-8">
-      <div class="aspect-square"></div>
-      <div class="border-custom aspect-square border-r border-b border-l"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="border-custom aspect-square border-r border-b"></div>
-      <div class="aspect-square"></div>
     </div>
   </section>
 
