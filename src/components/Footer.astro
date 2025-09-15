@@ -81,11 +81,11 @@ import LocationMap from '../assets/location.png';
         </div>
 
         <!-- Right side - Map taking remaining space (4 columns) -->
-        <div class="w-2/3 self-start overflow-hidden h-fit">
+        <div class="h-fit w-2/3 self-start overflow-hidden">
           <Image
             src={LocationMap}
             alt="Locația Hernia Center pe hartă - Medicover Hospital Baciu"
-            class="w-full object-cover aspect-[2/1]"
+            class="aspect-[2/1] w-full object-cover"
             width={800}
             height={400}
           />
@@ -116,13 +116,17 @@ import LocationMap from '../assets/location.png';
         >
           <ul class="space-y-2 pl-6">
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Spitalul</a>
+              <a href="/spital" class="text-sm transition-colors hover:text-blue-700">Spitalul</a>
             </li>
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Despre Dr. Trif</a>
+              <a href="/despre" class="text-sm transition-colors hover:text-blue-700"
+                >Despre Dr. Trif</a
+              >
             </li>
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Intervenții</a>
+              <a href="/interventii" class="text-sm transition-colors hover:text-blue-700"
+                >Intervenții</a
+              >
             </li>
           </ul>
         </div>
@@ -140,13 +144,14 @@ import LocationMap from '../assets/location.png';
         <div class="border-custom flex aspect-square items-center border-r border-b border-l">
           <ul class="space-y-2 pl-6">
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Recenzii</a>
+              <a href="/#recenzii" class="text-sm transition-colors hover:text-blue-700">Recenzii</a
+              >
             </li>
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Blog</a>
+              <a href="/blog" class="text-sm transition-colors hover:text-blue-700">Blog</a>
             </li>
             <li>
-              <a href="#" class="text-sm transition-colors hover:text-blue-700">Contact</a>
+              <a href="/contact" class="text-sm transition-colors hover:text-blue-700">Contact</a>
             </li>
           </ul>
         </div>
