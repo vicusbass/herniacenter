@@ -1,7 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import hospitalImage from '../assets/spital.png';
 ---
 
 <Layout title="Hernia Center - Blog">
-  <section class="max-w-full px-0"></section>
+  <section>
+    <!-- Row 1b (desktop only): the “squares” strip under the header -->
+    <div class="hidden md:flex">
+      <div class="aspect-square w-[12.5%] bg-white"></div>
+      <div
+        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white pl-4"
+      >
+        <h1 class="text-5xl font-extrabold tracking-tight sm:text-6xl">blog</h1>
+      </div>
+      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
+      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
+      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
+      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
+      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
+      <div class="aspect-square w-[12.5%] bg-white"></div>
+    </div>
+
+    <!-- Row 2: image + text; mobile = stacked, desktop = split -->
+    <div class="hidden md:flex">
+      <div class="w-[12.5%] bg-white"></div>
+      <div class="w-[50%]">
+        <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
+      </div>
+      <div class="w-[25%]">
+        <h2 class="pt-5 pl-5 text-3xl leading-tight font-semibold sm:text-4xl">
+          Ce este o hernie abdominală și cum o recunoști?
+        </h2>
+        <p class="pt-5 pl-5 text-lg leading-relaxed">
+          Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
+          Hernia Center pentru tratamente moderne și recuperare rapidă.
+        </p>
+      </div>
+      <div class="w-[12.5%] bg-white"></div>
+    </div>
+  </section>
 </Layout>
