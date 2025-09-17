@@ -3,21 +3,21 @@ import Logo from '../assets/logo.svg';
 import MenuIcon from '../assets/menu.svg';
 ---
 
-<header class="border-custom mt-4 border-b bg-white md:mt-0">
+<header class="border-custom border-b bg-white">
   <!-- Top navigation bar -->
   <nav class="relative max-w-full px-0">
-    <div class="grid grid-cols-8">
-      <div class="flex aspect-square items-center justify-center">
+    <div class="flex items-stretch">
+      <div class="flex aspect-square w-[12.5%] flex-none items-center justify-center">
         <div class="flex h-12 w-12 items-center justify-center">
-          <a href="/" class="block transition-transform duration-200 ease-in-out hover:scale-125">
-            <Logo />
-          </a>
+          <a href="/" class="block transition-transform duration-200 ease-in-out hover:scale-110"
+            ><Logo /></a
+          >
         </div>
       </div>
 
       <!-- Desktop Navigation - Spans 6 columns with flex layout -->
       <div
-        class="border-custom col-span-6 hidden items-center justify-evenly space-x-8 border-r border-l lg:flex"
+        class="border-custom hidden flex-1 items-center justify-evenly space-x-8 border-r border-l lg:flex"
       >
         <a
           href="/spital"
@@ -47,10 +47,10 @@ import MenuIcon from '../assets/menu.svg';
       </div>
 
       <!-- Empty spaces for mobile - spans 6 columns -->
-      <div class="col-span-6 lg:hidden"></div>
+      <div class="flex-1 lg:hidden"></div>
 
       <!-- Hamburger menu button -->
-      <div class="border-custom flex aspect-square items-center justify-center">
+      <div class="border-custom flex aspect-square w-[12.5%] flex-none items-center justify-center">
         <button
           id="mobile-menu-toggle"
           class="flex h-12 w-12 items-center justify-center"
