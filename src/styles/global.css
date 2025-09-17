@@ -44,7 +44,7 @@
   --color-border-custom: #cedce5;
 
   /* Custom text color */
-  --color-text-custom: #003055;
+  --color-primary: #003055;
 
   /* Text body color */
   --color-text-body: #374151;
@@ -62,7 +62,7 @@
     margin: 0;
     min-height: 100vh;
     @apply font-sans text-lg font-normal;
-    color: var(--color-text-custom);
+    color: var(--color-primary);
   }
 }
 
