@@ -1,224 +1,250 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import GreenButton from '../components/GreenButton.astro';
+import medic from '../assets/medic.png';
 ---
 
 <Layout title="Hernia Center - Chirurgie minim invazivă a herniilor">
-  <section class="max-w-full px-0">
+  <section class="max-w-full px-4 sm:px-0">
     <div class="relative">
-      <div class="grid grid-cols-8">
-        <div class="aspect-square"></div>
+      <div class="grid grid-cols-2 sm:grid-cols-8">
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="border-custom aspect-square sm:border-r sm:border-b sm:border-l"></div>
+        <div class="border-custom aspect-square sm:border-r sm:border-b"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="border-custom aspect-square border-b sm:border-r sm:border-l"></div>
+        <div class="border-custom aspect-square border-b sm:border-r"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
         <div class="border-custom aspect-square border-r border-b border-l"></div>
         <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
         <div class="aspect-square"></div>
         <div class="aspect-square"></div>
-        <div class="border-custom aspect-square border-r border-b border-l"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="aspect-square"></div>
-        <div class="aspect-square"></div>
-        <div class="border-custom aspect-square border-r border-b border-l"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="aspect-square"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
       </div>
 
-      <div class="absolute inset-0 grid grid-cols-8 grid-rows-3">
+      <div
+        class="grid-cols2 absolute inset-0 grid w-full grid-rows-5 sm:grid-cols-8 sm:grid-rows-4"
+      >
         <h1
-          class="col-span-4 col-start-3 row-span-3 row-start-1 self-start text-4xl font-bold md:text-7xl"
-          style="line-height: 0.8; margin-top: calc(100% / 4 - 0.8em);"
+          class="col-span-2 col-start-1 row-span-3 row-start-1 self-start text-6xl leading-[0.8] font-bold tracking-tight sm:col-span-3 sm:col-start-3 md:text-6xl lg:text-7xl"
         >
+          <p class="hidden sm:block" style="margin-top: calc(100% / 4 - 0.3em);"></p>
           <p>chirurgia</p>
           <p>minim invazivă</p>
           <p>a herniilor</p>
         </h1>
 
-        <div class="col-span-2 col-start-3 row-start-3">
+        <div
+          class="col-span-2 col-start-1 row-span-1 row-start-4 bg-(--color-border-custom) sm:col-span-3 sm:col-start-5"
+        >
+        </div>
+
+        <div
+          class="col-span-2 col-start-1 row-span-2 row-start-3 sm:col-span-3 sm:col-start-5 sm:row-span-4 sm:row-start-1"
+        >
+          <Image src={medic} alt="Hernia Center" class="h-full w-full object-contain" />
+        </div>
+
+        <div
+          class="col-span-1 col-start-1 row-span-1 row-start-5 text-left sm:col-span-3 sm:col-start-2 sm:row-span-3 sm:row-start-4"
+        >
+          <span class="text-heading-number text-6xl font-bold">01.</span>
+          <h2 class="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            tipuri de hernii
+          </h2>
+        </div>
+
+        <div class="col-span-2 col-start-1 row-start-2 mt-10 sm:col-start-3 sm:row-start-3 sm:mt-0">
           <GreenButton text="WhatsApp" icon={WhatsAppIcon} />
         </div>
-
-        <div class="col-span-3 col-start-5 row-span-3 row-start-1"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Types of Hernias Section -->
-  <section>
-    <div class="relative grid grid-cols-8">
-      <div class="aspect-square"></div>
-      <div class="col-span-6 text-left">
-        <span class="text-heading-number text-6xl font-bold">01.</span>
-        <h2 class="text-5xl font-bold">tipuri de hernii</h2>
       </div>
     </div>
 
-    <div class="container mx-auto px-4">
-      <!-- Hernia Types Grid -->
-      <div class="mb-8 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">01</div>
-          <h3 class="font-medium">hernie inghinală</h3>
+    <!-- Types of Hernias Section -->
+    <section>
+      <div class="relative grid grid-cols-8">
+        <div class="aspect-square"></div>
+      </div>
+
+      <div class="container mx-auto px-4">
+        <!-- Hernia Types Grid -->
+        <div class="mb-8 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">01</div>
+            <h3 class="font-medium">hernie inghinală</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">02</div>
+            <h3 class="font-medium">hernie ombilicală</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">03</div>
+            <h3 class="font-medium">hernie hiatală</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">04</div>
+            <h3 class="font-medium">hernie incizională</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">05</div>
+            <h3 class="font-medium">hernii complexe</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">06</div>
+            <h3 class="font-medium">diastazis abdominal</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">07</div>
+            <h3 class="font-medium">hernie de linia albă</h3>
+          </div>
+          <div class="rounded-lg bg-white p-6 text-center">
+            <div class="mb-2 font-semibold">08</div>
+            <h3 class="font-medium">hernie Spiegeliană</h3>
+          </div>
         </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">02</div>
-          <h3 class="font-medium">hernie ombilicală</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">03</div>
-          <h3 class="font-medium">hernie hiatală</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">04</div>
-          <h3 class="font-medium">hernie incizională</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">05</div>
-          <h3 class="font-medium">hernii complexe</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">06</div>
-          <h3 class="font-medium">diastazis abdominal</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">07</div>
-          <h3 class="font-medium">hernie de linia albă</h3>
-        </div>
-        <div class="rounded-lg bg-white p-6 text-center">
-          <div class="mb-2 font-semibold">08</div>
-          <h3 class="font-medium">hernie Spiegeliană</h3>
+
+        <div class="text-center">
+          <button
+            class="rounded-md bg-blue-900 px-6 py-3 text-white transition-colors hover:bg-blue-800"
+          >
+            citește mai mult →
+          </button>
         </div>
       </div>
 
-      <div class="text-center">
-        <button
-          class="rounded-md bg-blue-900 px-6 py-3 text-white transition-colors hover:bg-blue-800"
+      <!-- Large "hernia cen" Background Text -->
+      <div class="relative overflow-hidden">
+        <div
+          class="mt-8 text-center text-[12rem] leading-none font-bold text-red-200 opacity-30 lg:text-[20rem]"
         >
-          citește mai mult →
-        </button>
-      </div>
-    </div>
-
-    <!-- Large "hernia cen" Background Text -->
-    <div class="relative overflow-hidden">
-      <div
-        class="mt-8 text-center text-[12rem] leading-none font-bold text-red-200 opacity-30 lg:text-[20rem]"
-      >
-        hernia cen
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="mb-12 text-center">
-        <span class="text-6xl font-light text-blue-300">02.</span>
-        <h2 class="mt-4 text-3xl font-bold text-blue-900">beneficii</h2>
-      </div>
-
-      <!-- Benefits Grid -->
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-lg bg-gray-50 p-8">
-          <div class="mb-2 font-semibold text-blue-900">01</div>
-          <h3 class="mb-4 text-xl font-bold text-blue-900">tehnici moderne</h3>
-          <p class="text-gray-600">
-            Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu
-            instrumentar de finețe și tehnologii atraumatice.
-          </p>
-        </div>
-        <div class="rounded-lg bg-gray-50 p-8">
-          <div class="mb-2 font-semibold text-blue-900">02</div>
-          <h3 class="mb-4 text-xl font-bold text-blue-900">minim invaziv</h3>
-          <p class="text-gray-600">
-            Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă.
-          </p>
-        </div>
-        <div class="rounded-lg bg-gray-50 p-8">
-          <div class="mb-2 font-semibold text-blue-900">03</div>
-          <h3 class="mb-4 text-xl font-bold text-blue-900">recuperare rapidă</h3>
-          <p class="text-gray-600">
-            Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi.
-          </p>
-        </div>
-        <div class="rounded-lg bg-gray-50 p-8">
-          <div class="mb-2 font-semibold text-blue-900">04</div>
-          <h3 class="mb-4 text-xl font-bold text-blue-900">spital modern</h3>
-          <p class="text-gray-600">
-            Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere
-            private și zone de relaxare.
-          </p>
+          hernia cen
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-  <section id="recenzii" class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4">
-      <div class="mb-12 text-center">
-        <span class="text-6xl font-light text-blue-300">03.</span>
-        <h2 class="mt-4 text-3xl font-bold text-blue-900">ce zice lumea</h2>
-      </div>
+    <!-- Benefits Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-12 text-center">
+          <span class="text-6xl font-light text-blue-300">02.</span>
+          <h2 class="mt-4 text-3xl font-bold text-blue-900">beneficii</h2>
+        </div>
 
-      <!-- Testimonials Grid -->
-      <div class="grid gap-8 md:grid-cols-3">
-        <div class="rounded-lg bg-white p-6">
-          <div class="mb-4 flex items-center">
-            <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
-            <div>
-              <div class="font-semibold">Nistor Sabina</div>
-              <div class="text-yellow-400">★★★★★</div>
-            </div>
+        <!-- Benefits Grid -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-lg bg-gray-50 p-8">
+            <div class="mb-2 font-semibold text-blue-900">01</div>
+            <h3 class="mb-4 text-xl font-bold text-blue-900">tehnici moderne</h3>
+            <p class="text-gray-600">
+              Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu
+              instrumentar de finețe și tehnologii atraumatice.
+            </p>
           </div>
-          <p class="text-sm text-gray-600">
-            Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand cu
-            încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr. Hossu, dl.
-            dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională și o carieră
-            cât mai lungă!
-          </p>
-        </div>
-        <div class="rounded-lg bg-white p-6">
-          <div class="mb-4 flex items-center">
-            <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
-            <div>
-              <div class="font-semibold">Mihai Chis</div>
-              <div class="text-yellow-400">★★★★★</div>
-            </div>
+          <div class="rounded-lg bg-gray-50 p-8">
+            <div class="mb-2 font-semibold text-blue-900">02</div>
+            <h3 class="mb-4 text-xl font-bold text-blue-900">minim invaziv</h3>
+            <p class="text-gray-600">
+              Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă.
+            </p>
           </div>
-          <p class="text-sm text-gray-600">
-            Dr.Drasoveanu Radu si Dr Hossu, oameni deosebiti si medici desavarsiti care au reusit
-            impreuna cu toata echipa din cadrul Spitalului Medicover Suceagu sa imi ofere cea mai
-            placuta experienta pe care o poti avea la un spital, chiar daca a fost vorba de o
-            operatie de hernie inghinala bilaterala. Multumesc Dr.
-          </p>
-        </div>
-        <div class="rounded-lg bg-white p-6">
-          <div class="mb-4 flex items-center">
-            <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
-            <div>
-              <div class="font-semibold">Alexandra Alexandrescu</div>
-              <div class="text-yellow-400">★★★★★</div>
-            </div>
+          <div class="rounded-lg bg-gray-50 p-8">
+            <div class="mb-2 font-semibold text-blue-900">03</div>
+            <h3 class="mb-4 text-xl font-bold text-blue-900">recuperare rapidă</h3>
+            <p class="text-gray-600">
+              Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi.
+            </p>
           </div>
-          <p class="text-sm text-gray-600">
-            Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand cu
-            încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr. Hossu, dl.
-            dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională și o carieră
-            cât mai lungă!
-          </p>
+          <div class="rounded-lg bg-gray-50 p-8">
+            <div class="mb-2 font-semibold text-blue-900">04</div>
+            <h3 class="mb-4 text-xl font-bold text-blue-900">spital modern</h3>
+            <p class="text-gray-600">
+              Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere
+              private și zone de relaxare.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="recenzii" class="bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="mb-12 text-center">
+          <span class="text-6xl font-light text-blue-300">03.</span>
+          <h2 class="mt-4 text-3xl font-bold text-blue-900">ce zice lumea</h2>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="rounded-lg bg-white p-6">
+            <div class="mb-4 flex items-center">
+              <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
+              <div>
+                <div class="font-semibold">Nistor Sabina</div>
+                <div class="text-yellow-400">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600">
+              Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand
+              cu încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr.
+              Hossu, dl. dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională
+              și o carieră cât mai lungă!
+            </p>
+          </div>
+          <div class="rounded-lg bg-white p-6">
+            <div class="mb-4 flex items-center">
+              <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
+              <div>
+                <div class="font-semibold">Mihai Chis</div>
+                <div class="text-yellow-400">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600">
+              Dr.Drasoveanu Radu si Dr Hossu, oameni deosebiti si medici desavarsiti care au reusit
+              impreuna cu toata echipa din cadrul Spitalului Medicover Suceagu sa imi ofere cea mai
+              placuta experienta pe care o poti avea la un spital, chiar daca a fost vorba de o
+              operatie de hernie inghinala bilaterala. Multumesc Dr.
+            </p>
+          </div>
+          <div class="rounded-lg bg-white p-6">
+            <div class="mb-4 flex items-center">
+              <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
+              <div>
+                <div class="font-semibold">Alexandra Alexandrescu</div>
+                <div class="text-yellow-400">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600">
+              Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand
+              cu încredere o vizită, un tratament sau o investigație medicală.Mulțumim dl. dr.
+              Hossu, dl. dr. Drașovean, dl. dr. Trif.Vă dorim multă sănătate, excelență profesională
+              și o carieră cât mai lungă!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 </Layout>

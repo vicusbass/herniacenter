@@ -2,12 +2,20 @@
 import Logo from '../assets/logo.svg';
 import Menu from '../assets/menu.svg';
 import Close from '../assets/close.svg';
+
+const menuItems = [
+  { name: 'Spitalul', href: '/spital' },
+  { name: 'Despre', href: '/despre' },
+  { name: 'Intervenții', href: '/interventii' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
+];
 ---
 
-<header class="border-custom border-b bg-white">
+<header class="border-custom bg-white sm:border-b">
   <!-- Top navigation bar -->
-  <nav class="relative max-w-full px-0">
-    <div class="flex items-stretch">
+  <nav class="relative max-w-full px-4 sm:px-0">
+    <div class="flex min-h-40 items-stretch">
       <div class="flex aspect-square w-[12.5%] flex-none items-center justify-center">
         <div class="flex h-12 w-12 items-center justify-center">
           <a href="/" class="block transition-transform duration-200 ease-in-out hover:scale-110"
@@ -17,47 +25,32 @@ import Close from '../assets/close.svg';
       </div>
 
       <!-- Desktop Navigation - Spans 6 columns with flex layout -->
-      <div class="border-custom w-full border-r border-l">
+      <div class="border-custom hidden w-full border-r border-l sm:block">
         <div
           id="desktop-menu"
-          class="menu-hidden hidden h-full flex-1 items-center justify-evenly space-x-8 md:flex"
+          class="menu-hidden hidden h-full flex-1 items-center justify-evenly space-x-4 sm:flex md:space-x-8"
         >
-          <a
-            href="/spital"
-            class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
-            >Spitalul</a
-          >
-          <a
-            href="/despre"
-            class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
-            >Despre</a
-          >
-          <a
-            href="/interventii"
-            class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
-            >Intervenții</a
-          >
-          <a
-            href="/blog"
-            class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
-            >Blog</a
-          >
-          <a
-            href="/contact"
-            class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
-            >Contact</a
-          >
+          {
+            menuItems.map((item) => (
+              <a
+                href={item.href}
+                class="rounded-md px-4 py-2 text-lg font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-100 xl:text-xl 2xl:text-2xl"
+              >
+                {item.name}
+              </a>
+            ))
+          }
         </div>
       </div>
 
       <!-- Empty spaces for mobile - spans 6 columns -->
-      <div class="flex-1 md:hidden"></div>
+      <div class="flex-1 sm:hidden"></div>
 
       <!-- Hamburger menu button -->
       <div class="border-custom flex aspect-square w-[12.5%] flex-none items-center justify-center">
         <button
           id="mobile-menu-toggle"
-          class="relative flex h-[54px] w-[54px] items-center justify-center bg-(--color-primary)"
+          class="relative flex min-h-[54px] min-w-[54px] items-center justify-center bg-(--color-primary)"
           aria-label="Toggle menu"
         >
           <div class="icon-container">
@@ -95,32 +88,16 @@ import Close from '../assets/close.svg';
     <!-- Menu Content -->
     <div id="menu-content">
       <nav class="flex flex-col items-center space-y-8">
-        <h2 id="menu-title" class="sr-only">Main Menu</h2>
-        <a
-          href="/spital"
-          class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
-          >Spitalul</a
-        >
-        <a
-          href="/despre"
-          class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
-          >Despre Dr. Trif</a
-        >
-        <a
-          href="/interventii"
-          class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
-          >Intervenții</a
-        >
-        <a
-          href="/blog"
-          class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
-          >Blog</a
-        >
-        <a
-          href="/contact"
-          class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
-          >Contact</a
-        >
+        {
+          menuItems.map((item) => (
+            <a
+              href={item.href}
+              class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
+            >
+              {item.name}
+            </a>
+          ))
+        }
       </nav>
     </div>
   </div>
@@ -203,8 +180,8 @@ import Close from '../assets/close.svg';
 
     let isMenuOpen = false;
 
-    // Function to check if we're on a medium screen or larger (md breakpoint = 768px)
-    const isLargeScreen = () => window.innerWidth >= 768;
+    // Function to check if we're on a small screen or larger (sm breakpoint = 640px)
+    const isLargeScreen = () => window.innerWidth >= 640;
 
     const openMobileMenu = () => {
       if (modal && iconContainer && !isLargeScreen()) {
