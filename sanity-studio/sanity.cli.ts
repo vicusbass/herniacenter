@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config({path: '../.env'})
 
 export default defineCliConfig({
+  studioHost: 'herniacenter',
   api: {
     projectId: process.env.SANITY_STUDIO_PROJECT_ID,
     dataset: 'production',

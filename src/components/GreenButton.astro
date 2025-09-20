@@ -2,15 +2,30 @@
 export interface Props {
   text: string;
   icon?: any;
+  size?: 'small' | 'medium' | 'large' | 'responsive';
   class?: string;
 }
 
-const { text, icon: Icon, class: className = '' } = Astro.props;
+const { text, icon: Icon, size = 'large', class: className = '' } = Astro.props;
+
+const sizeClasses = {
+  small: 'h-8 px-4 text-sm',
+  medium: 'h-10 px-5 text-base',
+  large: 'h-14 px-7 text-[28px] leading-[36px]',
+  responsive: 'h-7 px-4 text-sm lg:h-8 lg:px-5 lg:text-base xl:h-10 xl:px-6 xl:text-lg',
+};
+
+const iconSizeClasses = {
+  small: 'h-4 w-4 mr-2',
+  medium: 'h-5 w-5 mr-3',
+  large: 'h-8 w-8 mr-4',
+  responsive: 'h-4 w-4 mr-2 lg:h-4 lg:w-4 lg:mr-3 xl:h-5 xl:w-5 xl:mr-4',
+};
 ---
 
 <button
-  class={`h-14 w-54 px-7 rounded-4xl flex items-center bg-main-btn text-[28px] leading-[36px] font-medium text-white transition-colors hover:opacity-90 ${className}`}
+  class={`w-auto rounded-4xl flex items-center bg-main-btn font-medium text-white transition-colors hover:opacity-90 ${sizeClasses[size]} ${className}`}
 >
-  {Icon && <Icon class="mr-4 h-8 w-8" />}
-  <span class="mt-[-4px]">{text}</span>
+  {Icon && <Icon class={iconSizeClasses[size]} />}
+  <span class={size === 'large' ? 'mt-[-4px]' : ''}>{text}</span>
 </button>
