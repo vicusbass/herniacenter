@@ -1,17 +1,63 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import type { SanityDocument } from '@sanity/client';
+import { sanityClient } from 'sanity:client';
+import Layout from '../layouts/Layout.astro';
+
 import hospitalImage from '../assets/spital.png';
+import PrimaryButton from '../components/PrimaryButton.astro';
+import Separator from '../components/Separator.astro';
+import WhatsAppIcon from '../assets/whatsapp-icon.svg';
+import { urlFor } from '../utils/sanityImageUrl';
+
+const PAGE = {
+  title: 'blog',
+  hero: {
+    heading: 'Ce este o hernie abdominală și cum o recunoști?',
+    copy: 'Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la Hernia Center pentru tratamente moderne și recuperare rapidă.',
+  },
+  cta: {
+    text: 'Programează-te',
+  },
+};
+const POSTS_QUERY = `
+*[_type == "post"] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  mainImage,
+  publishedAt,
+  body
+}
+`;
+
+const posts = await sanityClient.fetch<SanityDocument[]>(POSTS_QUERY);
+const articles = posts.map((post) => ({
+  ...post,
+  imageUrl: post?.mainImage
+    ? urlFor(post.mainImage)?.auto('format').width(600).height(400).url()
+    : null,
+  publishedAt: new Date(post.publishedAt).toLocaleDateString('ro-RO', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }),
+  text: post.text,
+  title: post.title,
+  slug: post.slug,
+}));
 ---
 
-<Layout title="Hernia Center - Blog">
+<Layout title={`Hernia Center - Blog`}>
   <section>
     <div class="hidden md:flex">
       <div class="aspect-square w-[12.5%] bg-white"></div>
       <div
-        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white pl-4"
+        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white"
       >
-        <h1 class="text-5xl font-extrabold tracking-tight sm:text-6xl">blog</h1>
+        <h1 class="font-bold tracking-tight md:text-4xl lg:text-6xl">
+          {PAGE.title}
+        </h1>
       </div>
       <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
       <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
@@ -21,21 +67,121 @@ import hospitalImage from '../assets/spital.png';
       <div class="aspect-square w-[12.5%] bg-white"></div>
     </div>
 
+    <!-- Desktop: full layout -->
     <div class="hidden md:flex">
       <div class="w-[12.5%] bg-white"></div>
       <div class="w-[50%]">
         <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
       </div>
-      <div class="w-[25%]">
-        <h2 class="pt-5 pl-5 text-3xl leading-tight font-semibold sm:text-4xl">
-          Ce este o hernie abdominală și cum o recunoști?
-        </h2>
-        <p class="pt-5 pl-5 text-lg leading-relaxed">
-          Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
-          Hernia Center pentru tratamente moderne și recuperare rapidă.
-        </p>
+      <div class="flex w-[25%] flex-col">
+        <div class="flex-grow pt-4 pl-4">
+          <h2 class="text-2xl leading-tight font-semibold lg:text-3xl xl:text-4xl">
+            {PAGE.hero.heading}
+          </h2>
+          <p class="pt-2 text-lg lg:pt-3 lg:text-base xl:pt-4 xl:text-lg">
+            {PAGE.hero.copy}
+          </p>
+          <a
+            href="/blog"
+            class="inline-block pt-2 text-sm underline underline-offset-4 hover:text-blue-800 lg:text-base xl:text-lg"
+          >
+            citește mai mult
+          </a>
+        </div>
+        <div class="pl-5">
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="responsive" />
+        </div>
       </div>
       <div class="w-[12.5%] bg-white"></div>
+    </div>
+
+    <Separator />
+
+    <!-- Desktop: Blog Articles Grid -->
+    <div class="mt-20 hidden md:block">
+      <div class="flex">
+        <div class="w-[12.5%] bg-white"></div>
+        <div class="w-[75%]">
+          <div class="grid grid-cols-3 gap-8">
+            {
+              articles.map((article) => (
+                <article class="overflow-hidden">
+                  {/* Clean image without blur */}
+                  <div class="h-64 overflow-hidden">
+                    <div
+                      class="h-full w-full bg-cover bg-center"
+                      style={`background-image: url(${article.imageUrl || hospitalImage.src})`}
+                    />
+                  </div>
+                  <div class="space-y-2 pt-4">
+                    <h3 class="text-2xl leading-tight font-bold">{article.title}</h3>
+                    <div class="text-sm font-light text-gray-600">{article.publishedAt}</div>
+                    <a
+                      href={`/blog/${article.slug?.current}`}
+                      class="inline-block text-sm underline underline-offset-4 hover:text-blue-800"
+                    >
+                      citește mai mult
+                    </a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+        <div class="w-[12.5%] bg-white"></div>
+      </div>
+    </div>
+
+    <!-- Mobile: title + intro -->
+    <div class="block md:hidden">
+      <div class="px-4">
+        <h1 class="text-5xl font-bold tracking-tight">{PAGE.title}</h1>
+        <div class="mt-8">
+          <h2 class="text-3xl leading-tight font-semibold">
+            {PAGE.hero.heading}
+          </h2>
+        </div>
+      </div>
+      <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full pt-4" />
+      <div class="px-4">
+        <p class="pt-5 text-lg leading-relaxed">
+          {PAGE.hero.copy}
+        </p>
+        <div class="mt-8">
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
+        </div>
+      </div>
+
+      <!-- Blog Articles -->
+      <div class="mt-12 space-y-6">
+        {
+          articles.map((article) => (
+            <article class="relative overflow-hidden">
+              <div class="relative h-80 overflow-hidden">
+                <div
+                  class="absolute inset-0 scale-110 bg-cover bg-center blur-xs"
+                  style={`background-image: url(${article.imageUrl || hospitalImage.src})`}
+                />
+                {/* Dark overlay for better text contrast */}
+                <div class="absolute inset-0 bg-black/30" />
+                {/* Text content */}
+                <div class="relative z-10 flex h-full flex-col justify-end p-6 text-white">
+                  <div class="space-y-4">
+                    <div class="text-2xl font-light">{article.publishedAt}</div>
+                    <h3 class="text-4xl font-bold">{article.title}</h3>
+                    <a
+                      href={`/blog/${article.slug?.current}`}
+                      class="hover:border-opacity-60 inline-block border-b border-white pb-1 text-2xl font-light underline-offset-4"
+                    >
+                      citește mai mult
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </section>
 </Layout>
