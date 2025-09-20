@@ -6,6 +6,7 @@ import Layout from '../layouts/Layout.astro';
 
 import hospitalImage from '../assets/spital.png';
 import PrimaryButton from '../components/PrimaryButton.astro';
+import Separator from '../components/Separator.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import { urlFor } from '../utils/sanityImageUrl';
 
@@ -94,16 +95,7 @@ const articles = posts.map((post) => ({
       <div class="w-[12.5%] bg-white"></div>
     </div>
 
-    <!-- Desktop: Separator Line -->
-    <div class="mt-20 hidden md:block">
-      <div class="flex">
-        <div class="w-[12.5%] bg-white"></div>
-        <div class="w-[75%]">
-          <hr class="border-gray-300" />
-        </div>
-        <div class="w-[12.5%] bg-white"></div>
-      </div>
-    </div>
+    <Separator />
 
     <!-- Desktop: Blog Articles Grid -->
     <div class="mt-20 hidden md:block">
