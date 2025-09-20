@@ -5,7 +5,7 @@ import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 
 import hospitalImage from '../assets/spital.png';
-import GreenButton from '../components/GreenButton.astro';
+import PrimaryButton from '../components/PrimaryButton.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import { urlFor } from '../utils/sanityImageUrl';
 
@@ -52,9 +52,9 @@ const articles = posts.map((post) => ({
     <div class="hidden md:flex">
       <div class="aspect-square w-[12.5%] bg-white"></div>
       <div
-        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white pl-4"
+        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white"
       >
-        <h1 class="font-extrabold tracking-tight md:text-4xl lg:text-5xl">
+        <h1 class="font-bold tracking-tight md:text-4xl lg:text-6xl">
           {PAGE.title}
         </h1>
       </div>
@@ -88,7 +88,7 @@ const articles = posts.map((post) => ({
           </a>
         </div>
         <div class="pl-5">
-          <GreenButton text={PAGE.cta.text} icon={WhatsAppIcon} size="responsive" />
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="responsive" />
         </div>
       </div>
       <div class="w-[12.5%] bg-white"></div>
@@ -156,7 +156,7 @@ const articles = posts.map((post) => ({
           {PAGE.hero.copy}
         </p>
         <div class="mt-8">
-          <GreenButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
         </div>
       </div>
 
