@@ -47,7 +47,9 @@ const menuItems = [
       <div class="flex-1 sm:hidden"></div>
 
       <!-- Hamburger menu button -->
-      <div class="border-custom flex aspect-square w-[12.5%] flex-none items-center justify-center">
+      <div
+        class="border-custom relative flex aspect-square w-[12.5%] flex-none items-center justify-center"
+      >
         <button
           id="mobile-menu-toggle"
           class="relative flex min-h-[54px] min-w-[54px] items-center justify-center bg-(--color-primary)"
@@ -70,21 +72,12 @@ const menuItems = [
 <!-- Full-screen Mobile Menu Modal -->
 <div
   id="mobile-menu-modal"
-  class="fixed inset-0 z-50 hidden bg-white"
+  class="fixed inset-0 z-50 hidden bg-(--color-primary)"
   aria-labelledby="menu-title"
   role="dialog"
   aria-modal="true"
 >
   <div class="relative flex h-full w-full flex-col items-center justify-center">
-    <!-- Close Menu Button -->
-    <button
-      id="close-menu-button"
-      class="absolute top-4 right-4 p-4 text-8xl font-bold text-gray-800 hover:text-gray-600"
-      aria-label="Close menu"
-    >
-      &times;
-    </button>
-
     <!-- Menu Content -->
     <div id="menu-content">
       <nav class="flex flex-col items-center space-y-8">
@@ -92,7 +85,7 @@ const menuItems = [
           menuItems.map((item) => (
             <a
               href={item.href}
-              class="menu-item text-4xl font-medium text-gray-800 transition-colors duration-200 hover:text-blue-600"
+              class="menu-item text-4xl font-medium text-white transition-colors duration-200 hover:text-gray-200"
             >
               {item.name}
             </a>
@@ -167,12 +160,32 @@ const menuItems = [
     opacity: 0;
     pointer-events: none;
   }
+
+  /* Mobile modal animation */
+  #mobile-menu-modal {
+    opacity: 0;
+    transform: scale(0.1);
+    /* dynamic transform-origin set via JS each open */
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  #mobile-menu-modal.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Ensure toggle button always above modal */
+  #mobile-menu-toggle {
+    z-index: 60; /* higher than modal (z-50) */
+  }
 </style>
 
 <script>
   function setupMenu() {
     const toggleButton = document.getElementById('mobile-menu-toggle');
-    const closeButton = document.getElementById('close-menu-button');
     const modal = document.getElementById('mobile-menu-modal');
     const menuItems = document.querySelectorAll('.menu-item');
     const iconContainer = document.querySelector('.icon-container');
@@ -183,18 +196,29 @@ const menuItems = [
     // Function to check if we're on a small screen or larger (sm breakpoint = 640px)
     const isLargeScreen = () => window.innerWidth >= 640;
 
+    const computeTransformOrigin = () => {
+      if (!toggleButton || !modal) return;
+      const btnRect = toggleButton.getBoundingClientRect();
+      const cx = btnRect.left + btnRect.width;
+      const cy = btnRect.top;
+      // viewport relative center converted to percentages
+      const xPercent = (cx / window.innerWidth) * 100;
+      const yPercent = (cy / window.innerHeight) * 100;
+      modal.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    };
+
     const openMobileMenu = () => {
       if (modal && iconContainer && !isLargeScreen()) {
         isMenuOpen = true;
         iconContainer.classList.add('active');
+        computeTransformOrigin();
+        // reveal first so transition can play
         modal.classList.remove('hidden');
+        // force reflow to ensure transition starts
+        void modal.offsetWidth;
+        modal.classList.add('active');
         menuItems.forEach((item, index) => {
-          setTimeout(
-            () => {
-              item.classList.add('visible');
-            },
-            (index + 1) * 50
-          );
+          setTimeout(() => item.classList.add('visible'), (index + 1) * 50);
         });
       }
     };
@@ -203,10 +227,17 @@ const menuItems = [
       if (modal && iconContainer && !isLargeScreen()) {
         isMenuOpen = false;
         iconContainer.classList.remove('active');
-        modal.classList.add('hidden');
-        menuItems.forEach((item) => {
-          item.classList.remove('visible');
-        });
+        modal.classList.remove('active');
+        menuItems.forEach((item) => item.classList.remove('visible'));
+        // after transition hide completely
+        // @ts-ignore - runtime JS only, event typing not required
+        const handleTransitionEnd = (e) => {
+          if (e.target === modal && e.propertyName === 'opacity') {
+            modal.classList.add('hidden');
+            modal.removeEventListener('transitionend', handleTransitionEnd);
+          }
+        };
+        modal.addEventListener('transitionend', handleTransitionEnd);
       }
     };
 
@@ -266,14 +297,11 @@ const menuItems = [
         iconContainer.classList.remove('active');
       }
       isMenuOpen = false;
+      // recompute origin if menu is about to be opened again
+      computeTransformOrigin();
     };
 
-    if (toggleButton) {
-      toggleButton.addEventListener('click', toggleMenu);
-    }
-    if (closeButton) {
-      closeButton.addEventListener('click', closeMobileMenu);
-    }
+    if (toggleButton) toggleButton.addEventListener('click', toggleMenu);
 
     // Listen for window resize to handle responsive behavior
     window.addEventListener('resize', handleResize);
