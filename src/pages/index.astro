@@ -11,8 +11,8 @@ import medic from '../assets/medic.png';
     <div class="relative">
       <div class="grid grid-cols-2 sm:grid-cols-8">
         <div class="hidden aspect-square sm:block"></div>
-        <div class="border-custom aspect-square sm:border-r sm:border-b sm:border-l"></div>
-        <div class="border-custom aspect-square sm:border-r sm:border-b"></div>
+        <div class="border-custom sm:aspect-square sm:border-r sm:border-b sm:border-l"></div>
+        <div class="border-custom sm:aspect-square sm:border-r sm:border-b"></div>
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
@@ -67,6 +67,9 @@ import medic from '../assets/medic.png';
           <Image src={medic} alt="Hernia Center" class="h-full w-full object-contain" />
         </div>
 
+        <div class="col-span-2 col-start-1 row-start-2 mt-10 sm:col-start-3 sm:row-start-3 sm:mt-0">
+          <PrimaryButton text="WhatsApp" icon={WhatsAppIcon} />
+        </div>
         <div
           class="col-span-1 col-start-1 row-span-1 row-start-5 text-left sm:col-span-3 sm:col-start-2 sm:row-span-3 sm:row-start-4"
         >
@@ -74,10 +77,6 @@ import medic from '../assets/medic.png';
           <h2 class="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             tipuri de hernii
           </h2>
-        </div>
-
-        <div class="col-span-2 col-start-1 row-start-2 mt-10 sm:col-start-3 sm:row-start-3 sm:mt-0">
-          <PrimaryButton text="WhatsApp" icon={WhatsAppIcon} />
         </div>
       </div>
     </div>
@@ -134,12 +133,17 @@ import medic from '../assets/medic.png';
         </div>
       </div>
 
-      <!-- Large "hernia cen" Background Text -->
-      <div class="relative overflow-hidden">
+      <div class="relative mt-8 overflow-hidden">
         <div
-          class="mt-8 text-center text-[12rem] leading-none font-bold text-red-200 opacity-30 lg:text-[20rem]"
+          id="scroll-title-wrapper"
+          class="pointer-events-none leading-none font-bold whitespace-nowrap text-red-200 opacity-30 select-none"
+          style="--scroll-shift:0;"
         >
-          hernia cen
+          <span
+            id="scroll-title"
+            class="mx-8 inline-block translate-x-0 text-[12rem] will-change-transform sm:mx-16 lg:text-[20rem]"
+            >hernia&nbsp;center</span
+          >
         </div>
       </div>
     </section>
@@ -248,3 +252,66 @@ import medic from '../assets/medic.png';
     </section>
   </section>
 </Layout>
+
+<style>
+  #scroll-title-wrapper {
+    position: relative;
+  }
+  #scroll-title {
+    transition: transform 0.1s linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #scroll-title {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const title = document.getElementById('scroll-title');
+    if (!title) return;
+
+    let ticking = false;
+    let maxShift = 0; // maximum horizontal translation (negative)
+    let startOffset = 0; // vertical position where effect begins
+    let effectHeight = 0; // scroll distance over which full shift occurs
+
+    const computeMetrics = () => {
+      const vw = window.innerWidth;
+      const rect = title.getBoundingClientRect();
+      const fullWidth = title.scrollWidth; // intrinsic width (nowrap)
+      // Scroll begins when title enters viewport; we want whole width to traverse
+      maxShift = Math.min(0, vw - fullWidth - 32); // extra 32px buffer
+      startOffset = window.scrollY + rect.top - window.innerHeight * 0.6; // start a bit before center
+      effectHeight = window.innerHeight * 1.5; // distance to complete animation
+    };
+
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      if (y <= startOffset) {
+        title.style.transform = 'translateX(0)';
+        return;
+      }
+      const progress = Math.min(1.5, (2.3 * (y - startOffset)) / effectHeight);
+      const shift = maxShift * progress;
+      title.style.transform = `translateX(${shift}px)`;
+    };
+
+    const requestTick = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', () => {
+      computeMetrics();
+      requestTick();
+    });
+    computeMetrics();
+    update();
+  });
+</script>
