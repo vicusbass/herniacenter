@@ -19,6 +19,14 @@ import medic from '../assets/medic.png';
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
+        <div class="border-custom aspect-square sm:border-r sm:border-b sm:border-l"></div>
+        <div class="border-custom aspect-square sm:border-r sm:border-b"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
+        <div class="hidden aspect-square sm:block"></div>
         <div class="border-custom aspect-square border-b sm:border-r sm:border-l"></div>
         <div class="border-custom aspect-square border-b sm:border-r"></div>
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
@@ -27,16 +35,16 @@ import medic from '../assets/medic.png';
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
-        <div class="border-custom aspect-square border-r border-b border-l"></div>
-        <div class="border-custom aspect-square border-r border-b"></div>
-        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
-        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
-        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
-        <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
-        <div class="hidden aspect-square sm:block"></div>
-        <div class="hidden aspect-square sm:block"></div>
-        <div class="aspect-square"></div>
-        <div class="aspect-square"></div>
+        <!-- <div class="block aspect-square sm:hidden"></div> -->
+        <!-- <div class="block aspect-square sm:hidden"></div> -->
+
+        <div class="border-custom block aspect-square border-r border-b border-l sm:hidden"></div>
+        <div class="border-custom block aspect-square border-r border-b sm:hidden"></div>
+        <div class="block aspect-square sm:hidden"></div>
+        <div class="block aspect-square sm:hidden"></div>
+        <div class="block aspect-square sm:hidden"></div>
+        <div class="block aspect-square sm:hidden"></div>
+
         <div class="hidden aspect-square sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
@@ -62,9 +70,13 @@ import medic from '../assets/medic.png';
         </div>
 
         <div
-          class="col-span-2 col-start-1 row-span-2 row-start-3 sm:col-span-3 sm:col-start-5 sm:row-span-4 sm:row-start-1"
+          class="relative col-span-2 col-start-1 row-span-2 row-start-3 overflow-visible sm:static sm:col-span-3 sm:col-start-5 sm:row-span-4 sm:row-start-1 sm:overflow-hidden"
         >
-          <Image src={medic} alt="Hernia Center" class="h-full w-full object-contain" />
+          <Image
+            src={medic}
+            alt="Hernia Center"
+            class="absolute bottom-0 left-1/2 h-[110%] w-auto -translate-x-1/2 object-contain sm:static sm:h-full sm:w-full sm:translate-x-0"
+          />
         </div>
 
         <div class="col-span-2 col-start-1 row-start-2 mt-10 sm:col-start-3 sm:row-start-3 sm:mt-0">
