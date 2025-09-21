@@ -3,16 +3,25 @@ import type { SanityDocument } from '@sanity/client';
 import { loadQuery } from '../../utils/loadQuery';
 import { urlFor } from '../../utils/sanityImageUrl';
 import Layout from '../../layouts/Layout.astro';
+import { PortableText } from 'astro-portabletext';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const { data: posts } = await loadQuery<SanityDocument[]>({
-    query: `*[_type == "post"]`,
+    query: `*[_type == "post"]{
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      body
+    }`,
   });
 
   return posts.map((post) => {
     const article = {
       imageUrl: post?.mainImage
-        ? urlFor(post.mainImage)?.auto('format').width(600).height(400).url()
+        ? urlFor(post.mainImage)?.auto('format').width(1200).height(600).url()
         : null,
       publishedAt: new Date(post.publishedAt).toLocaleDateString('ro-RO', {
         day: '2-digit',
@@ -36,9 +45,37 @@ const { article } = Astro.props;
 ---
 
 <Layout title={`Hernia Center - ${article.title}`}>
-  <h1>{article.title}</h1>
-  <p>Published: {article.publishedAt}</p>
-  <p>Slug: {slug}</p>
-  {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
-  {article.body && <div>Content: {JSON.stringify(article.body)}</div>}
+  <main>
+    <!-- Hero Image - Full width on mobile, constrained on desktop -->
+    {
+      article.imageUrl && (
+        <div class="w-full md:flex md:justify-center">
+          <Image
+            src={article.imageUrl}
+            alt={article.title}
+            width={1200}
+            height={600}
+            class="h-64 w-full object-cover md:h-96 md:w-3/4"
+          />
+        </div>
+      )
+    }
+
+    <!-- Content Container -->
+    <div class="px-4 py-8 md:mx-auto md:max-w-4xl md:px-0 md:py-16">
+      <!-- Title and Date -->
+      <header class="mb-8">
+        <h1 class="text-2xl leading-tight font-bold md:text-4xl">
+          {article.title}
+        </h1>
+      </header>
+
+      <!-- Article Content -->
+      <article
+        class="prose prose-lg md:prose-xl prose-headings:font-bold prose-p:leading-relaxed prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
+      >
+        {article.body && <PortableText value={article.body} />}
+      </article>
+    </div>
+  </main>
 </Layout>
