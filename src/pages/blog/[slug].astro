@@ -1,0 +1,44 @@
+---
+import type { SanityDocument } from '@sanity/client';
+import { loadQuery } from '../../utils/loadQuery';
+import { urlFor } from '../../utils/sanityImageUrl';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const { data: posts } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "post"]`,
+  });
+
+  return posts.map((post) => {
+    const article = {
+      imageUrl: post?.mainImage
+        ? urlFor(post.mainImage)?.auto('format').width(600).height(400).url()
+        : null,
+      publishedAt: new Date(post.publishedAt).toLocaleDateString('ro-RO', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }),
+      title: post.title,
+      body: post.body,
+      slug: post.slug,
+    };
+
+    return {
+      params: { slug: post.slug?.current || '' },
+      props: { article },
+    };
+  });
+}
+
+const { slug } = Astro.params;
+const { article } = Astro.props;
+---
+
+<Layout title={`Hernia Center - ${article.title}`}>
+  <h1>{article.title}</h1>
+  <p>Published: {article.publishedAt}</p>
+  <p>Slug: {slug}</p>
+  {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
+  {article.body && <div>Content: {JSON.stringify(article.body)}</div>}
+</Layout>
