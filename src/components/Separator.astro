@@ -1,0 +1,17 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`mt-20 hidden md:block ${className}`}>
+  <div class="flex">
+    <div class="w-[12.5%] bg-white"></div>
+    <div class="w-[75%]">
+      <hr class="border-custom" />
+    </div>
+    <div class="w-[12.5%] bg-white"></div>
+  </div>
+</div>
