@@ -13,6 +13,7 @@ export async function getStaticPaths() {
       title,
       slug,
       mainImage,
+      description,
       publishedAt,
       body
     }`,
@@ -31,6 +32,7 @@ export async function getStaticPaths() {
       title: post.title,
       body: post.body,
       slug: post.slug,
+      description: post.description,
     };
 
     return {
@@ -40,7 +42,6 @@ export async function getStaticPaths() {
   });
 }
 
-const { slug } = Astro.params;
 const { article } = Astro.props;
 ---
 
