@@ -17,6 +17,14 @@ export default defineType({
       description: 'Review details',
     }),
     defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'priority',
       title: 'Priority',
       type: 'number',
@@ -26,6 +34,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
+      media: 'image',
     },
   },
 })
