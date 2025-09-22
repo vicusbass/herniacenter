@@ -46,6 +46,7 @@
   /* Custom text color */
   --color-primary: #003055;
   --color-stars: #ffc1af;
+  --color-contact-bg: #f2f7fa;
 
   /* Text body color */
   --color-text-body: #374151;
@@ -83,5 +84,9 @@
 
   .stars-color {
     color: var(--color-stars);
+  }
+
+  .bg-contact {
+    background-color: var(--color-contact-bg);
   }
 }
