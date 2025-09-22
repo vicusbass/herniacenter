@@ -1,22 +1,31 @@
 ---
 import { Image } from 'astro:assets';
 import type { SanityDocument } from '@sanity/client';
-import { sanityClient } from 'sanity:client';
 import { loadQuery } from '../utils/loadQuery';
+import { urlFor } from '../utils/sanityImageUrl';
 
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import PrimaryButton from '../components/PrimaryButton.astro';
 import medic from '../assets/medic.png';
 
-const { data: reviews } = await loadQuery<SanityDocument[]>({
+const { data: testimonials } = await loadQuery<SanityDocument[]>({
   query: `*[_type == "review"] | order(priority asc)[0...3] {
       _id,
       name,
       description,
       priority,
+      image,
     }`,
 });
+const reviews = testimonials.map((review) => ({
+  ...review,
+  imageUrl: review?.image
+    ? urlFor(review.image)?.auto('format').width(120).height(120).url()
+    : null,
+  name: review.name,
+  description: review.description,
+}));
 ---
 
 <Layout title="Hernia Center - Chirurgie minim invazivă a herniilor">
@@ -229,13 +238,23 @@ const { data: reviews } = await loadQuery<SanityDocument[]>({
             {
               reviews?.map((review) => (
                 <div class="p-6">
-                  <div class="mb-4 flex items-center">
+                  <div class="mb-4 flex items-center gap-3">
+                    {review.imageUrl ? (
+                      <Image
+                        src={review.imageUrl}
+                        alt={review.name}
+                        inferSize
+                        class="h-20 w-20 rounded-full object-cover md:h-30 md:w-30"
+                      />
+                    ) : (
+                      <div class="h-20 w-20 rounded-full bg-gray-300 md:h-30 md:w-30" />
+                    )}
                     <div>
-                      <div class="font-semibold">{review.name}</div>
+                      <div class="text-3xl font-semibold">{review.name}</div>
                       <div class="stars-color">★★★★★</div>
                     </div>
                   </div>
-                  <p class="text-sm">{review.description}</p>
+                  <p class="text-lg">{review.description}</p>
                 </div>
               ))
             }
