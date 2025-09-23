@@ -82,29 +82,22 @@ import hands from '../assets/despre/hands.png';
             <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
           </div>
           <div class="border-custom relative aspect-square w-1/2 border-t border-r border-b">
-            <!-- Animated div positioned in top left -->
+            <!-- Animation container positioned in top left with border -->
             <div
-              class="group border-custom absolute top-8 left-12 h-16 w-16 cursor-pointer border transition-all duration-300 ease-out hover:h-[53px] hover:w-[54px]"
+              class="group border-custom absolute top-8 left-12 flex h-16 w-16 cursor-pointer items-center justify-center border"
             >
-              <div
-                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-[32px] group-hover:translate-y-[31px] group-hover:bg-[#ffc1af]"
-              >
-              </div>
-
-              <div
-                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-[31px] group-hover:bg-[#ffc1af]"
-              >
-              </div>
-
-              <div
-                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-[32px] group-hover:translate-y-0 group-hover:bg-[#ffc1af]"
-              >
-              </div>
-
-              <div
-                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:bg-[#ffc1af]"
-              >
-              </div>
+              {
+                [
+                  { x: 'translate-x-1.5', y: 'translate-y-1.5' },
+                  { x: '-translate-x-4.5', y: 'translate-y-1.5' },
+                  { x: 'translate-x-1.5', y: '-translate-y-4.5' },
+                  { x: '-translate-x-4.5', y: '-translate-y-4.5' },
+                ].map((pos) => (
+                  <div
+                    class={`gray-bg absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4 group-hover:${pos.x} group-hover:${pos.y} group-hover:bg-[#ffc1af]`}
+                  />
+                ))
+              }
             </div>
 
             <!-- Text positioned in bottom left -->
