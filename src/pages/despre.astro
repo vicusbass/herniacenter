@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
+import hands from '../assets/despre/hands.png';
 ---
 
 <Layout title="Hernia Center - Despre">
@@ -54,37 +55,92 @@ import spital from '../assets/spital.png';
 
         <!-- Row 3 -->
         <div class="flex">
-          <div class="border-custom aspect-square flex-1 border-b border-l"></div>
-          <div class="border-custom aspect-square flex-1 border-b border-l"></div>
-          <div class="border-custom aspect-square flex-1 border-b border-l"></div>
-          <div class="border-custom aspect-square flex-1 border-b border-l"></div>
-          <div class="border-custom aspect-square flex-1 border-b border-l"></div>
-          <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
+          <div class="border-custom aspect-square w-1/6 border-r border-b border-l"></div>
+        </div>
+
+        <div class="flex">
+          <div class="border-custom flex w-2/3 items-center">
+            <h2
+              class="text-left leading-tight font-bold tracking-tight"
+              style="font-size: clamp(1.5rem, 4vw, 4rem);"
+            >
+              excelența în tratamentul herniilor,<br />
+              de la diagnostic la recuperare
+            </h2>
+          </div>
+          <div class="border-custom gray-bg aspect-square w-1/6"></div>
+          <div class="border-custom gray-bg aspect-square w-1/6"></div>
+        </div>
+
+        <div class="flex">
+          <div class="border-custom aspect-square w-1/2 border">
+            <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
+          </div>
+          <div class="border-custom relative aspect-square w-1/2 border-t border-r border-b">
+            <!-- Animated div positioned in top left -->
+            <div
+              class="group border-custom absolute top-8 left-12 h-16 w-16 cursor-pointer border transition-all duration-300 ease-out hover:h-[53px] hover:w-[54px]"
+            >
+              <div
+                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-[32px] group-hover:translate-y-[31px] group-hover:bg-[#ffc1af]"
+              >
+              </div>
+
+              <div
+                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-[31px] group-hover:bg-[#ffc1af]"
+              >
+              </div>
+
+              <div
+                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-[32px] group-hover:translate-y-0 group-hover:bg-[#ffc1af]"
+              >
+              </div>
+
+              <div
+                class="gray-bg absolute h-[22px] w-[22px] translate-x-[13px] translate-y-[13px] transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:bg-[#ffc1af]"
+              >
+              </div>
+            </div>
+
+            <!-- Text positioned in bottom left -->
+            <div class="absolute right-4 bottom-20 left-12">
+              <p class="text-left text-3xl">
+                La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
+                abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
+                pacient.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      <!-- Right empty column - 12.5% -->
+      <div class="w-[12.5%]"></div>
     </div>
-
-    <!-- Right empty column - 12.5% -->
-    <div class="w-[12.5%]"></div>
   </div>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const hospitalImage = document.getElementById('hospital-image');
+
+      if (hospitalImage) {
+        hospitalImage.addEventListener('mouseenter', () => {
+          hospitalImage.style.height = '300%';
+          hospitalImage.style.width = '100%';
+          hospitalImage.style.left = '0';
+        });
+
+        hospitalImage.addEventListener('mouseleave', () => {
+          hospitalImage.style.height = '200%';
+          hospitalImage.style.width = '66.667%';
+          hospitalImage.style.left = '33.333%';
+        });
+      }
+    });
+  </script>
 </Layout>
-
-<script>
-  document.addEventListener('astro:page-load', () => {
-    const hospitalImage = document.getElementById('hospital-image');
-
-    if (hospitalImage) {
-      hospitalImage.addEventListener('mouseenter', () => {
-        hospitalImage.style.height = '300%';
-        hospitalImage.style.width = '100%';
-        hospitalImage.style.left = '0';
-      });
-
-      hospitalImage.addEventListener('mouseleave', () => {
-        hospitalImage.style.height = '200%';
-        hospitalImage.style.width = '66.667%';
-        hospitalImage.style.left = '33.333%';
-      });
-    }
-  });
-</script>

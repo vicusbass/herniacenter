@@ -89,4 +89,8 @@
   .bg-contact {
     background-color: var(--color-contact-bg);
   }
+
+  .gray-bg {
+    background-color: var(--color-border-custom);
+  }
 }
