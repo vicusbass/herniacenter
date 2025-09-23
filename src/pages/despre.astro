@@ -5,7 +5,14 @@ import spital from '../assets/spital.png';
 ---
 
 <Layout title="Hernia Center - Despre">
-  <div class="flex w-full">
+  <!-- Mobile Layout -->
+  <div class="w-full md:hidden">
+    <h1 class="mb-4 pl-4 text-5xl leading-none font-bold tracking-tight">despre</h1>
+    <Image src={spital} alt="Spital" class="h-auto w-full object-cover" />
+  </div>
+
+  <!-- Desktop Layout -->
+  <div class="hidden w-full md:flex">
     <!-- Left empty column - 12.5% -->
     <div class="w-[12.5%]"></div>
 
@@ -27,11 +34,12 @@ import spital from '../assets/spital.png';
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
           <!-- Hospital image spanning from 3rd cell to end, covering 2 rows -->
-          <Image
-            src={spital}
-            alt="Spital"
-            class="absolute left-[33.333%] top-0 z-10 h-[200%] w-[66.667%] object-cover"
-          />
+          <div
+            id="hospital-image"
+            class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] transition-all duration-300"
+          >
+            <Image src={spital} alt="Spital" class="h-full w-full object-cover" />
+          </div>
         </div>
 
         <!-- Row 2 -->
@@ -60,3 +68,23 @@ import spital from '../assets/spital.png';
     <div class="w-[12.5%]"></div>
   </div>
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const hospitalImage = document.getElementById('hospital-image');
+
+    if (hospitalImage) {
+      hospitalImage.addEventListener('mouseenter', () => {
+        hospitalImage.style.height = '300%';
+        hospitalImage.style.width = '100%';
+        hospitalImage.style.left = '0';
+      });
+
+      hospitalImage.addEventListener('mouseleave', () => {
+        hospitalImage.style.height = '200%';
+        hospitalImage.style.width = '66.667%';
+        hospitalImage.style.left = '33.333%';
+      });
+    }
+  });
+</script>
