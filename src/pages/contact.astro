@@ -1,7 +1,117 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Logo from '../assets/logo.svg';
+import spitalImage from '../assets/spital.png';
 ---
 
 <Layout title="Hernia Center - Contact">
-  <section class="max-w-full px-0"></section>
+  <section class="max-w-full px-0 sm:px-0">
+    <div class="flex flex-col lg:flex-row">
+      <!-- First container: Always 12.5% screen width (empty gap with contact background) -->
+      <div class="bg-contact hidden lg:order-1 lg:block lg:w-[12.5%]"></div>
+
+      <!-- Second container: Contact form content -->
+      <div class="bg-contact order-2 flex w-full lg:order-2 lg:w-[29.17%]">
+        <div
+          id="contact-form"
+          class="flex flex-col px-4 py-4 pb-8 lg:px-0 lg:py-8 lg:pr-8 lg:pb-12"
+        >
+          <div class="w-full max-w-md">
+            <div class="mb-8">
+              <div class="mb-4 flex items-center">
+                <div class="flex h-8 w-8 items-center justify-center">
+                  <Logo />
+                </div>
+                <span class="ml-3 text-lg font-medium text-blue-900">HERNIA CENTER</span>
+              </div>
+              <h1 class="mb-4 text-4xl font-bold lg:text-5xl">ai întrebări?</h1>
+              <p class="text-lg">
+                pentru alte informații, suntem aici pentru tine și vom reveni cu un răspuns în cel
+                mai scurt timp.
+              </p>
+            </div>
+
+            <form class="space-y-4" method="POST" action="/api/contact">
+              <div class="flex space-x-4">
+                <div class="flex-1">
+                  <input
+                    type="text"
+                    name="nume"
+                    placeholder="Nume"
+                    required
+                    class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                  />
+                </div>
+                <div class="flex-1">
+                  <input
+                    type="text"
+                    name="prenume"
+                    placeholder="Prenume"
+                    required
+                    class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="e-mail"
+                required
+                class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+              />
+
+              <input
+                type="tel"
+                name="telefon"
+                placeholder="telefon"
+                required
+                class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+              />
+
+              <textarea
+                name="mesaj"
+                placeholder="lasă-ne un mesaj"
+                rows="4"
+                required
+                class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+              ></textarea>
+
+              <div class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  name="privacy"
+                  required
+                  class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <label for="privacy" class="text-sm text-gray-600">
+                  Sunt de acord cu termenii și condițiile
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-[#003055] px-6 py-2 text-lg font-medium text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+              >
+                Trimite
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Third container: Full width on mobile, ~58.33% on desktop -->
+      <div class="order-1 flex w-full lg:order-3 lg:w-[58.33%]">
+        <div class="relative h-64 w-full lg:h-auto">
+          <Image
+            src={spitalImage}
+            alt="Hernia Center - Spital"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
