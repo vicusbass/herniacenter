@@ -5,14 +5,10 @@ import spital from '../assets/spital.png';
 import hands from '../assets/despre/hands.png';
 import morehands from '../assets/despre/morehands.png';
 import device from '../assets/despre/device.png';
-import AnimationContainer from '../components/AnimationContainer.astro';
 import HeartAnimation from '../components/HeartAnimation.astro';
 import SquaresAnimation from '../components/SquaresAnimation.astro';
 import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
 import PolygonAnimation from '../components/PolygonAnimation.astro';
-
-const baseAnimationClass =
-  'gray-bg group-hover:bg-[#ffc1af] absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4';
 ---
 
 <Layout title="Hernia Center - Despre">
@@ -297,7 +293,7 @@ const baseAnimationClass =
 
     <style>
       p {
-        font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+        font-size: clamp(1.5rem, 2.5vw, 1.875rem);
         line-height: 1.1;
         text-align: left;
       }
