@@ -24,6 +24,7 @@ const POSTS_QUERY = `
 *[_type == "post"] | order(publishedAt desc) {
   _id,
   title,
+  description,
   slug,
   mainImage,
   publishedAt,
@@ -42,10 +43,12 @@ const articles = posts.map((post) => ({
     month: '2-digit',
     year: 'numeric',
   }),
-  text: post.text,
   title: post.title,
+  description: post.description,
   slug: post.slug,
 }));
+
+const [featuredArticle, ...otherArticles] = articles;
 ---
 
 <Layout title={`Hernia Center - Blog`}>
@@ -71,18 +74,22 @@ const articles = posts.map((post) => ({
     <div class="hidden md:flex">
       <div class="w-[12.5%] bg-white"></div>
       <div class="w-[50%]">
-        <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
+        {featuredArticle?.imageUrl ? (
+          <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full" />
+        ) : (
+          <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
+        )}
       </div>
       <div class="flex w-[25%] flex-col">
         <div class="flex-grow pt-4 pl-4">
           <h2 class="text-2xl leading-tight font-semibold lg:text-3xl xl:text-4xl">
-            {PAGE.hero.heading}
+            {featuredArticle?.title || PAGE.hero.heading}
           </h2>
           <p class="pt-2 text-lg lg:pt-3 lg:text-base xl:pt-4 xl:text-lg">
-            {PAGE.hero.copy}
+            {featuredArticle?.description || PAGE.hero.copy}
           </p>
           <a
-            href="/blog"
+            href={featuredArticle?.slug?.current ? `/blog/${featuredArticle.slug.current}` : "/blog"}
             class="inline-block pt-2 text-sm underline underline-offset-4 hover:text-blue-800 lg:text-base xl:text-lg"
           >
             citește mai mult
@@ -104,7 +111,7 @@ const articles = posts.map((post) => ({
         <div class="w-[75%]">
           <div class="grid grid-cols-3 gap-8">
             {
-              articles.map((article) => (
+              otherArticles.map((article) => (
                 <article class="overflow-hidden">
                   {/* Clean image without blur */}
                   <div class="h-64 overflow-hidden">
@@ -138,14 +145,18 @@ const articles = posts.map((post) => ({
         <h1 class="text-5xl font-bold tracking-tight">{PAGE.title}</h1>
         <div class="mt-8">
           <h2 class="text-3xl leading-tight font-semibold">
-            {PAGE.hero.heading}
+            {featuredArticle?.title || PAGE.hero.heading}
           </h2>
         </div>
       </div>
-      <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full pt-4" />
+      {featuredArticle?.imageUrl ? (
+        <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full pt-4" />
+      ) : (
+        <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full pt-4" />
+      )}
       <div class="px-4">
         <p class="pt-5 text-lg leading-relaxed">
-          {PAGE.hero.copy}
+          {featuredArticle?.description || PAGE.hero.copy}
         </p>
         <div class="mt-8">
           <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
@@ -155,7 +166,7 @@ const articles = posts.map((post) => ({
       <!-- Blog Articles -->
       <div class="mt-12 space-y-6">
         {
-          articles.map((article) => (
+          otherArticles.map((article) => (
             <article class="relative overflow-hidden">
               <div class="relative h-80 overflow-hidden">
                 <div

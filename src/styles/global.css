@@ -45,6 +45,8 @@
 
   /* Custom text color */
   --color-primary: #003055;
+  --color-stars: #ffc1af;
+  --color-contact-bg: #f2f7fa;
 
   /* Text body color */
   --color-text-body: #374151;
@@ -78,5 +80,21 @@
   /* WhatsApp button utility */
   .bg-main-btn {
     background-color: var(--color-green-main-btn);
+  }
+
+  .stars-color {
+    color: var(--color-stars);
+  }
+
+  .peach-bg {
+    background-color: var(--color-stars);
+  }
+
+  .bg-contact {
+    background-color: var(--color-contact-bg);
+  }
+
+  .gray-bg {
+    background-color: var(--color-border-custom);
   }
 }

@@ -1,11 +1,33 @@
 ---
 import { Image } from 'astro:assets';
+import type { SanityDocument } from '@sanity/client';
+import { loadQuery } from '../utils/loadQuery';
+import { urlFor } from '../utils/sanityImageUrl';
+
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import ArrowDown from '../assets/arrow-down.svg';
 import ArrowRight from '../assets/arrow-right.svg';
 import PrimaryButton from '../components/PrimaryButton.astro';
 import medic from '../assets/medic.png';
+
+const { data: testimonials } = await loadQuery<SanityDocument[]>({
+  query: `*[_type == "review"] | order(priority asc)[0...3] {
+      _id,
+      name,
+      description,
+      priority,
+      image,
+    }`,
+});
+const reviews = testimonials.map((review) => ({
+  ...review,
+  imageUrl: review?.image
+    ? urlFor(review.image)?.auto('format').width(120).height(120).url()
+    : null,
+  name: review.name,
+  description: review.description,
+}));
 ---
 
 <Layout title="Hernia Center - Chirurgie minim invazivă a herniilor">
@@ -37,8 +59,6 @@ import medic from '../assets/medic.png';
         <div class="border-custom hidden aspect-square border-r border-b sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
         <div class="hidden aspect-square sm:block"></div>
-        <!-- <div class="block aspect-square sm:hidden"></div> -->
-        <!-- <div class="block aspect-square sm:hidden"></div> -->
 
         <div class="border-custom block aspect-square border-r border-b border-l sm:hidden"></div>
         <div class="border-custom block aspect-square border-r border-b sm:hidden"></div>
@@ -128,7 +148,7 @@ import medic from '../assets/medic.png';
             },
           ].map(({ title, description }, index, items) => (
             <button
-              class={`hernia-button border-custom flex aspect-square cursor-pointer flex-col justify-between border-t border-b-0 border-l p-7 sm:border-b ${
+              class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-b-0 border-l sm:border-b ${
                 index === items.length - 1
                   ? 'border-r'
                   : index % 2 === 1
@@ -140,10 +160,10 @@ import medic from '../assets/medic.png';
               data-description={description}
             >
               <div class="flex justify-between">
-                <div class="text-4xl/4 font-semibold">{String(index + 1).padStart(2, '0')}</div>
+                <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
                 <ArrowDown />
               </div>
-              <h3 class="text-left text-3xl/6">{title}</h3>
+              <h3 class="hernia-text">{title}</h3>
             </button>
           ))
         }
@@ -154,7 +174,7 @@ import medic from '../assets/medic.png';
         <button
           class="group col-span-2 flex aspect-[2/1] items-center justify-center bg-(--color-primary) transition-colors hover:opacity-90 sm:aspect-auto"
         >
-          <span class="flex items-center text-3xl/6 text-white">
+          <span class="flex items-center text-3xl/6 text-white sm:text-xl/6 lg:text-3xl/6">
             citește mai mult
             <ArrowRight
               class="mt-1 ml-4 scale-80 transition-all duration-300 ease-out group-hover:translate-x-3"
@@ -167,14 +187,14 @@ import medic from '../assets/medic.png';
       </div>
       <div
         id="hernina-type-modal"
-        class="border-custom absolute hidden cursor-pointer border bg-(--color-primary) p-7"
+        class="border-custom hernia-container absolute hidden cursor-pointer border bg-(--color-primary) p-7"
       >
         <div class="flex justify-between">
-          <div id="hernia-number" class="text-4xl/4 font-semibold"></div>
+          <div id="hernia-number" class="hernia-title"></div>
           <ArrowDown />
         </div>
-        <h3 id="hernia-title" class="text-left text-3xl/6"></h3>
-        <h3 id="hernia-description" class="text-left text-3xl/6"></h3>
+        <h3 id="hernia-title" class="hernia-text"></h3>
+        <h3 id="hernia-description" class="hernia-text"></h3>
       </div>
     </section>
 
@@ -262,28 +282,33 @@ import medic from '../assets/medic.png';
             cât mai lungă!
           </p>
         </div>
-        <div class="rounded-lg bg-white p-6">
-          <div class="mb-4 flex items-center">
-            <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
-            <div>
-              <div class="font-semibold">Mihai Chis</div>
-              <div class="text-yellow-400">★★★★★</div>
-            </div>
-          </div>
-          <p class="text-sm text-gray-600">
-            Dr.Drasoveanu Radu si Dr Hossu, oameni deosebiti si medici desavarsiti care au reusit
-            impreuna cu toata echipa din cadrul Spitalului Medicover Suceagu sa imi ofere cea mai
-            placuta experienta pe care o poti avea la un spital, chiar daca a fost vorba de o
-            operatie de hernie inghinala bilaterala. Multumesc Dr.
-          </p>
-        </div>
-        <div class="rounded-lg bg-white p-6">
-          <div class="mb-4 flex items-center">
-            <div class="mr-3 h-12 w-12 rounded-full bg-gray-300"></div>
-            <div>
-              <div class="font-semibold">Alexandra Alexandrescu</div>
-              <div class="text-yellow-400">★★★★★</div>
-            </div>
+
+        <!-- Testimonials Grid -->
+        <div class="mx-auto w-3/4">
+          <div id="testimonials" class="grid md:grid-cols-3">
+            {
+              reviews?.map((review) => (
+                <div class="p-6">
+                  <div class="mb-4 flex items-center gap-3">
+                    {review.imageUrl ? (
+                      <Image
+                        src={review.imageUrl}
+                        alt={review.name}
+                        inferSize
+                        class="h-20 w-20 rounded-full object-cover md:h-30 md:w-30"
+                      />
+                    ) : (
+                      <div class="h-20 w-20 rounded-full bg-gray-300 md:h-30 md:w-30" />
+                    )}
+                    <div>
+                      <div class="text-3xl font-semibold">{review.name}</div>
+                      <div class="stars-color">★★★★★</div>
+                    </div>
+                  </div>
+                  <p class="text-lg">{review.description}</p>
+                </div>
+              ))
+            }
           </div>
           <p class="text-sm text-gray-600">
             Astăzi am cunoscut oameni minunați, doctori apropiați denevoile pacienţilor. Recomand cu
@@ -307,6 +332,42 @@ import medic from '../assets/medic.png';
   @media (prefers-reduced-motion: reduce) {
     #scroll-title {
       transition: none;
+    }
+  }
+
+  .hernia-container {
+    padding: 2rem;
+  }
+
+  .hernia-title {
+    font-size: 2.5rem;
+    line-height: 0.4;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .hernia-text {
+    font-size: 2rem;
+    line-height: 0.8;
+    text-align: left;
+  }
+
+  @media (width >= 40rem) {
+    .hernia-container {
+      padding: clamp(0.3rem, 2vw, 1.5rem);
+    }
+
+    .hernia-title {
+      font-size: clamp(1.4rem, 3vw, 2.25rem);
+      line-height: 0.4;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .hernia-text {
+      font-size: clamp(1.25rem, 2.4vw, 2.25rem);
+      line-height: 0.8;
+      text-align: left;
     }
   }
 </style>
