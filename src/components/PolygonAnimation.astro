@@ -1,0 +1,25 @@
+---
+import AnimationContainer from './AnimationContainer.astro';
+---
+
+<AnimationContainer>
+  <div class="polygon-container group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out">
+    <div
+      class="polygon-shape absolute top-2 left-2 h-12 w-12 bg-[#cedce5] transition-all duration-300 ease-out group-hover:bg-[#ffc1af]"
+      style="clip-path: polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%); 
+                transition: clip-path 0.3s ease-out, background-color 0.3s ease-out;"
+      onmouseenter="this.style.clipPath = 'polygon(-10% -10%, 90% -10%, 90% 90%, -10% 90%)'"
+      onmouseleave="this.style.clipPath = 'polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%)'"
+    >
+    </div>
+  </div>
+</AnimationContainer>
+
+<style>
+  @media (max-width: 767px) {
+    :global(.mobile-animate.in-view) .polygon-shape {
+      background-color: #ffc1af !important;
+      clip-path: polygon(-10% -10%, 90% -10%, 90% 90%, -10% 90%) !important;
+    }
+  }
+</style>

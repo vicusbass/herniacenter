@@ -86,7 +86,15 @@
     color: var(--color-stars);
   }
 
+  .peach-bg {
+    background-color: var(--color-stars);
+  }
+
   .bg-contact {
     background-color: var(--color-contact-bg);
+  }
+
+  .gray-bg {
+    background-color: var(--color-border-custom);
   }
 }
