@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
 import hands from '../assets/despre/hands.png';
+
+const baseAnimationClass =
+  'gray-bg group-hover:bg-[#ffc1af] absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4';
 ---
 
 <Layout title="Hernia Center - Despre">
@@ -86,18 +89,25 @@ import hands from '../assets/despre/hands.png';
             <div
               class="group border-custom absolute top-8 left-12 flex h-16 w-16 cursor-pointer items-center justify-center border"
             >
-              {
-                [
-                  { x: 'translate-x-1.5', y: 'translate-y-1.5' },
-                  { x: '-translate-x-4.5', y: 'translate-y-1.5' },
-                  { x: 'translate-x-1.5', y: '-translate-y-4.5' },
-                  { x: '-translate-x-4.5', y: '-translate-y-4.5' },
-                ].map((pos) => (
-                  <div
-                    class={`gray-bg absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4 group-hover:${pos.x} group-hover:${pos.y} group-hover:bg-[#ffc1af]`}
-                  />
-                ))
-              }
+              <div
+                class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
+              >
+              </div>
+
+              <div
+                class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}
+              >
+              </div>
+
+              <div
+                class={`${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}
+              >
+              </div>
+
+              <div
+                class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
+              >
+              </div>
             </div>
 
             <!-- Text positioned in bottom left -->
