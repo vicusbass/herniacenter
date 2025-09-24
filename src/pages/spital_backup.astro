@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
+---
+
+<Layout title="Hernia Center - Spitalul">
+  <section class="flex min-h-screen items-center justify-center">
+    <div id="lottie-container" class="h-[240px] w-[240px] cursor-pointer border">
+      <LottieAnimation id="target-animation" src="target.json" autoplay={false} loop={false} />
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const container = document.getElementById('lottie-container');
+
+      if (container) {
+        container.addEventListener('mouseenter', () => {
+          const animation = astroLottie.getAnimation('target-animation');
+          if (animation && animation.isLoaded) {
+            animation.player.setDirection(1);
+            animation.player.play();
+          }
+        });
+
+        container.addEventListener('mouseleave', () => {
+          const animation = astroLottie.getAnimation('target-animation');
+          if (animation && animation.isLoaded) {
+            animation.player.setDirection(-1);
+            animation.player.play();
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
