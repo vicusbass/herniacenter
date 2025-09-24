@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
 import hands from '../assets/despre/hands.png';
+import morehands from '../assets/despre/morehands.png';
 
 const baseAnimationClass =
   'gray-bg group-hover:bg-[#ffc1af] absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4';
@@ -118,6 +119,43 @@ const baseAnimationClass =
                 pacient.
               </p>
             </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="border-custom relative aspect-square w-1/2 border-t border-r border-b">
+            <!-- Animation container positioned in top left with border -->
+            <div
+              class="group border-custom absolute top-8 left-12 flex h-16 w-16 cursor-pointer items-center justify-center border"
+            >
+              <div class="group relative h-12 w-12 cursor-pointer">
+                <!-- Circle -->
+                <div
+                  class="absolute inset-2 rounded-full bg-[#cedce5] transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+                >
+                </div>
+
+                <!-- Heart (wider with scale-x) -->
+                <div
+                  class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
+                >
+                  ♥
+                </div>
+              </div>
+            </div>
+
+            <!-- Text positioned in bottom left -->
+            <div class="absolute right-4 bottom-20 left-12">
+              <p class="text-left text-3xl">
+                Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
+                ombilicale, până la forme mai rare sau complexe - utilizând metode chirurgicale
+                minim invazive care reduc semnificativ durerea postoperatorie și accelerează
+                procesul de recuperare.
+              </p>
+            </div>
+          </div>
+          <div class="border-custom aspect-square w-1/2 border">
+            <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
           </div>
         </div>
       </section>
