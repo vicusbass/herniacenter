@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
 import hands from '../assets/despre/hands.png';
 import morehands from '../assets/despre/morehands.png';
+import device from '../assets/despre/device.png';
+import AnimationContainer from '../components/AnimationContainer.astro';
 
 const baseAnimationClass =
   'gray-bg group-hover:bg-[#ffc1af] absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4';
@@ -82,14 +84,38 @@ const baseAnimationClass =
         </div>
 
         <div class="flex">
-          <div class="border-custom aspect-square w-1/2 border">
+          <div class="aspect-square w-1/2">
             <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
           </div>
-          <div class="border-custom relative aspect-square w-1/2 border-t border-r border-b">
-            <!-- Animation container positioned in top left with border -->
-            <div
-              class="group border-custom absolute top-8 left-12 flex h-16 w-16 cursor-pointer items-center justify-center border"
-            >
+          <div class="border-custom relative aspect-square w-1/2 border-t border-r">
+            <AnimationContainer>
+              <div class="group relative h-14 w-14 cursor-pointer">
+                <div
+                  class="gray-bg absolute inset-2 rounded-full transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+                >
+                </div>
+                <div
+                  class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
+                >
+                  ♥
+                </div>
+              </div>
+            </AnimationContainer>
+
+            <!-- Text positioned in bottom left -->
+            <div class="absolute right-4 bottom-20 left-12">
+              <p class="text-left text-3xl">
+                La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
+                abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
+                pacient.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="border-custom relative aspect-square w-1/2 border-l">
+            <AnimationContainer>
               <div
                 class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
               >
@@ -109,42 +135,7 @@ const baseAnimationClass =
                 class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
               >
               </div>
-            </div>
-
-            <!-- Text positioned in bottom left -->
-            <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-left text-3xl">
-                La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
-                abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
-                pacient.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex">
-          <div class="border-custom relative aspect-square w-1/2 border-t border-r border-b">
-            <!-- Animation container positioned in top left with border -->
-            <div
-              class="group border-custom absolute top-8 left-12 flex h-16 w-16 cursor-pointer items-center justify-center border"
-            >
-              <div class="group relative h-12 w-12 cursor-pointer">
-                <!-- Circle -->
-                <div
-                  class="absolute inset-2 rounded-full bg-[#cedce5] transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
-                >
-                </div>
-
-                <!-- Heart (wider with scale-x) -->
-                <div
-                  class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
-                >
-                  ♥
-                </div>
-              </div>
-            </div>
-
-            <!-- Text positioned in bottom left -->
+            </AnimationContainer>
             <div class="absolute right-4 bottom-20 left-12">
               <p class="text-left text-3xl">
                 Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
@@ -154,8 +145,81 @@ const baseAnimationClass =
               </p>
             </div>
           </div>
-          <div class="border-custom aspect-square w-1/2 border">
-            <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
+          <div class="aspect-square w-1/2">
+            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="aspect-square w-1/2">
+            <Image src={device} alt="Device" class="h-full w-full object-cover" />
+          </div>
+          <div class="border-custom relative aspect-square w-1/2 border-r">
+            <AnimationContainer>
+              <div
+                class="group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out"
+              >
+                <div
+                  class="absolute top-1 left-1/2 h-0 w-0 -translate-x-1/2 border-r-[20px] border-b-[32px] border-l-[20px] border-r-transparent border-b-[#cedce5] border-l-transparent transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+                >
+                </div>
+                <div
+                  class="absolute top-2 left-[10px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+                >
+                </div>
+
+                <div
+                  class="absolute top-2 left-[18px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+                >
+                </div>
+
+                <div
+                  class="absolute top-2 left-[26px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+                >
+                </div>
+                <div
+                  class="absolute top-2 left-[34px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+                >
+                </div>
+              </div>
+            </AnimationContainer>
+
+            <div class="absolute right-4 bottom-20 left-12">
+              <p class="text-left text-3xl">
+                Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
+                laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și
+                cu un rezultat estetic optim.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="border-custom relative aspect-square w-1/2 border-l">
+            <AnimationContainer>
+              <div
+                class="group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out"
+              >
+                <!-- Irregular Quadrilateral to Square -->
+                <div
+                  class="absolute top-2 left-2 h-12 w-12 bg-[#cedce5] transition-all duration-300 ease-out group-hover:bg-[#ffc1af]"
+                  style="clip-path: polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%); 
+                            transition: clip-path 0.3s ease-out, background-color 0.3s ease-out;"
+                  onmouseenter="this.style.clipPath = 'polygon(-10% -10%, 90% -10%, 90% 90%, -10% 90%)'"
+                  onmouseleave="this.style.clipPath = 'polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%)'"
+                >
+                </div>
+              </div>
+            </AnimationContainer>
+            <div class="absolute right-4 bottom-20 left-12">
+              <p class="text-left text-3xl">
+                Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
+                sale, într-un spațiu dedicat, modern și prietenos.
+              </p>
+            </div>
+          </div>
+          <div class="aspect-square w-1/2">
+            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
           </div>
         </div>
       </section>
