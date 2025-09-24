@@ -1,0 +1,17 @@
+---
+import AnimationContainer from './AnimationContainer.astro';
+---
+
+<AnimationContainer>
+  <div class="group relative h-14 w-14 cursor-pointer">
+    <div
+      class="gray-bg absolute inset-2 rounded-full transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+    >
+    </div>
+    <div
+      class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
+    >
+      ♥
+    </div>
+  </div>
+</AnimationContainer>

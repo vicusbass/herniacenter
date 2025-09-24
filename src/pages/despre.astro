@@ -6,31 +6,42 @@ import hands from '../assets/despre/hands.png';
 import morehands from '../assets/despre/morehands.png';
 import device from '../assets/despre/device.png';
 import AnimationContainer from '../components/AnimationContainer.astro';
+import HeartAnimation from '../components/HeartAnimation.astro';
+import SquaresAnimation from '../components/SquaresAnimation.astro';
+import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
+import PolygonAnimation from '../components/PolygonAnimation.astro';
 
 const baseAnimationClass =
   'gray-bg group-hover:bg-[#ffc1af] absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out group-hover:h-4 group-hover:w-4';
 ---
 
 <Layout title="Hernia Center - Despre">
-  <!-- Mobile Layout -->
-  <div class="w-full md:hidden">
-    <h1 class="mb-4 pl-4 text-5xl leading-none font-bold tracking-tight">despre</h1>
-    <Image src={spital} alt="Spital" class="h-auto w-full object-cover" />
-  </div>
+  <!-- Responsive Layout -->
+  <div class="flex w-full">
+    <!-- Left empty column - hidden on mobile, 12.5% on desktop -->
+    <div class="hidden md:block md:w-[12.5%]"></div>
 
-  <!-- Desktop Layout -->
-  <div class="hidden w-full md:flex">
-    <!-- Left empty column - 12.5% -->
-    <div class="w-[12.5%]"></div>
-
-    <!-- Main content column - 75% -->
-    <div id="main-content" class="w-[75%]">
+    <!-- Main content column - full width on mobile, 75% on desktop -->
+    <div id="main-content" class="w-full md:w-[75%]">
       <section class="max-w-full px-0">
-        <!-- Row 1 -->
-        <div class="relative flex">
-          <div class="border-custom flex aspect-square flex-1 items-end border-b border-l">
+        <!-- Mobile: H1 and Image Stack -->
+        <div class="block md:hidden">
+          <div class="px-4 py-4">
+            <h1 class="text-5xl leading-none font-bold tracking-tight">despre</h1>
+          </div>
+          <div class="w-full">
+            <Image src={spital} alt="Spital" class="w-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Desktop: Grid Layout -->
+        <div class="relative hidden md:flex">
+          <!-- Desktop: Show h1 in grid cell -->
+          <div
+            class="border-custom flex aspect-square flex-1 items-end border-b border-l px-0 py-0"
+          >
             <h1
-              class="translate-y-[3px] text-lg leading-none font-bold tracking-tight md:translate-y-[4px] md:text-4xl lg:translate-y-[6px] lg:text-5xl xl:translate-y-[8px] xl:text-6xl 2xl:translate-y-[8px] 2xl:text-7xl"
+              class="translate-y-[4px] text-4xl leading-none font-bold tracking-tight lg:translate-y-[6px] lg:text-5xl xl:translate-y-[8px] xl:text-6xl 2xl:translate-y-[8px] 2xl:text-7xl"
             >
               despre
             </h1>
@@ -40,7 +51,7 @@ const baseAnimationClass =
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
-          <!-- Hospital image spanning from 3rd cell to end, covering 2 rows -->
+          <!-- Hospital image - spanning cells on desktop -->
           <div
             id="hospital-image"
             class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] transition-all duration-300"
@@ -49,8 +60,8 @@ const baseAnimationClass =
           </div>
         </div>
 
-        <!-- Row 2 -->
-        <div class="flex">
+        <!-- Row 2 - Hidden on mobile -->
+        <div class="hidden md:flex">
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
@@ -59,8 +70,8 @@ const baseAnimationClass =
           <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
         </div>
 
-        <!-- Row 3 -->
-        <div class="flex">
+        <!-- Row 3 - Hidden on mobile -->
+        <div class="hidden md:flex">
           <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
           <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
           <div class="border-custom aspect-square w-1/6 border-b border-l"></div>
@@ -69,11 +80,18 @@ const baseAnimationClass =
           <div class="border-custom aspect-square w-1/6 border-r border-b border-l"></div>
         </div>
 
-        <div class="flex">
+        <!-- Mobile: Text content -->
+        <div class="block px-4 py-8 md:hidden">
+          <h2 class="text-left text-3xl leading-tight font-bold tracking-tight">
+            excelența în tratamentul herniilor, de la diagnostic la recuperare
+          </h2>
+        </div>
+
+        <!-- Desktop: Text container -->
+        <div class="hidden justify-start px-0 py-0 md:flex">
           <div class="border-custom flex w-2/3 items-center">
             <h2
-              class="text-left leading-tight font-bold tracking-tight"
-              style="font-size: clamp(1.5rem, 4vw, 4rem);"
+              class="text-left text-[clamp(1.5rem,4vw,3rem)] leading-[1.1] font-bold tracking-tight"
             >
               excelența în tratamentul herniilor,<br />
               de la diagnostic la recuperare
@@ -83,28 +101,36 @@ const baseAnimationClass =
           <div class="border-custom gray-bg aspect-square w-1/6"></div>
         </div>
 
-        <div class="flex">
-          <div class="aspect-square w-1/2">
+        <!-- Section 1 -->
+        <div class="md:flex">
+          <div class="aspect-square w-full md:w-1/2">
             <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
           </div>
-          <div class="border-custom relative aspect-square w-1/2 border-t border-r">
-            <AnimationContainer>
-              <div class="group relative h-14 w-14 cursor-pointer">
-                <div
-                  class="gray-bg absolute inset-2 rounded-full transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
-                >
-                </div>
-                <div
-                  class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
-                >
-                  ♥
-                </div>
-              </div>
-            </AnimationContainer>
 
-            <!-- Text positioned in bottom left -->
+          <!-- Animation - Mobile only -->
+          <div class="flex justify-start py-8 pl-4 md:hidden">
+            <HeartAnimation />
+          </div>
+
+          <!-- Text - Mobile only -->
+          <div class="px-4 pb-8 md:hidden">
+            <p>
+              La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
+              abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
+              pacient.
+            </p>
+          </div>
+
+          <!-- Animation + Text - Desktop only -->
+          <div
+            class="border-custom relative hidden aspect-square w-full border-t border-r md:block md:w-1/2"
+          >
+            <div class="absolute top-8 left-12">
+              <HeartAnimation />
+            </div>
+
             <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-left text-3xl">
+              <p>
                 La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
                 abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
                 pacient.
@@ -113,8 +139,15 @@ const baseAnimationClass =
           </div>
         </div>
 
-        <div class="flex">
-          <div class="border-custom relative aspect-square w-1/2 border-l">
+        <!-- Section 2: Mobile (image, animation, text) | Desktop (animation left, image right) -->
+        <div class="md:flex">
+          <!-- Image -->
+          <div class="aspect-square w-full md:order-2 md:w-1/2">
+            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
+          </div>
+
+          <!-- Animation - Mobile only -->
+          <div class="flex justify-start py-8 pl-12 md:hidden">
             <AnimationContainer>
               <div
                 class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
@@ -136,8 +169,50 @@ const baseAnimationClass =
               >
               </div>
             </AnimationContainer>
+          </div>
+
+          <!-- Text - Mobile only -->
+          <div class="px-4 pb-8 md:hidden">
+            <p>
+              Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
+              ombilicale, până la forme mai rare sau complexe - utilizând metode chirurgicale minim
+              invazive care reduc semnificativ durerea postoperatorie și accelerează procesul de
+              recuperare.
+            </p>
+          </div>
+
+          <!-- Animation + Text - Desktop only -->
+          <div
+            class="border-custom relative hidden aspect-square w-full border-l md:order-1 md:block md:w-1/2"
+          >
+            <!-- Animation -->
+            <div class="absolute top-8 left-12">
+              <AnimationContainer>
+                <div
+                  class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
+                >
+                </div>
+
+                <div
+                  class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}
+                >
+                </div>
+
+                <div
+                  class={`${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}
+                >
+                </div>
+
+                <div
+                  class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
+                >
+                </div>
+              </AnimationContainer>
+            </div>
+
+            <!-- Text -->
             <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-left text-3xl">
+              <p>
                 Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
                 ombilicale, până la forme mai rare sau complexe - utilizând metode chirurgicale
                 minim invazive care reduc semnificativ durerea postoperatorie și accelerează
@@ -145,47 +220,38 @@ const baseAnimationClass =
               </p>
             </div>
           </div>
-          <div class="aspect-square w-1/2">
-            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
-          </div>
         </div>
 
-        <div class="flex">
-          <div class="aspect-square w-1/2">
+        <!-- Section 3 -->
+        <div class="md:flex">
+          <div class="aspect-square w-full md:w-1/2">
             <Image src={device} alt="Device" class="h-full w-full object-cover" />
           </div>
-          <div class="border-custom relative aspect-square w-1/2 border-r">
-            <AnimationContainer>
-              <div
-                class="group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out"
-              >
-                <div
-                  class="absolute top-1 left-1/2 h-0 w-0 -translate-x-1/2 border-r-[20px] border-b-[32px] border-l-[20px] border-r-transparent border-b-[#cedce5] border-l-transparent transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
-                >
-                </div>
-                <div
-                  class="absolute top-2 left-[10px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-                >
-                </div>
 
-                <div
-                  class="absolute top-2 left-[18px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-                >
-                </div>
+          <!-- Animation - Mobile only -->
+          <div class="flex justify-start py-8 pl-12 md:hidden">
+            <TriangleBarsAnimation />
+          </div>
 
-                <div
-                  class="absolute top-2 left-[26px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-                >
-                </div>
-                <div
-                  class="absolute top-2 left-[34px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-                >
-                </div>
-              </div>
-            </AnimationContainer>
+          <!-- Text - Mobile only -->
+          <div class="px-4 pb-8 md:hidden">
+            <p>
+              Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
+              laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și cu
+              un rezultat estetic optim.
+            </p>
+          </div>
+
+          <!-- Animation + Text - Desktop only -->
+          <div
+            class="border-custom relative hidden aspect-square w-full border-r md:block md:w-1/2"
+          >
+            <div class="absolute top-8 left-12">
+              <TriangleBarsAnimation />
+            </div>
 
             <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-left text-3xl">
+              <p>
                 Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
                 laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și
                 cu un rezultat estetic optim.
@@ -194,58 +260,110 @@ const baseAnimationClass =
           </div>
         </div>
 
-        <div class="flex">
-          <div class="border-custom relative aspect-square w-1/2 border-l">
-            <AnimationContainer>
-              <div
-                class="group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out"
-              >
-                <!-- Irregular Quadrilateral to Square -->
-                <div
-                  class="absolute top-2 left-2 h-12 w-12 bg-[#cedce5] transition-all duration-300 ease-out group-hover:bg-[#ffc1af]"
-                  style="clip-path: polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%); 
-                            transition: clip-path 0.3s ease-out, background-color 0.3s ease-out;"
-                  onmouseenter="this.style.clipPath = 'polygon(-10% -10%, 90% -10%, 90% 90%, -10% 90%)'"
-                  onmouseleave="this.style.clipPath = 'polygon(30% 10%, 80% 0%, 100% 60%, 10% 75%)'"
-                >
-                </div>
-              </div>
-            </AnimationContainer>
+        <!-- Section 4 -->
+        <div class="md:flex">
+          <div class="aspect-square w-full md:order-2 md:w-1/2">
+            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
+          </div>
+
+          <!-- Animation - Mobile only -->
+          <div class="flex justify-start py-8 pl-4 md:hidden">
+            <PolygonAnimation />
+          </div>
+
+          <!-- Text - Mobile only -->
+          <div class="px-4 pb-8 md:hidden">
+            <p>
+              Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
+              sale, într-un spațiu dedicat, modern și prietenos.
+            </p>
+          </div>
+
+          <!-- Animation + Text - Desktop only -->
+          <div
+            class="border-custom relative hidden aspect-square w-full border-l md:order-1 md:block md:w-1/2"
+          >
+            <div class="absolute top-8 left-12">
+              <PolygonAnimation />
+            </div>
+
             <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-left text-3xl">
+              <p>
                 Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
                 sale, într-un spațiu dedicat, modern și prietenos.
               </p>
             </div>
           </div>
-          <div class="aspect-square w-1/2">
-            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
-          </div>
         </div>
       </section>
 
-      <!-- Right empty column - 12.5% -->
-      <div class="w-[12.5%]"></div>
+      <!-- Section 5 -->
+      <div class="md:flex">
+        <div class="aspect-square w-full md:w-1/2">
+          <Image src={device} alt="Device" class="h-full w-full object-cover" />
+        </div>
+
+        <!-- Animation - Mobile only -->
+        <div class="flex justify-start py-8 pl-4 md:hidden">
+          <TriangleBarsAnimation />
+        </div>
+
+        <!-- Text - Mobile only -->
+        <div class="px-4 pb-8 md:hidden">
+          <p>
+            Obiectivul nostru este simplu: o recuperare rapidă, fără durere, o experiență medicală
+            pozitivă și o calitate a vieții cât mai bună după operația de hernie.
+          </p>
+        </div>
+
+        <!-- Animation + Text - Desktop only -->
+        <div
+          class="border-custom relative hidden aspect-square w-full border-r border-b md:block md:w-1/2"
+        >
+          <div class="absolute top-8 left-12">
+            <TriangleBarsAnimation />
+          </div>
+
+          <div class="absolute right-4 bottom-20 left-12">
+            <p>
+              Obiectivul nostru este simplu: o recuperare rapidă, fără durere, o experiență medicală
+              pozitivă și o calitate a vieții cât mai bună după operația de hernie.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right empty column - hidden on mobile, 12.5% on desktop -->
+      <div class="hidden md:block md:w-[12.5%]"></div>
     </div>
-  </div>
 
-  <script>
-    document.addEventListener('astro:page-load', () => {
-      const hospitalImage = document.getElementById('hospital-image');
-
-      if (hospitalImage) {
-        hospitalImage.addEventListener('mouseenter', () => {
-          hospitalImage.style.height = '300%';
-          hospitalImage.style.width = '100%';
-          hospitalImage.style.left = '0';
-        });
-
-        hospitalImage.addEventListener('mouseleave', () => {
-          hospitalImage.style.height = '200%';
-          hospitalImage.style.width = '66.667%';
-          hospitalImage.style.left = '33.333%';
-        });
+    <style>
+      p {
+        font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+        line-height: 1.1;
+        text-align: left;
       }
-    });
-  </script>
+    </style>
+
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const hospitalImage = document.getElementById('hospital-image');
+
+        // Only add hover events on desktop (md breakpoint and up)
+        if (hospitalImage && window.innerWidth >= 768) {
+          hospitalImage.addEventListener('mouseenter', () => {
+            hospitalImage.style.height = '300%';
+            hospitalImage.style.width = '100%';
+            hospitalImage.style.left = '0';
+          });
+
+          hospitalImage.addEventListener('mouseleave', () => {
+            hospitalImage.style.height = '200%';
+            hospitalImage.style.width = '66.667%';
+            hospitalImage.style.left = '33.333%';
+          });
+        }
+      });
+    </script>
+  </div>
 </Layout>
