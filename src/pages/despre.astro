@@ -147,28 +147,8 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-12 md:hidden">
-            <AnimationContainer>
-              <div
-                class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
-              >
-              </div>
-
-              <div
-                class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}
-              >
-              </div>
-
-              <div
-                class={`${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}
-              >
-              </div>
-
-              <div
-                class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
-              >
-              </div>
-            </AnimationContainer>
+          <div class="flex justify-start py-8 pl-4 md:hidden">
+            <SquaresAnimation />
           </div>
 
           <!-- Text - Mobile only -->
@@ -185,32 +165,10 @@ const baseAnimationClass =
           <div
             class="border-custom relative hidden aspect-square w-full border-l md:order-1 md:block md:w-1/2"
           >
-            <!-- Animation -->
             <div class="absolute top-8 left-12">
-              <AnimationContainer>
-                <div
-                  class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
-                >
-                </div>
-
-                <div
-                  class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}
-                >
-                </div>
-
-                <div
-                  class={`${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}
-                >
-                </div>
-
-                <div
-                  class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
-                >
-                </div>
-              </AnimationContainer>
+              <SquaresAnimation />
             </div>
 
-            <!-- Text -->
             <div class="absolute right-4 bottom-20 left-12">
               <p>
                 Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
@@ -229,7 +187,7 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-12 md:hidden">
+          <div class="flex justify-start py-8 pl-4 md:hidden">
             <TriangleBarsAnimation />
           </div>
 
