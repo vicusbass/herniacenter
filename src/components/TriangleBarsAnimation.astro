@@ -3,28 +3,45 @@ import AnimationContainer from './AnimationContainer.astro';
 ---
 
 <AnimationContainer>
-  <div class="group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out">
+  <div class="triangle-container group relative h-12 w-12 cursor-pointer transition-all duration-300 ease-out">
     <div
-      class="absolute top-1 left-1/2 h-0 w-0 -translate-x-1/2 border-r-[20px] border-b-[32px] border-l-[20px] border-r-transparent border-b-[#cedce5] border-l-transparent transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+      class="triangle-shape absolute top-1 left-1/2 h-0 w-0 -translate-x-1/2 border-r-[20px] border-b-[32px] border-l-[20px] border-r-transparent border-b-[#cedce5] border-l-transparent transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
     >
     </div>
     <div
-      class="absolute top-2 left-[10px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-    >
-    </div>
-
-    <div
-      class="absolute top-2 left-[18px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+      class="triangle-bar-1 absolute top-2 left-[10px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
     >
     </div>
 
     <div
-      class="absolute top-2 left-[26px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+      class="triangle-bar-2 absolute top-2 left-[18px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+    >
+    </div>
+
+    <div
+      class="triangle-bar-3 absolute top-2 left-[26px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
     >
     </div>
     <div
-      class="absolute top-2 left-[34px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+      class="triangle-bar-4 absolute top-2 left-[34px] h-8 w-1.5 scale-0 bg-[#ffc1af] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
     >
     </div>
   </div>
 </AnimationContainer>
+
+<style>
+  @media (max-width: 767px) {
+    :global(.mobile-animate.in-view) .triangle-shape {
+      opacity: 0 !important;
+      transform: scale(0) !important;
+    }
+    
+    :global(.mobile-animate.in-view) .triangle-bar-1,
+    :global(.mobile-animate.in-view) .triangle-bar-2,
+    :global(.mobile-animate.in-view) .triangle-bar-3,
+    :global(.mobile-animate.in-view) .triangle-bar-4 {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+  }
+</style>

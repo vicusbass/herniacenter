@@ -108,7 +108,7 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-4 md:hidden">
+          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
             <HeartAnimation />
           </div>
 
@@ -147,7 +147,7 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-4 md:hidden">
+          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
             <SquaresAnimation />
           </div>
 
@@ -187,7 +187,7 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-4 md:hidden">
+          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
             <TriangleBarsAnimation />
           </div>
 
@@ -225,7 +225,7 @@ const baseAnimationClass =
           </div>
 
           <!-- Animation - Mobile only -->
-          <div class="flex justify-start py-8 pl-4 md:hidden">
+          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
             <PolygonAnimation />
           </div>
 
@@ -262,7 +262,7 @@ const baseAnimationClass =
         </div>
 
         <!-- Animation - Mobile only -->
-        <div class="flex justify-start py-8 pl-4 md:hidden">
+        <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
           <TriangleBarsAnimation />
         </div>
 
@@ -319,6 +319,29 @@ const baseAnimationClass =
             hospitalImage.style.height = '200%';
             hospitalImage.style.width = '66.667%';
             hospitalImage.style.left = '33.333%';
+          });
+        }
+
+        // Mobile animation observer - only on mobile devices
+        if (window.innerWidth < 768) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('in-view');
+                }
+              });
+            },
+            {
+              threshold: 0.3,
+              rootMargin: '-120px',
+            }
+          );
+
+          // Observe all mobile animation containers
+          const mobileAnimations = document.querySelectorAll('.mobile-animate');
+          mobileAnimations.forEach((animation) => {
+            observer.observe(animation);
           });
         }
       });

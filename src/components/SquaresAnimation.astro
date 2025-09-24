@@ -6,15 +6,63 @@ const baseAnimationClass =
 ---
 
 <AnimationContainer>
-  <div class={` ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}>
+  <div
+    class={`square-1 ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:translate-y-1.5`}
+  >
   </div>
 
-  <div class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}>
+  <div
+    class={`square-2 ${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:translate-y-1.5`}
+  >
   </div>
 
-  <div class={`${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}>
+  <div
+    class={`square-3 ${baseAnimationClass} group-hover:translate-x-1.5 group-hover:-translate-y-4.5`}
+  >
   </div>
 
-  <div class={`${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}>
+  <div
+    class={`square-4 ${baseAnimationClass} group-hover:-translate-x-4.5 group-hover:-translate-y-4.5`}
+  >
   </div>
 </AnimationContainer>
+
+<style>
+  @media (max-width: 767px) {
+    :global(.mobile-animate.in-view .square-1) {
+      top: calc(50% + 10px) !important;
+      left: calc(50% + 10px) !important;
+      transform: none !important;
+      background-color: #ffc1af !important;
+      height: 1rem !important;
+      width: 1rem !important;
+    }
+
+    :global(.mobile-animate.in-view .square-2) {
+      top: calc(50% + 10px) !important;
+      left: calc(50% - 10px) !important;
+      transform: none !important;
+      background-color: #ffc1af !important;
+      height: 1rem !important;
+      width: 1rem !important;
+    }
+
+    :global(.mobile-animate.in-view .square-3) {
+      top: calc(50% - 10px) !important;
+      left: calc(50% + 10px) !important;
+      transform: none !important;
+      background-color: #ffc1af !important;
+      height: 1rem !important;
+      width: 1rem !important;
+    }
+
+    :global(.mobile-animate.in-view .square-4) {
+      top: calc(50% - 10px) !important;
+      left: calc(50% - 10px) !important;
+      transform: none !important;
+      background-color: #ffc1af !important;
+      height: 1rem !important;
+      width: 1rem !important;
+    }
+  }
+</style>

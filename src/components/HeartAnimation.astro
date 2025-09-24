@@ -3,15 +3,55 @@ import AnimationContainer from './AnimationContainer.astro';
 ---
 
 <AnimationContainer>
-  <div class="group relative h-14 w-14 cursor-pointer">
+  <div class="heart-container group relative h-14 w-14 cursor-pointer">
     <div
-      class="gray-bg absolute inset-2 rounded-full transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
+      class="heart-circle gray-bg absolute inset-2 rounded-full transition-all duration-300 ease-out group-hover:scale-0 group-hover:opacity-0"
     >
     </div>
     <div
-      class="absolute inset-0 flex scale-0 items-center justify-center text-4xl text-[#cedce5] opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:scale-x-125 group-hover:text-[#ffc1af] group-hover:opacity-100"
+      class="heart-symbol absolute inset-0 flex items-center justify-center text-4xl text-[#cedce5] transition-all duration-300 ease-out"
+      style="transform: scale(0); opacity: 0;"
     >
-      ♥
+      <span>♥</span>
     </div>
   </div>
 </AnimationContainer>
+
+<style>
+  /* Desktop hover behavior */
+  .heart-symbol {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .group:hover .heart-symbol {
+    transform: scale(1) scaleX(1.25) !important;
+    opacity: 1 !important;
+    color: #ffc1af !important;
+  }
+
+  .group:hover .heart-circle {
+    transform: scale(0) !important;
+    opacity: 0 !important;
+  }
+
+  @media (max-width: 767px) {
+    /* Hide circle when parent has mobile-animate in-view classes */
+    :global(.mobile-animate.in-view) .heart-circle {
+      opacity: 0 !important;
+      transform: scale(0) !important;
+    }
+
+    /* Show heart symbol */
+    :global(.mobile-animate.in-view) .heart-symbol {
+      opacity: 1 !important;
+      transform: scale(1) scaleX(1.25) !important;
+    }
+
+    /* Show heart symbol text with proper styling */
+    :global(.mobile-animate.in-view) .heart-symbol span {
+      color: #ffc1af !important;
+      font-size: 2.25rem !important;
+    }
+  }
+</style>
