@@ -293,9 +293,15 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
 
     <style>
       p {
-        font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+        font-size: clamp(1.5rem, 2.5vw, 1.625rem);
         line-height: 1.1;
         text-align: left;
+      }
+
+      @media (max-width: 1220px) {
+        p {
+          font-size: clamp(1.4rem, 2.2vw, 1.5rem);
+        }
       }
     </style>
 
