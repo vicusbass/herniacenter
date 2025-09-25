@@ -97,4 +97,8 @@
   .gray-bg {
     background-color: var(--color-border-custom);
   }
+
+  .primary-bg {
+    background-color: var(--color-primary);
+  }
 }

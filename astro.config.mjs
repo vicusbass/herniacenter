@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import lottie from 'astro-integration-lottie';
+
 import icon from 'astro-icon';
 
 import dotenv from 'dotenv';
@@ -23,5 +25,6 @@ export default defineConfig({
       dataset: 'production',
       useCdn: false,
     }),
+    lottie(),
   ],
 });
