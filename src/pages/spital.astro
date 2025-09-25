@@ -237,6 +237,35 @@ const carouselItems = [
       indicator.addEventListener('click', () => goToSlide(index));
     });
 
+    // Add scroll event listener for mobile to sync currentSlide with actual scroll position
+    let scrollTimeout;
+    carouselTrack.addEventListener('scroll', () => {
+      // Only handle scroll events on mobile
+      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+      if (isDesktop) return;
+
+      // Debounce scroll events to avoid excessive updates
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const slideWidth = carouselTrack.clientWidth;
+        const scrollLeft = carouselTrack.scrollLeft;
+        const newSlide = Math.round(scrollLeft / slideWidth);
+
+        // Update currentSlide only if it actually changed
+        if (newSlide !== currentSlide && newSlide >= 0 && newSlide < totalSlides) {
+          currentSlide = newSlide;
+          // Update indicators without scrolling again
+          indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+              indicator.classList.add('peach-bg');
+            } else {
+              indicator.classList.remove('peach-bg');
+            }
+          });
+        }
+      }, 50);
+    });
+
     // Initialize carousel
     updateCarousel();
   });
