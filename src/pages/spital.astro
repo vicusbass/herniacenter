@@ -2,7 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
+import hospital1 from '../assets/spital/hospital1.png';
+import device from '../assets/despre/device.png';
 import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
+
+const carouselItems = [
+  {
+    image: hospital1,
+    description:
+      'Utilizăm cele mai moderne tehnici chirurgicale mini-invazive pentru tratamentul herniilor, garantând o recuperare rapidă și rezultate excelente.',
+  },
+  {
+    image: device,
+    description:
+      'Pacientul beneficiază de evaluare, intervenție chirurgicală minim invazivă și monitorizare postoperatorie, toate în același loc.',
+  },
+  {
+    image: spital,
+    description:
+      'Am creat un traseu medical complet, într-un spațiu modern, sigur și bine organizat.',
+  },
+];
 ---
 
 <Layout title="Hernia Center - Spitalul">
@@ -12,10 +32,10 @@ import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
     <div id="main-content" class="w-full md:w-[75%]">
       <section class="max-w-full px-0">
         <div class="block md:hidden">
-          <div class="px-4 py-4">
+          <div class="px-4">
             <h1 class="text-5xl leading-none font-bold tracking-tight">spitalul</h1>
           </div>
-          <div class="w-full">
+          <div class="w-full pt-8">
             <Image src={spital} alt="Spital" class="w-full object-cover" />
           </div>
         </div>
@@ -55,9 +75,11 @@ import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
           <div class="border-custom aspect-square flex-1 border-b border-l"></div>
           <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
         </div>
-        <div class="pt-16 text-left">
-          <span class="text-heading-number text-6xl font-bold">01.</span>
-          <div class="w-2/3">
+        <div class="pt-4 pl-4 text-left sm:pt-16">
+          <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
+            >01.</span
+          >
+          <div class="w-full sm:w-3/5">
             <h2
               class="leading-none font-bold tracking-normal"
               style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
@@ -70,21 +92,53 @@ import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
     </div>
     <div class="hidden md:block md:w-[12.5%]"></div>
   </div>
-  <div id="carousel-1" class="flex min-h-[60vh] w-full bg-gray-100">
-    <!-- Text Section - Left third -->
-    <div class="flex w-1/3 items-center justify-center bg-white p-8">
-      <div class="max-w-md text-center">
-        <h3 class="mb-4 text-2xl font-bold text-gray-800">Tehnologie Avansată</h3>
-        <p class="leading-relaxed text-gray-600">
-          Utilizăm cele mai moderne tehnici chirurgicale mini-invazive pentru tratamentul herniilor,
-          garantând o recuperare rapidă și rezultate excelente.
-        </p>
+  
+  <div id="carousel-1" class="relative w-full pt-18">
+    <!-- Carousel Container -->
+    <div class="carousel-container relative overflow-hidden">
+      <div class="carousel-track flex transition-transform duration-300 ease-in-out">
+        {carouselItems.map((item, index) => (
+          <div class="carousel-slide flex h-[60vh] w-full flex-shrink-0">
+
+            <!-- Text Section - Left third -->
+            <div class="primary-bg flex w-1/3 items-center justify-center">
+              <div class="ml-20 w-2/3 max-w-md text-left">
+                <p class="text-2xl leading-tight text-white">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+
+            <!-- Image Section - Right two-thirds -->
+            <div class="relative w-2/3 overflow-hidden">
+              <Image src={item.image} alt={`Slide ${index + 1}`} class="h-full w-full object-cover" />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
 
-    <!-- Image Section - Right two-thirds -->
-    <div class="relative w-2/3 overflow-hidden pt-16">
-      <Image src={spital} alt="Echipament medical modern" class="h-full w-full object-cover" />
+    <!-- Navigation Buttons -->
+    <button id="prev-btn" class="absolute left-6 z-10 rounded-full bg-[#134368] p-3 shadow-lg transition-all hover:bg-white" style="top: calc(4.5rem + 30vh - 1.5rem);">
+      <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <button id="next-btn" class="absolute right-6 z-10 rounded-full bg-white/80 p-3 shadow-lg transition-all hover:bg-white" style="top: calc(4.5rem + 30vh - 1.5rem);">
+      <svg class="h-6 w-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Indicators -->
+    <div class="absolute bottom-4 left-[16.67%] flex -translate-x-1/2 space-x-4">
+      {carouselItems.map((_, index) => (
+        <button 
+          class="carousel-indicator h-3 w-3 rounded-full border-1 border-white bg-transparent transition-all"
+          data-slide={index}
+        ></button>
+      ))}
     </div>
   </div>
 </Layout>
@@ -94,24 +148,56 @@ import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const container = document.getElementById('lottie-container');
+    // Carousel functionality
+    const carouselTrack = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
 
-    if (container) {
-      container.addEventListener('mouseenter', () => {
-        const animation = astroLottie.getAnimation('target-animation');
-        if (animation && animation.isLoaded) {
-          animation.player.setDirection(1);
-          animation.player.play();
-        }
-      });
-
-      container.addEventListener('mouseleave', () => {
-        const animation = astroLottie.getAnimation('target-animation');
-        if (animation && animation.isLoaded) {
-          animation.player.setDirection(-1);
-          animation.player.play();
+    function updateCarousel() {
+      if (!carouselTrack) return;
+      
+      const translateX = -currentSlide * 100;
+      carouselTrack.style.transform = `translateX(${translateX}%)`;
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        if (index === currentSlide) {
+          indicator.classList.add('peach-bg');
+        } else {
+          indicator.classList.remove('peach-bg');
         }
       });
     }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      updateCarousel();
+    }
+
+    // Event listeners
+    nextBtn?.addEventListener('click', nextSlide);
+    prevBtn?.addEventListener('click', prevSlide);
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Initialize carousel
+    updateCarousel();
   });
 </script>
