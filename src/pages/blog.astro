@@ -74,11 +74,13 @@ const [featuredArticle, ...otherArticles] = articles;
     <div class="hidden md:flex">
       <div class="w-[12.5%] bg-white"></div>
       <div class="w-[50%]">
-        {featuredArticle?.imageUrl ? (
-          <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full" />
-        ) : (
-          <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
-        )}
+        {
+          featuredArticle?.imageUrl ? (
+            <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full" />
+          ) : (
+            <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full" />
+          )
+        }
       </div>
       <div class="flex w-[25%] flex-col">
         <div class="flex-grow pt-4 pl-4">
@@ -89,7 +91,9 @@ const [featuredArticle, ...otherArticles] = articles;
             {featuredArticle?.description || PAGE.hero.copy}
           </p>
           <a
-            href={featuredArticle?.slug?.current ? `/blog/${featuredArticle.slug.current}` : "/blog"}
+            href={featuredArticle?.slug?.current
+              ? `/blog/${featuredArticle.slug.current}`
+              : '/blog'}
             class="inline-block pt-2 text-sm underline underline-offset-4 hover:text-blue-800 lg:text-base xl:text-lg"
           >
             citește mai mult
@@ -149,15 +153,27 @@ const [featuredArticle, ...otherArticles] = articles;
           </h2>
         </div>
       </div>
-      {featuredArticle?.imageUrl ? (
-        <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full pt-4" />
-      ) : (
-        <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full pt-4" />
-      )}
+      {
+        featuredArticle?.imageUrl ? (
+          <img
+            src={featuredArticle.imageUrl}
+            alt={featuredArticle.title}
+            class="h-auto w-full pt-4"
+          />
+        ) : (
+          <Image src={hospitalImage} alt="Hernia Center" class="h-auto w-full pt-4" />
+        )
+      }
       <div class="px-4">
         <p class="pt-5 text-lg leading-relaxed">
           {featuredArticle?.description || PAGE.hero.copy}
         </p>
+        <a
+          href={featuredArticle?.slug?.current ? `/blog/${featuredArticle.slug.current}` : '/blog'}
+          class="inline-block pt-2 text-lg underline underline-offset-4"
+        >
+          citește mai mult
+        </a>
         <div class="mt-8">
           <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
         </div>
