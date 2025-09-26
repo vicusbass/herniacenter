@@ -4,6 +4,34 @@ import spital from '../assets/spital.png';
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import PrimaryButton from '../components/PrimaryButton.astro';
+import contact from '../config/contact';
+
+const hernii = [
+  {
+    title: 'hernia inghinală',
+    id: 'hernia-inghinala',
+  },
+  {
+    title: 'hernia ombilicală',
+    id: 'hernia-ombilicala',
+  },
+  {
+    title: 'hernia femurală',
+    id: 'hernia-femurala',
+  },
+  {
+    title: 'hernia hiatala',
+    id: 'hernia-hiatala',
+  },
+  {
+    title: 'herniile incizionale',
+    id: 'herniile-incizionale',
+  },
+  {
+    title: 'herniile rare',
+    id: 'herniile-rare',
+  },
+];
 ---
 
 <Layout title="Hernia Center - Intervenții">
@@ -34,18 +62,19 @@ import PrimaryButton from '../components/PrimaryButton.astro';
             </h1>
           </div>
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
-          <div
-            id="hospital-image"
-            class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] bg-white/10 shadow-xl backdrop-blur-xl transition-all duration-300"
-            style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px) saturate(180%);"
-          >
+          <div id="hospital-image" class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%]">
             <div class="flex h-full flex-col items-start justify-center">
               <p class="px-24 text-left text-xl">
                 Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
                 Hernia Center pentru tratamente moderne și recuperare rapidă.
               </p>
               <div class="px-24 pt-16">
-                <PrimaryButton text="Programează-te" icon={WhatsAppIcon} size="responsive" />
+                <PrimaryButton
+                  text="Programează-te"
+                  icon={WhatsAppIcon}
+                  size="responsive"
+                  href={contact.whatsapp}
+                />
               </div>
             </div>
           </div>
@@ -56,18 +85,22 @@ import PrimaryButton from '../components/PrimaryButton.astro';
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
         </div>
-        <div class="pt-4 pl-4 text-left sm:pt-16">
-          <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
-            >01.</span
-          >
-          <div class="w-full sm:w-3/5">
-            <h2
-              class="leading-none font-bold tracking-normal"
-              style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
-            >
-              Hernia Center - tratament modern al herniilor, în cadrul Spitalului Medicover Cluj
-            </h2>
-          </div>
+        <div class="hidden md:flex">
+          {
+            hernii.map((hernia, index) => (
+              <div
+                class="border-custom aspect-square w-[12.5vw] border-b border-l pl-4 text-left text-2xl"
+                data-id={hernia.id}
+              >
+                <h3 class="pt-8 font-bold">{`0${index + 1}.`}</h3>
+                <h3 class="pt-12">
+                  {hernia.title.split(' ')[0]}
+                  <br />
+                  {hernia.title.split(' ').slice(1).join(' ')}
+                </h3>
+              </div>
+            ))
+          }
         </div>
       </section>
     </div>
