@@ -1,7 +1,76 @@
 ---
+import { Image } from 'astro:assets';
+import spital from '../assets/spital.png';
 import Layout from '../layouts/Layout.astro';
+import WhatsAppIcon from '../assets/whatsapp-icon.svg';
+import PrimaryButton from '../components/PrimaryButton.astro';
 ---
 
 <Layout title="Hernia Center - Intervenții">
-  <section class="max-w-full px-0"></section>
+  <div class="flex w-full">
+    <div class="hidden md:block md:w-[12.5%]"></div>
+
+    <div id="main-content" class="w-full md:w-[75%]">
+      <section class="max-w-full px-0">
+        <div class="block md:hidden">
+          <div class="px-4">
+            <h1 class="text-5xl leading-none font-bold tracking-tight">intervenții</h1>
+          </div>
+          <div class="w-full pt-8">
+            <Image src={spital} alt="Spital" class="w-full object-cover" />
+          </div>
+        </div>
+
+        <div class="relative hidden md:flex">
+          <!-- Desktop: Show h1 in grid cell -->
+          <div
+            class="border-custom flex aspect-square w-[12.5vw] items-end border-b border-l px-0 py-0"
+          >
+            <h1
+              class="leading-none font-bold tracking-tight"
+              style="font-size: clamp(2.25rem, 5vw, 4.5rem); transform: translateY(clamp(8px, 0.5vw, 12px));"
+            >
+              intervenții
+            </h1>
+          </div>
+          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
+          <div
+            id="hospital-image"
+            class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] bg-white/10 shadow-xl backdrop-blur-xl transition-all duration-300"
+            style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px) saturate(180%);"
+          >
+            <div class="flex h-full flex-col items-start justify-center">
+              <p class="px-24 text-left text-xl">
+                Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
+                Hernia Center pentru tratamente moderne și recuperare rapidă.
+              </p>
+              <div class="px-24 pt-16">
+                <PrimaryButton text="Programează-te" icon={WhatsAppIcon} size="responsive" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2 - Hidden on mobile -->
+        <div class="hidden md:flex">
+          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
+          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
+        </div>
+        <div class="pt-4 pl-4 text-left sm:pt-16">
+          <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
+            >01.</span
+          >
+          <div class="w-full sm:w-3/5">
+            <h2
+              class="leading-none font-bold tracking-normal"
+              style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
+            >
+              Hernia Center - tratament modern al herniilor, în cadrul Spitalului Medicover Cluj
+            </h2>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="hidden md:block md:w-[12.5%]"></div>
+  </div>
 </Layout>
