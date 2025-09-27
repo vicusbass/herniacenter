@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import contact from '../config/contact';
 
 import LocationMap from '../assets/location.png';
 ---
@@ -59,19 +60,19 @@ import LocationMap from '../assets/location.png';
           <div class="border-custom flex aspect-square items-center border-r border-b">
             <div class="flex flex-col space-y-2 pl-6">
               <a
-                href="#"
+                href={contact.whatsapp}
                 class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
               >
                 <Icon name="mdi:whatsapp" class="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href={contact.facebook}
                 class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
               >
                 <Icon name="mdi:facebook" class="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href={contact.instagram}
                 class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
               >
                 <Icon name="mdi:instagram" class="h-5 w-5" />
@@ -158,19 +159,19 @@ import LocationMap from '../assets/location.png';
         <div class="border-custom flex aspect-square items-center border-r border-b">
           <div class="flex flex-col space-y-2 pl-6">
             <a
-              href="#"
+              href={contact.whatsapp}
               class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
             >
               <Icon name="mdi:whatsapp" class="h-5 w-5" />
             </a>
             <a
-              href="#"
+              href={contact.facebook}
               class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
             >
               <Icon name="mdi:facebook" class="h-5 w-5" />
             </a>
             <a
-              href="#"
+              href={contact.instagram}
               class="flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-80"
             >
               <Icon name="mdi:instagram" class="h-5 w-5" />

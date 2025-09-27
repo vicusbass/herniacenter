@@ -44,8 +44,21 @@ const hernii = [
           <div class="px-4">
             <h1 class="text-5xl leading-none font-bold tracking-tight">intervenții</h1>
           </div>
-          <div class="w-full pt-8">
-            <Image src={spital} alt="Spital" class="w-full object-cover" />
+          <div class="w-full pt-16">
+            <p class="px-4 text-left text-xl">
+              Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
+              Hernia Center pentru tratamente moderne și recuperare rapidă.
+            </p>
+            <div class="px-4 pt-16">
+              <div class="inline-block">
+                <PrimaryButton
+                  text="Programează-te"
+                  icon={WhatsAppIcon}
+                  size="medium"
+                  href={contact.whatsapp}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -89,7 +102,7 @@ const hernii = [
           {
             hernii.map((hernia, index) => (
               <div
-                class="border-custom aspect-square w-[12.5vw] border-b border-l pl-4 text-left text-2xl"
+                class={`border-custom aspect-square w-[12.5vw] border-b border-l pl-4 text-left text-2xl ${index === hernii.length - 1 ? 'border-r' : ''}`}
                 data-id={hernia.id}
               >
                 <h3 class="pt-8 font-bold">{`0${index + 1}.`}</h3>
@@ -102,6 +115,97 @@ const hernii = [
             ))
           }
         </div>
+
+        <!-- Mobile dropdown -->
+        <div class="block px-4 pt-8 md:hidden">
+          <div class="relative" id="custom-dropdown">
+            <button
+              type="button"
+              class="border-custom w-full cursor-pointer border bg-white p-3 pr-10 text-left text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              id="dropdown-button"
+              aria-expanded="false"
+            >
+              <span id="dropdown-text">Selectează tipul de hernie</span>
+              <svg
+                class="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform fill-current text-gray-700 transition-transform duration-200"
+                id="dropdown-arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                ></path>
+              </svg>
+            </button>
+
+            <div
+              class="absolute top-full right-0 left-0 z-10 mt-1 hidden rounded-lg border border-gray-300 bg-white shadow-lg"
+              id="dropdown-menu"
+            >
+              {
+                hernii.map((hernia, index) => (
+                  <button
+                    type="button"
+                    class={`block w-full px-3 py-2 text-left text-lg hover:bg-blue-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                    data-value={hernia.id}
+                    onclick="selectOption(this)"
+                  >
+                    {hernia.title}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener('astro:page-load', () => {
+            function selectOption(option) {
+              const text = option.textContent;
+              const value = option.dataset.value;
+
+              document.getElementById('dropdown-text').textContent = text;
+              document.getElementById('dropdown-menu').classList.add('hidden');
+              document.getElementById('dropdown-arrow').classList.remove('rotate-180');
+              document.getElementById('dropdown-button').setAttribute('aria-expanded', 'false');
+            }
+
+            // Make selectOption globally available
+            window.selectOption = selectOption;
+
+            const dropdownButton = document.getElementById('dropdown-button');
+            if (dropdownButton) {
+              dropdownButton.addEventListener('click', function () {
+                const menu = document.getElementById('dropdown-menu');
+                const arrow = document.getElementById('dropdown-arrow');
+                const isOpen = !menu.classList.contains('hidden');
+
+                if (isOpen) {
+                  menu.classList.add('hidden');
+                  arrow.classList.remove('rotate-180');
+                  this.setAttribute('aria-expanded', 'false');
+                } else {
+                  menu.classList.remove('hidden');
+                  arrow.classList.add('rotate-180');
+                  this.setAttribute('aria-expanded', 'true');
+                }
+              });
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (event) {
+              const dropdown = document.getElementById('custom-dropdown');
+              if (dropdown && !dropdown.contains(event.target)) {
+                const menu = document.getElementById('dropdown-menu');
+                const arrow = document.getElementById('dropdown-arrow');
+                const button = document.getElementById('dropdown-button');
+
+                if (menu) menu.classList.add('hidden');
+                if (arrow) arrow.classList.remove('rotate-180');
+                if (button) button.setAttribute('aria-expanded', 'false');
+              }
+            });
+          });
+        </script>
       </section>
     </div>
     <div class="hidden md:block md:w-[12.5%]"></div>
