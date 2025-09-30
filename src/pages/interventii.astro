@@ -89,6 +89,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
           <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
           <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
         </div>
+        <!-- Desktop - hernia navigation squares -->
         <div class="hidden md:flex">
           {
             hernii.map((hernia, index) => (
@@ -150,78 +151,6 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
             </div>
           </div>
         </div>
-
-        <script>
-          document.addEventListener('astro:page-load', () => {
-            function scrollToHernia(herniaId) {
-              const targetElement = document.getElementById(herniaId);
-              if (targetElement) {
-                targetElement.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start',
-                });
-              }
-            }
-
-            // Make scrollToHernia globally available
-            window.scrollToHernia = scrollToHernia;
-
-            function selectOption(option) {
-              const text = option.textContent;
-              const value = option.dataset.value;
-
-              document.getElementById('dropdown-text').textContent = text;
-              document.getElementById('dropdown-menu').classList.add('hidden');
-              document.getElementById('dropdown-arrow').classList.remove('rotate-180');
-              document.getElementById('dropdown-button').setAttribute('aria-expanded', 'false');
-
-              // Scroll to the corresponding hernia section
-              const targetElement = document.getElementById(value);
-              if (targetElement) {
-                targetElement.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start',
-                });
-              }
-            }
-
-            // Make selectOption globally available
-            window.selectOption = selectOption;
-
-            const dropdownButton = document.getElementById('dropdown-button');
-            if (dropdownButton) {
-              dropdownButton.addEventListener('click', function () {
-                const menu = document.getElementById('dropdown-menu');
-                const arrow = document.getElementById('dropdown-arrow');
-                const isOpen = !menu.classList.contains('hidden');
-
-                if (isOpen) {
-                  menu.classList.add('hidden');
-                  arrow.classList.remove('rotate-180');
-                  this.setAttribute('aria-expanded', 'false');
-                } else {
-                  menu.classList.remove('hidden');
-                  arrow.classList.add('rotate-180');
-                  this.setAttribute('aria-expanded', 'true');
-                }
-              });
-            }
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function (event) {
-              const dropdown = document.getElementById('custom-dropdown');
-              if (dropdown && !dropdown.contains(event.target)) {
-                const menu = document.getElementById('dropdown-menu');
-                const arrow = document.getElementById('dropdown-arrow');
-                const button = document.getElementById('dropdown-button');
-
-                if (menu) menu.classList.add('hidden');
-                if (arrow) arrow.classList.remove('rotate-180');
-                if (button) button.setAttribute('aria-expanded', 'false');
-              }
-            });
-          });
-        </script>
       </section>
     </div>
     <div class="hidden md:block md:w-[12.5%] flex-none"></div>
@@ -281,9 +210,9 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
           </div>
         </div>
         <!-- Desktop -->
-        <div class={`hidden md:flex w-full ${index % 2 === 0 ? 'bg-contact' : ''}`}>
+        <div class={`hidden md:flex w-full ${index % 2 === 0 ? 'bg-contact' : ''}`} id={`desktop-${hernia.id}`}>
           <div class="hidden md:block md:w-[12.5%] flex-none"></div>
-          
+
           <div class="flex w-full flex-col md:flex-row md:w-[75%]">
             <div class="flex flex-col pb-12 pt-7 w-[50%] relative">
               <div class="hernia-heading text-heading-number mb-0 absolute -left-[4vw]">
@@ -346,6 +275,81 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
     ))
   }
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    function scrollToHernia(herniaId) {
+      // Check if we're on desktop (md breakpoint is 768px)
+      const isDesktop = window.innerWidth >= 768;
+      const targetId = isDesktop ? `desktop-${herniaId}` : herniaId;
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+
+    // Make scrollToHernia globally available
+    window.scrollToHernia = scrollToHernia;
+
+    function selectOption(option) {
+      const text = option.textContent;
+      const value = option.dataset.value;
+
+      document.getElementById('dropdown-text').textContent = text;
+      document.getElementById('dropdown-menu').classList.add('hidden');
+      document.getElementById('dropdown-arrow').classList.remove('rotate-180');
+      document.getElementById('dropdown-button').setAttribute('aria-expanded', 'false');
+
+      // Scroll to the corresponding hernia section
+      const targetElement = document.getElementById(value);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+
+    // Make selectOption globally available
+    window.selectOption = selectOption;
+
+    const dropdownButton = document.getElementById('dropdown-button');
+    if (dropdownButton) {
+      dropdownButton.addEventListener('click', function () {
+        const menu = document.getElementById('dropdown-menu');
+        const arrow = document.getElementById('dropdown-arrow');
+        const isOpen = !menu.classList.contains('hidden');
+
+        if (isOpen) {
+          menu.classList.add('hidden');
+          arrow.classList.remove('rotate-180');
+          this.setAttribute('aria-expanded', 'false');
+        } else {
+          menu.classList.remove('hidden');
+          arrow.classList.add('rotate-180');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('custom-dropdown');
+      if (dropdown && !dropdown.contains(event.target)) {
+        const menu = document.getElementById('dropdown-menu');
+        const arrow = document.getElementById('dropdown-arrow');
+        const button = document.getElementById('dropdown-button');
+
+        if (menu) menu.classList.add('hidden');
+        if (arrow) arrow.classList.remove('rotate-180');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
 
 <style>
   .cell-icon {
