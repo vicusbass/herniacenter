@@ -6,7 +6,6 @@ import {schemaTypes} from './schemaTypes'
 export default defineConfig({
   name: 'default',
   title: 'herniacenter',
-
   projectId: 'jsgpdc3c',
   dataset: 'production',
 

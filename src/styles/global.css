@@ -57,6 +57,7 @@
 @layer base {
   html {
     overflow-y: scroll; /* Always show vertical scrollbar */
+    scrollbar-gutter: stable; /* Prevents layout shift */
     scroll-behavior: smooth;
   }
 

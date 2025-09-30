@@ -1,7 +1,388 @@
 ---
+import { Image } from 'astro:assets';
+import type { SanityDocument } from '@sanity/client';
+import { loadQuery } from '../utils/loadQuery';
+
 import Layout from '../layouts/Layout.astro';
+import WhatsAppIcon from '../assets/whatsapp-icon.svg';
+import PrimaryButton from '../components/PrimaryButton.astro';
+import contact from '../config/contact';
+import ClockIcon from '../assets/interventii/clock.svg';
+import NotesIcon from '../assets/interventii/notes.svg';
+import PileIcon from '../assets/interventii/pile.svg';
+
+// get hernia data ordered asc by "order" fields
+const { data: hernii } = await loadQuery<SanityDocument[]>({
+  query: `*[_type == "intervention"] | order(order asc) {
+  name,
+  id,
+  order,
+  duration,
+  hospitalization,
+  price,
+  description
+}`,
+});
 ---
 
 <Layout title="Hernia Center - Intervenții">
-  <section class="max-w-full px-0"></section>
+  <div class="mb-16 flex w-full">
+    <div id="left-sidebar" class="hidden md:block md:w-[12.5%] md:flex-none"></div>
+
+    <div id="main-content" class="w-full md:w-[75%]">
+      <section class="max-w-full px-0">
+        <div class="block md:hidden">
+          <div class="px-4">
+            <h1 class="text-5xl leading-none font-bold tracking-tight">intervenții</h1>
+          </div>
+          <div class="w-full pt-16">
+            <p class="px-4 text-left text-xl">
+              Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
+              Hernia Center pentru tratamente moderne și recuperare rapidă.
+            </p>
+            <div class="px-4 pt-16">
+              <div class="inline-block">
+                <PrimaryButton
+                  text="Programează-te"
+                  icon={WhatsAppIcon}
+                  size="medium"
+                  href={contact.whatsapp}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative hidden md:flex">
+          <!-- Desktop: Show h1 in grid cell -->
+          <div
+            class="border-custom flex aspect-square w-[16.666%] items-end border-b border-l px-0 py-0"
+          >
+            <h1
+              class="leading-none font-bold tracking-tight"
+              style="font-size: clamp(2.25rem, 5vw, 4.5rem); transform: translateY(clamp(8px, 0.5vw, 12px));"
+            >
+              intervenții
+            </h1>
+          </div>
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
+          <div id="hospital-image" class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%]">
+            <div class="flex h-full flex-col items-start justify-center">
+              <p class="px-24 text-left text-xl">
+                Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
+                Hernia Center pentru tratamente moderne și recuperare rapidă.
+              </p>
+              <div class="px-24 pt-16">
+                <PrimaryButton
+                  text="Programează-te"
+                  icon={WhatsAppIcon}
+                  size="responsive"
+                  href={contact.whatsapp}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2 - Hidden on mobile -->
+        <div class="hidden md:flex">
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
+        </div>
+        <div class="hidden md:flex">
+          {
+            hernii.map((hernia, index) => (
+              <a
+                href={`#${hernia.id}`}
+                class={`border-custom flex aspect-square w-[16.666%] cursor-pointer flex-col justify-between overflow-hidden border-b border-l text-left no-underline transition-colors duration-200 hover:bg-gray-50 ${index === hernii.length - 1 ? 'border-r' : ''}`}
+                style="padding-left: clamp(10px, 1vw, 16px); padding-bottom: clamp(12px, 1.2vw, 20px); padding-top: clamp(20px, 2vw, 32px);"
+                data-id={hernia.id}
+                onclick={`event.preventDefault(); scrollToHernia('${hernia.id}');`}
+              >
+                <span style="font-size: clamp(18px, 1.8vw, 28px);" class="font-bold">{`0${index + 1}.`}</span>
+                <h3 style="font-size: clamp(18px, 1.8vw, 28px); line-height: 1.2;">
+                  {hernia.name.split(' ')[0]}
+                  <br />
+                  {hernia.name.split(' ').slice(1).join(' ')}
+                </h3>
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Mobile dropdown -->
+        <div class="block px-4 pt-8 md:hidden">
+          <div class="relative" id="custom-dropdown">
+            <button
+              type="button"
+              class="border-custom w-full cursor-pointer border bg-white p-3 pr-10 text-left text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              id="dropdown-button"
+              aria-expanded="false"
+            >
+              <span id="dropdown-text">Selectează tipul de hernie</span>
+              <svg
+                class="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform fill-current text-gray-700 transition-transform duration-200"
+                id="dropdown-arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                ></path>
+              </svg>
+            </button>
+
+            <div
+              class="absolute top-full right-0 left-0 z-10 mt-1 hidden rounded-lg border border-gray-300 bg-white shadow-lg"
+              id="dropdown-menu"
+            >
+              {
+                hernii.map((hernia, index) => (
+                  <button
+                    type="button"
+                    class={`block w-full px-3 py-2 text-left text-lg hover:bg-blue-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                    data-value={hernia.id}
+                    onclick="selectOption(this)"
+                  >
+                    {hernia.name}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener('astro:page-load', () => {
+            function scrollToHernia(herniaId) {
+              const targetElement = document.getElementById(herniaId);
+              if (targetElement) {
+                targetElement.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                });
+              }
+            }
+
+            // Make scrollToHernia globally available
+            window.scrollToHernia = scrollToHernia;
+
+            function selectOption(option) {
+              const text = option.textContent;
+              const value = option.dataset.value;
+
+              document.getElementById('dropdown-text').textContent = text;
+              document.getElementById('dropdown-menu').classList.add('hidden');
+              document.getElementById('dropdown-arrow').classList.remove('rotate-180');
+              document.getElementById('dropdown-button').setAttribute('aria-expanded', 'false');
+
+              // Scroll to the corresponding hernia section
+              const targetElement = document.getElementById(value);
+              if (targetElement) {
+                targetElement.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                });
+              }
+            }
+
+            // Make selectOption globally available
+            window.selectOption = selectOption;
+
+            const dropdownButton = document.getElementById('dropdown-button');
+            if (dropdownButton) {
+              dropdownButton.addEventListener('click', function () {
+                const menu = document.getElementById('dropdown-menu');
+                const arrow = document.getElementById('dropdown-arrow');
+                const isOpen = !menu.classList.contains('hidden');
+
+                if (isOpen) {
+                  menu.classList.add('hidden');
+                  arrow.classList.remove('rotate-180');
+                  this.setAttribute('aria-expanded', 'false');
+                } else {
+                  menu.classList.remove('hidden');
+                  arrow.classList.add('rotate-180');
+                  this.setAttribute('aria-expanded', 'true');
+                }
+              });
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (event) {
+              const dropdown = document.getElementById('custom-dropdown');
+              if (dropdown && !dropdown.contains(event.target)) {
+                const menu = document.getElementById('dropdown-menu');
+                const arrow = document.getElementById('dropdown-arrow');
+                const button = document.getElementById('dropdown-button');
+
+                if (menu) menu.classList.add('hidden');
+                if (arrow) arrow.classList.remove('rotate-180');
+                if (button) button.setAttribute('aria-expanded', 'false');
+              }
+            });
+          });
+        </script>
+      </section>
+    </div>
+    <div class="hidden md:block md:w-[12.5%] flex-none"></div>
+  </div>
+  {
+    hernii.map((hernia, index) => (
+      <>
+        <div class={`flex w-full md:hidden`}>
+          <div class="flex w-full flex-col">
+            <div id={hernia.id} class="flex w-full flex-col px-4 py-12 relative">
+              <div class="text-3xl font-bold text-heading-number mb-1">
+                <span>0</span>{hernia.order}.
+              </div>
+              <h2 class="text-primary mb-6 text-3xl font-bold">
+                {hernia.name}
+              </h2>
+              <p class="text-xl leading-relaxed">{hernia.description}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex w-full bg-contact md:hidden">
+          <div class="flex w-full flex-col px-4 py-12">
+            <div class="flex flex-col">
+              <div class="border-custom flex flex-row w-full border border-b-0">
+                <div class="flex flex-col items-start justify-start w-1/2 pt-4 pb-2 px-4">
+                  <ClockIcon class="cell-icon" />
+                  <div class="text-lg text-left leading-tight">Cât durează<br />operația?</div>
+                </div>
+                <div class="border-custom flex items-end w-1/2 border-l">
+                  <div class="text-4xl text-left font-bold px-4 pb-2">{hernia.duration} min</div>
+                </div>
+              </div>
+
+              <div class="border-custom flex flex-row w-full border border-b-0">
+                <div class="flex flex-col items-start justify-start w-1/2 pt-4 pb-2 px-4">
+                  <NotesIcon class="cell-icon" />
+                  <div class="text-lg text-left leading-tight">Cât durează<br />spitalizarea?</div>
+                </div>
+                <div class="border-custom flex items-end w-1/2 border-l">
+                  <div class="text-4xl text-left font-bold px-4 pb-2">{hernia.hospitalization} zi</div>
+                </div>
+              </div>
+
+              <div class="border-custom flex flex-row w-full border">
+                <div class="flex flex-col items-start justify-start w-1/2 pt-4 pb-2 px-4">
+                  <PileIcon class="cell-icon" />
+                  <div class="text-lg text-left leading-tight">Cât costă<br />intervenția?</div>
+                </div>
+                <div class="border-custom flex items-end w-1/2 border-l relative">
+                  <div class="text-xs text-left absolute top-12 left-4">de la</div>
+                  <div class="text-4xl text-left font-bold px-4 pb-2">{hernia.price} €</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Desktop -->
+        <div class={`hidden md:flex w-full ${index % 2 === 0 ? 'bg-contact' : ''}`}>
+          <div class="hidden md:block md:w-[12.5%] flex-none"></div>
+          
+          <div class="flex w-full flex-col md:flex-row md:w-[75%]">
+            <div class="flex flex-col pb-12 pt-7 w-[50%] relative">
+              <div class="hernia-heading text-heading-number mb-0 absolute -left-[4vw]">
+                {hernia.order}.
+              </div>
+              <h2 class="text-primary mb-6 hernia-heading">
+                <span>{hernia.name.split(' ')[0]}<br />{hernia.name.split(' ').slice(1).join(' ')}</span>
+              </h2>
+              <p class="hernia-description pt-8 pr-16">{hernia.description}</p>
+            </div>
+
+            <div class="flex flex-col py-12 w-[50%]">
+            <div class="flex flex-row h-[250px]">
+              <div class="border-custom flex flex-col w-1/3 border border-b border-r">
+                <div class="flex flex-col items-start justify-start w-full pt-4 pl-4 flex-[0_0_70%]">
+                  <ClockIcon class="cell-icon-desktop" />
+                  <div class="cell-label">Cât durează<br />operația?</div>
+                </div>
+                <div class="border-custom flex items-center w-full border-t flex-[0_0_30%]">
+                  <div class="cell-value">{hernia.duration} min</div>
+                </div>
+              </div>
+
+              <div class="border-custom flex flex-col w-1/3 border border-b border-l-0 border-r">
+                <div class="flex flex-col items-start justify-start w-full pt-4 pl-4 flex-[0_0_70%]">
+                  <NotesIcon class="cell-icon-desktop" />
+                  <div class="cell-label">Cât durează<br />spitalizarea?</div>
+                </div>
+                <div class="border-custom flex items-center w-full border-t flex-[0_0_30%]">
+                  <div class="cell-value">{hernia.hospitalization} zi</div>
+                </div>
+              </div>
+
+              <div class="border-custom flex flex-col w-1/3 border border-l-0">
+                <div class="flex flex-col items-start justify-start w-full pt-4 pl-4 flex-[0_0_70%]">
+                  <PileIcon class="cell-icon-desktop" />
+                  <div class="cell-label">Cât costă<br />intervenția?</div>
+                </div>
+                <div class="border-custom flex items-center w-full border-t relative flex-[0_0_30%]">
+                  <div class="text-xs text-left absolute top-2 left-4">de la</div>
+                  <div class="cell-value">{hernia.price} €</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Button -->
+            <div class="hidden md:flex mt-4 pt-8">
+              <PrimaryButton
+                text="Programează-te"
+                icon={WhatsAppIcon}
+                size="medium"
+                href={contact.whatsapp}
+              />
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block md:w-[12.5%] flex-none" />
+        </div>
+      </>
+    ))
+  }
 </Layout>
+
+<style>
+  .cell-icon {
+    width: clamp(1.25rem, 2vw, 2rem);
+    height: clamp(1.25rem, 2vw, 2rem);
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+  }
+
+  .cell-icon-desktop {
+    width: clamp(1.75rem, 2.5vw, 2rem);
+    height: clamp(1.75rem, 2.5vw, 2rem);
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+  }
+
+  .cell-label {
+    font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+    text-align: left;
+    line-height: 1.25;
+    padding-top: clamp(0.5rem, 1vw, 1rem);
+  }
+
+  .cell-value {
+    font-size: clamp(1.25rem, 2vw, 2.25rem);
+    text-align: left;
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hernia-heading {
+    font-size: clamp(3rem, 5vw, 3.5em);
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .hernia-description {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.6;
+  }
+</style>

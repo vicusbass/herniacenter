@@ -6,6 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyWhatsApp from '../assets/sticky-whatsapp.svg';
 import '../styles/global.css';
+import contact from '../config/contact';
 
 interface Props {
   title: string;
@@ -36,7 +37,7 @@ const { title } = Astro.props;
     <!-- Fixed WhatsApp button -->
     <div class="fixed right-6 bottom-6 z-50 md:right-18">
       <a
-        href="https://wa.me/40744123456"
+        href={contact.whatsapp}
         class="block transition-transform hover:scale-105"
         aria-label="Contact WhatsApp"
       >

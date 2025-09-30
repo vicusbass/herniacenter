@@ -53,27 +53,27 @@ const [featuredArticle, ...otherArticles] = articles;
 
 <Layout title={`Hernia Center - Blog`}>
   <section>
-    <div class="hidden md:flex">
-      <div class="aspect-square w-[12.5%] bg-white"></div>
+    <div id="first-row" class="hidden md:flex">
+      <div class="aspect-square w-[12.5%] flex-none"></div>
       <div
-        class="border-custom flex aspect-square w-[12.5%] items-center justify-start border-r border-b border-l bg-white"
+        class="border-custom flex aspect-square w-[12.5%] flex-none items-center justify-start border-r border-b border-l bg-white"
       >
         <h1 class="font-bold tracking-tight md:text-4xl lg:text-6xl">
           {PAGE.title}
         </h1>
       </div>
-      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
-      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
-      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
-      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
-      <div class="border-custom aspect-square w-[12.5%] border-r border-b bg-white"></div>
-      <div class="aspect-square w-[12.5%] bg-white"></div>
+      <div class="border-custom aspect-square w-[12.5%] flex-none border-r border-b"></div>
+      <div class="border-custom aspect-square w-[12.5%] flex-none border-r border-b"></div>
+      <div class="border-custom aspect-square w-[12.5%] flex-none border-r border-b"></div>
+      <div class="border-custom aspect-square w-[12.5%] flex-none border-r border-b"></div>
+      <div class="border-custom aspect-square w-[12.5%] flex-none border-r border-b"></div>
+      <div class="aspect-square w-[12.5%] flex-none"></div>
     </div>
 
     <!-- Desktop: full layout -->
     <div class="hidden md:flex">
-      <div class="w-[12.5%] bg-white"></div>
-      <div class="w-[50%]">
+      <div class="w-[12.5%] flex-none"></div>
+      <div class="w-[50%] flex-none">
         {
           featuredArticle?.imageUrl ? (
             <img src={featuredArticle.imageUrl} alt={featuredArticle.title} class="h-auto w-full" />
@@ -103,7 +103,7 @@ const [featuredArticle, ...otherArticles] = articles;
           <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="responsive" />
         </div>
       </div>
-      <div class="w-[12.5%] bg-white"></div>
+      <div class="w-[12.5%] flex-none"></div>
     </div>
 
     <Separator />
@@ -111,7 +111,7 @@ const [featuredArticle, ...otherArticles] = articles;
     <!-- Desktop: Blog Articles Grid -->
     <div class="mt-20 hidden md:block">
       <div class="flex">
-        <div class="w-[12.5%] bg-white"></div>
+        <div class="w-[12.5%]"></div>
         <div class="w-[75%]">
           <div class="grid grid-cols-3 gap-8">
             {
