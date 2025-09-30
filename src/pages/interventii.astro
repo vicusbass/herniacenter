@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import type { SanityDocument } from '@sanity/client';
 import { loadQuery } from '../utils/loadQuery';
 
-import spital from '../assets/spital.png';
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import PrimaryButton from '../components/PrimaryButton.astro';
@@ -28,7 +27,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
 
 <Layout title="Hernia Center - Intervenții">
   <div class="mb-16 flex w-full">
-    <div class="hidden md:block md:w-[12.5%]"></div>
+    <div id="left-sidebar" class="hidden md:block md:w-[12.5%] md:flex-none"></div>
 
     <div id="main-content" class="w-full md:w-[75%]">
       <section class="max-w-full px-0">
@@ -57,7 +56,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
         <div class="relative hidden md:flex">
           <!-- Desktop: Show h1 in grid cell -->
           <div
-            class="border-custom flex aspect-square w-[12.5vw] items-end border-b border-l px-0 py-0"
+            class="border-custom flex aspect-square w-[16.666%] items-end border-b border-l px-0 py-0"
           >
             <h1
               class="leading-none font-bold tracking-tight"
@@ -66,7 +65,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
               intervenții
             </h1>
           </div>
-          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
           <div id="hospital-image" class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%]">
             <div class="flex h-full flex-col items-start justify-center">
               <p class="px-24 text-left text-xl">
@@ -87,15 +86,15 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
 
         <!-- Row 2 - Hidden on mobile -->
         <div class="hidden md:flex">
-          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
-          <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
+          <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
         </div>
         <div class="hidden md:flex">
           {
             hernii.map((hernia, index) => (
               <a
                 href={`#${hernia.id}`}
-                class={`border-custom flex aspect-square w-[12.5vw] cursor-pointer flex-col justify-between overflow-hidden border-b border-l text-left no-underline transition-colors duration-200 hover:bg-gray-50 ${index === hernii.length - 1 ? 'border-r' : ''}`}
+                class={`border-custom flex aspect-square w-[16.666%] cursor-pointer flex-col justify-between overflow-hidden border-b border-l text-left no-underline transition-colors duration-200 hover:bg-gray-50 ${index === hernii.length - 1 ? 'border-r' : ''}`}
                 style="padding-left: clamp(10px, 1vw, 16px); padding-bottom: clamp(12px, 1.2vw, 20px); padding-top: clamp(20px, 2vw, 32px);"
                 data-id={hernia.id}
                 onclick={`event.preventDefault(); scrollToHernia('${hernia.id}');`}
@@ -225,7 +224,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
         </script>
       </section>
     </div>
-    <div class="hidden md:block md:w-[12.5%]"></div>
+    <div class="hidden md:block md:w-[12.5%] flex-none"></div>
   </div>
   {
     hernii.map((hernia, index) => (
@@ -283,7 +282,8 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
         </div>
         <!-- Desktop -->
         <div class={`hidden md:flex w-full ${index % 2 === 0 ? 'bg-contact' : ''}`}>
-          <div class="hidden md:block md:w-[12.5%]"></div>
+          <div class="hidden md:block md:w-[12.5%] flex-none"></div>
+          
           <div class="flex w-full flex-col md:flex-row md:w-[75%]">
             <div class="flex flex-col pb-12 pt-7 w-[50%] relative">
               <div class="hernia-heading text-heading-number mb-0 absolute -left-[4vw]">
@@ -340,7 +340,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
             </div>
           </div>
         </div>
-        <div class="hidden md:block md:w-[12.5%]" />
+        <div class="hidden md:block md:w-[12.5%] flex-none" />
         </div>
       </>
     ))
