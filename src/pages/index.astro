@@ -30,7 +30,7 @@ const reviews = testimonials.map((review) => ({
     ? urlFor(review.image)?.auto('format').width(120).height(120).url()
     : null,
   name: review.name,
-  review: review.description,
+  description: review.description,
   rating: review?.rating || 5, // rating should be present
 }));
 ---
