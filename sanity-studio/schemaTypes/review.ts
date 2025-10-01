@@ -29,6 +29,12 @@ export default defineType({
       title: 'Priority',
       type: 'number',
     }),
+    defineField({
+      name: 'rating',
+      title: 'Rating',
+      type: 'number',
+      validation: (rule) => rule.min(1).max(5),
+    }),
   ],
 
   preview: {
