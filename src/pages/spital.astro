@@ -5,6 +5,7 @@ import spital from '../assets/spital.png';
 import hospital1 from '../assets/spital/hospital1.png';
 import device from '../assets/despre/device.png';
 import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
+import DownArrow from '../assets/arrow-down.svg';
 
 const carouselItems = [
   {
@@ -84,63 +85,80 @@ const carouselItems = [
     </div>
     <div class="hidden md:block md:w-[12.5%]"></div>
   </div>
-  
-  <div id="carousel-1" class="relative w-full pt-18 overflow-hidden">
+
+  <div id="carousel-1" class="relative w-full overflow-hidden pt-18">
     <!-- Carousel Container -->
     <div class="carousel-container relative overflow-hidden">
-      <div class="carousel-track flex transition-transform duration-500 ease-in-out overflow-x-auto md:overflow-visible scroll-smooth snap-x snap-mandatory md:snap-none">
-        {carouselItems.map((item, index) => (
-          <div class="carousel-slide flex h-[60vh] w-full flex-shrink-0 flex-col md:flex-row snap-start">
+      <div
+        class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth transition-transform duration-500 ease-in-out md:snap-none md:overflow-visible"
+      >
+        {
+          carouselItems.map((item, index) => (
+            <div class="carousel-slide flex h-[60vh] w-full flex-shrink-0 snap-start flex-col md:flex-row">
+              {/* <!-- Image Section - Top on mobile, Right two-thirds on desktop --> */}
+              <div class="relative order-1 h-1/2 w-full overflow-hidden md:order-2 md:h-full md:w-2/3">
+                <Image
+                  src={item.image}
+                  alt={`Slide ${index + 1}`}
+                  class="h-full w-full object-cover"
+                />
+              </div>
 
-            <!-- Image Section - Top on mobile, Right two-thirds on desktop -->
-            <div class="relative w-full md:w-2/3 h-1/2 md:h-full overflow-hidden order-1 md:order-2">
-              <Image src={item.image} alt={`Slide ${index + 1}`} class="h-full w-full object-cover" />
-            </div>
-
-            <!-- Text Section - Bottom on mobile, Left third on desktop -->
-            <div class="primary-bg flex w-full md:w-1/3 h-1/2 md:h-full items-center justify-center order-2 md:order-1">
-              <div class="px-4 md:ml-20 w-full md:w-2/3 max-w-md text-left">
-                <p class="text-xl md:text-2xl leading-tight text-white">
-                  {item.description}
-                </p>
+              {/* <!-- Text Section - Bottom on mobile, Left third on desktop --> */}
+              <div class="primary-bg order-2 flex h-1/2 w-full items-center justify-center md:order-1 md:h-full md:w-1/3">
+                <div class="w-full max-w-md px-4 text-left md:ml-20 md:w-2/3">
+                  <p class="text-xl leading-tight text-white md:text-2xl">{item.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
     <!-- Navigation Buttons - Hidden on mobile -->
-    <button id="prev-btn" class="absolute left-6 z-10 rounded-full bg-[#134368] p-3 shadow-lg transition-all hover:bg-white hidden md:block" style="top: calc(4.5rem + 30vh - 1.5rem);">
+    <button
+      id="prev-btn"
+      class="absolute left-6 z-10 hidden rounded-full bg-[#134368] p-3 shadow-lg transition-all hover:bg-white md:block"
+      style="top: calc(4.5rem + 30vh - 1.5rem);"
+    >
       <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+        ></path>
       </svg>
     </button>
 
-    <button id="next-btn" class="absolute right-6 z-10 rounded-full bg-white/80 p-3 shadow-lg transition-all hover:bg-white hidden md:block" style="top: calc(4.5rem + 30vh - 1.5rem);">
+    <button
+      id="next-btn"
+      class="absolute right-6 z-10 hidden rounded-full bg-white/80 p-3 shadow-lg transition-all hover:bg-white md:block"
+      style="top: calc(4.5rem + 30vh - 1.5rem);"
+    >
       <svg class="h-6 w-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+        ></path>
       </svg>
     </button>
 
     <!-- Indicators - Centered on parent container -->
     <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-4">
-      {carouselItems.map((_, index) => (
-        <button 
-          class="carousel-indicator h-3 w-3 rounded-full border-1 border-white bg-transparent transition-all"
-          data-slide={index}
-        ></button>
-      ))}
+      {
+        carouselItems.map((_, index) => (
+          <button
+            class="carousel-indicator h-3 w-3 rounded-full border-1 border-white bg-transparent transition-all"
+            data-slide={index}
+          />
+        ))
+      }
     </div>
   </div>
 
-  <div id="section-2"class="flex w-full">
+  <div id="section-2" class="flex w-full">
     <div class="hidden md:block md:w-[12.5%]"></div>
 
     <div id="section-2-main-content" class="w-full md:w-[75%]">
       <section class="max-w-full px-0">
         <div class="flex w-full">
-          <div class="pt-4 pl-4 text-left sm:pt-16 flex-1">
+          <div class="flex-1 pt-4 pl-4 text-left sm:pt-16">
             <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
               >02.</span
             >
@@ -149,14 +167,43 @@ const carouselItems = [
                 class="leading-none font-bold tracking-normal"
                 style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
               >
-              echipamente de ultimă generație, configurate pentru precizie și recuperare rapidă
+                echipamente de ultimă generație, configurate pentru precizie și recuperare rapidă
               </h2>
             </div>
           </div>
-          <div class="hidden md:flex md:w-[12.5vw] flex-col">
-            <div class="border-custom aspect-square flex-1 border-b border-l border-r"></div>
-            <div class="border-custom aspect-square flex-1 border-b border-l border-r"></div>
-            <div class="border-custom aspect-square flex-1 border-b border-l border-r"></div>
+          <div class="hidden flex-col md:flex md:w-[12.5vw]">
+            <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+            <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+            <div class="border-custom aspect-square flex-1 border-r border-l"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="animations" class="max-w-full px-0">
+        <div class="border-custom relative hidden h-[12.5vw] overflow-visible border-t md:flex">
+          <div
+            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b border-l transition-all duration-700"
+          >
+            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
+            <div class="absolute inset-0 h-full w-full">
+              <LottieAnimation id="lottie-1" src="target.json" autoplay={false} loop={false} />
+            </div>
+          </div>
+          <div
+            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b border-l transition-all duration-700"
+          >
+            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
+            <div class="absolute inset-0 h-full w-full">
+              <LottieAnimation id="lottie-2" src="target.json" autoplay={false} loop={false} />
+            </div>
+          </div>
+          <div
+            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-r border-b border-l transition-all duration-700"
+          >
+            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
+            <div class="absolute inset-0 h-full w-full">
+              <LottieAnimation id="lottie-3" src="target.json" autoplay={false} loop={false} />
+            </div>
           </div>
         </div>
       </section>
@@ -164,9 +211,6 @@ const carouselItems = [
     <div class="hidden md:block md:w-[12.5%]"></div>
   </div>
 </Layout>
-<!-- <div id="lottie-container" class="h-[240px] w-[240px] cursor-pointer border">
-      <LottieAnimation id="target-animation" src="target.json" autoplay={false} loop={false} />
-    </div> -->
 
 <script>
   document.addEventListener('astro:page-load', () => {
@@ -176,7 +220,7 @@ const carouselItems = [
     const nextBtn = document.getElementById('next-btn');
     const prevBtn = document.getElementById('prev-btn');
     const indicators = document.querySelectorAll('.carousel-indicator');
-    
+
     let currentSlide = 0;
     const totalSlides = slides.length;
 
@@ -200,7 +244,7 @@ const carouselItems = [
         const slideWidth = carouselTrack.clientWidth;
         carouselTrack.scrollTo({
           left: currentSlide * slideWidth,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       }
 
@@ -268,5 +312,87 @@ const carouselItems = [
 
     // Initialize carousel
     updateCarousel();
+
+    // Animation container expansion functionality
+    const arrowTriggers = document.querySelectorAll('.arrow-trigger');
+    const animationsWrapper = document.querySelector('#animations > div');
+
+    arrowTriggers.forEach((arrow, index) => {
+      arrow.addEventListener('click', (e) => {
+        const container = e.currentTarget.closest('.animation-container');
+        const isExpanded = container.classList.contains('expanded');
+        const lottieId = `lottie-${index + 1}`;
+
+        if (isExpanded) {
+          // Reset Lottie animation immediately
+          const animation = astroLottie.getAnimation(lottieId);
+          if (animation && animation.isLoaded) {
+            animation.player.goToAndStop(0, true);
+          }
+
+          // Get current and target heights
+          const currentHeight = container.offsetHeight;
+          const targetHeight = animationsWrapper.offsetHeight;
+
+          // Set current height explicitly first
+          container.style.height = `${currentHeight}px`;
+
+          // Force reflow
+          container.offsetHeight;
+
+          // Then animate collapse in next frame
+          requestAnimationFrame(() => {
+            container.classList.remove('primary-bg', 'overflow-visible');
+            container.classList.add('overflow-hidden');
+            container.style.height = `${targetHeight}px`;
+          });
+
+          // After collapse completes (700ms), clean up
+          setTimeout(() => {
+            container.classList.remove('expanded', 'z-20');
+            container.style.height = '';
+          }, 700);
+        } else {
+          // Collapse all others first
+          document.querySelectorAll('.animation-container').forEach((c, i) => {
+            if (c.classList.contains('expanded')) {
+              const otherLottieId = `lottie-${i + 1}`;
+              const otherAnimation = astroLottie.getAnimation(otherLottieId);
+              if (otherAnimation && otherAnimation.isLoaded) {
+                // Reset to first frame immediately
+                otherAnimation.player.goToAndStop(0, true);
+              }
+            }
+            c.classList.remove('expanded', 'z-20', 'primary-bg', 'overflow-visible');
+            c.classList.add('overflow-hidden');
+            c.style.height = '';
+          });
+
+          // Get current width and height
+          const currentWidth = container.offsetWidth;
+          const currentHeight = container.offsetHeight;
+
+          // Set current height first
+          container.style.height = `${currentHeight}px`;
+
+          // Force reflow
+          container.offsetHeight;
+
+          // Then animate to target height
+          requestAnimationFrame(() => {
+            container.style.height = `${currentWidth}px`;
+            container.classList.remove('overflow-hidden');
+            container.classList.add('expanded', 'z-20', 'primary-bg', 'overflow-visible');
+
+            // Start Lottie animation
+            const animation = astroLottie.getAnimation(lottieId);
+            if (animation && animation.isLoaded) {
+              animation.player.setDirection(1);
+              animation.player.play();
+            }
+          });
+        }
+      });
+    });
   });
 </script>
