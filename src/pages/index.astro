@@ -22,16 +22,16 @@ const { data: testimonials } = await loadQuery<SanityDocument[]>({
       description,
       priority,
       image,
+      rating
     }`,
 });
 const reviews = testimonials.map((review) => ({
-  ...review,
   imageUrl: review?.image
     ? urlFor(review.image)?.auto('format').width(120).height(120).url()
     : null,
   name: review.name,
   description: review.description,
-  rating: review?.rating || 5, // rating should be present
+  rating: Math.max(Math.min(review?.rating || 5, 5), 1), // Clamp rating between 1 and 5
 }));
 ---
 
@@ -341,8 +341,8 @@ const reviews = testimonials.map((review) => ({
       <div class="col-span-1 flex flex-col flex-wrap sm:col-span-6 sm:flex-row">
         {
           reviews?.map((review) => (
-            <div class="border-custom border-t-0 border-r-0 border-b border-l-0 p-8 sm:aspect-square sm:w-110 sm:min-w-110 sm:border-t sm:border-r sm:border-l">
-              <div class="mb-4 flex">
+            <div class="border-custom flex flex-col border-t-0 border-r-0 border-b border-l-0 p-8 sm:aspect-square sm:w-110 sm:min-w-110 sm:border-t sm:border-r sm:border-l">
+              <div class="mb-4 flex shrink-0">
                 {review.imageUrl ? (
                   <Image
                     src={review.imageUrl}
@@ -354,11 +354,15 @@ const reviews = testimonials.map((review) => ({
                   <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 sm:h-30 sm:w-30" />
                 )}
                 <div>
-                  <div class="stars-color">★★★★★</div>
+                  <div class="stars-color">
+                    {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
+                  </div>
                   <div class="mt-1 text-3xl font-semibold">{review.name}</div>
                 </div>
               </div>
-              <p class="text-lg">{review.description}</p>
+              <div class="min-h-0 flex-1 overflow-auto pr-2 text-2xl leading-snug">
+                {review.description}
+              </div>
             </div>
           ))
         }
