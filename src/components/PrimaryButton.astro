@@ -8,28 +8,28 @@ export interface Props {
   target?: string;
 }
 
-const { text, icon: Icon, size = 'large', class: className = '', href = '#', target = '_blank' } = Astro.props;
+const {
+  text,
+  icon: Icon,
+  size = 'large',
+  class: className = '',
+  href = '#',
+  target = '_blank',
+} = Astro.props;
 
 const sizeClasses = {
   small: 'h-8 px-4 text-sm',
   medium: 'h-10 px-5 text-base',
-  large: 'h-14 px-7 text-[28px] leading-[36px]',
+  large: 'h-14 px-7 text-[26px] leading-[34px]',
   responsive: 'h-7 px-4 text-sm lg:h-8 lg:px-5 lg:text-base xl:h-10 xl:px-6 xl:text-lg',
-};
-
-const iconSizeClasses = {
-  small: 'h-4 w-4 mr-2',
-  medium: 'h-5 w-5 mr-3',
-  large: 'h-8 w-8 mr-4',
-  responsive: 'h-4 w-4 mr-2 lg:h-4 lg:w-4 lg:mr-3 xl:h-5 xl:w-5 xl:mr-4',
 };
 ---
 
 <a
   href={href}
   target={target}
-  class={`w-auto rounded-4xl flex items-center bg-main-btn font-medium text-white transition-colors hover:opacity-90 ${sizeClasses[size]} ${className}`}
+  class={`w-auto min-w-50 sm:min-w-60 rounded-4xl flex items-center bg-main-btn font-medium text-white transition-colors hover:opacity-90 ${sizeClasses[size]} ${className}`}
 >
-  {Icon && <Icon class={iconSizeClasses[size]} />}
+  {Icon && <Icon class="mr-4 h-7 min-h-7 w-7 min-w-7 sm:h-8 sm:min-h-7 sm:w-8 sm:min-w-7" />}
   <span class={size === 'large' ? 'mt-[-4px]' : ''}>{text}</span>
 </a>
