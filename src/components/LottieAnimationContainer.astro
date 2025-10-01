@@ -1,0 +1,39 @@
+---
+import DownArrow from '../assets/arrow-down.svg';
+import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
+
+interface Props {
+  index: string;
+  title: string;
+  details: string;
+  id: string;
+  src: string;
+  autoplay?: boolean;
+  loop?: boolean;
+}
+
+const { index, title, details, id, src, autoplay = false, loop = false } = Astro.props;
+---
+
+<div
+  class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b transition-all duration-700"
+>
+  <span
+    class="index-text absolute top-6 left-6 z-10 text-4xl font-bold transition-colors duration-700"
+    >{index}</span
+  >
+  <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-7 w-7 cursor-pointer" />
+  <h3
+    class="title-text absolute left-6 z-10 text-4xl transition-colors duration-700"
+    style="top: calc(12.5vw - 1.5rem - 2.25rem);"
+  >
+    {title}
+  </h3>
+  <span
+    class="details-text absolute left-6 bottom-6 z-10 w-2/3 text-left text-4xl opacity-0 transition-colors duration-700"
+    >{details}</span
+  >
+  <div class="absolute inset-0 h-full w-full">
+    <LottieAnimation {id} {src} {autoplay} {loop} />
+  </div>
+</div>

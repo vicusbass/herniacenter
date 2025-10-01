@@ -4,8 +4,7 @@ import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
 import hospital1 from '../assets/spital/hospital1.png';
 import device from '../assets/despre/device.png';
-import LottieAnimation from 'astro-integration-lottie/Lottie.astro';
-import DownArrow from '../assets/arrow-down.svg';
+import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
 
 const carouselItems = [
   {
@@ -180,30 +179,52 @@ const carouselItems = [
       </section>
 
       <section id="animations" class="max-w-full px-0">
-        <div class="border-custom relative hidden h-[12.5vw] overflow-visible border-t md:flex">
-          <div
-            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b border-l transition-all duration-700"
-          >
-            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
-            <div class="absolute inset-0 h-full w-full">
-              <LottieAnimation id="lottie-1" src="target.json" autoplay={false} loop={false} />
-            </div>
-          </div>
-          <div
-            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b border-l transition-all duration-700"
-          >
-            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
-            <div class="absolute inset-0 h-full w-full">
-              <LottieAnimation id="lottie-2" src="target.json" autoplay={false} loop={false} />
-            </div>
-          </div>
-          <div
-            class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-r border-b border-l transition-all duration-700"
-          >
-            <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-8 w-8 cursor-pointer" />
-            <div class="absolute inset-0 h-full w-full">
-              <LottieAnimation id="lottie-3" src="target.json" autoplay={false} loop={false} />
-            </div>
+        <div
+          class="border-custom relative hidden h-[12.5vw] divide-x overflow-visible border-t border-r border-l md:flex"
+        >
+          <LottieAnimationContainer
+            id="lottie-1"
+            src="target.json"
+            index="01"
+            title="sisteme video 4K"
+            details="pentru vizualizare de înaltă definiție"
+          />
+          <LottieAnimationContainer
+            id="lottie-2"
+            src="target.json"
+            index="02"
+            title="instrumentar dedicat"
+            details="intervențiilor de finețe"
+          />
+          <LottieAnimationContainer
+            id="lottie-3"
+            src="target.json"
+            index="03"
+            title="sisteme avansate"
+            details="de electrocauterizare și sigilare vasculară"
+          />
+        </div>
+        <div
+          class="border-custom relative hidden h-[12.5vw] divide-x overflow-visible border-t border-r border-l md:flex"
+        >
+          <LottieAnimationContainer
+            id="lottie-4"
+            src="target.json"
+            index="04"
+            title="plase chirurgicale"
+            details="pentru vizualizare de înaltă definiție"
+          />
+          <LottieAnimationContainer
+            id="lottie-5"
+            src="target.json"
+            index="05"
+            title="tehnologii atraumatice"
+            details="intervențiilor de finețe"
+          />
+          <div class="primary-bg border-custom relative z-10 flex flex-1 items-center justify-center overflow-hidden border-b">
+            <h3 class="text-center text-4xl text-white">
+              programeaza-te
+            </h3>
           </div>
         </div>
       </section>
@@ -324,6 +345,17 @@ const carouselItems = [
         const lottieId = `lottie-${index + 1}`;
 
         if (isExpanded) {
+          // Reset text colors and hide details when collapsing
+          const indexText = container.querySelector('.index-text');
+          const titleText = container.querySelector('.title-text');
+          const detailsText = container.querySelector('.details-text');
+          if (indexText) indexText.style.color = '';
+          if (titleText) titleText.style.color = '';
+          if (detailsText) {
+            detailsText.style.color = '';
+            detailsText.style.opacity = '0';
+          }
+
           // Reset Lottie animation immediately
           const animation = astroLottie.getAnimation(lottieId);
           if (animation && animation.isLoaded) {
@@ -355,6 +387,9 @@ const carouselItems = [
         } else {
           // Collapse all others first
           document.querySelectorAll('.animation-container').forEach((c, i) => {
+            // Skip the container being expanded
+            if (c === container) return;
+
             if (c.classList.contains('expanded')) {
               const otherLottieId = `lottie-${i + 1}`;
               const otherAnimation = astroLottie.getAnimation(otherLottieId);
@@ -362,6 +397,30 @@ const carouselItems = [
                 // Reset to first frame immediately
                 otherAnimation.player.goToAndStop(0, true);
               }
+
+              // Hide all text immediately during collapse
+              const indexText = c.querySelector('.index-text');
+              const titleText = c.querySelector('.title-text');
+              const detailsText = c.querySelector('.details-text');
+              if (indexText) indexText.style.opacity = '0';
+              if (titleText) titleText.style.opacity = '0';
+              if (detailsText) detailsText.style.opacity = '0';
+
+              // Reset text colors and visibility after collapse animation completes
+              setTimeout(() => {
+                if (indexText) {
+                  indexText.style.color = '';
+                  indexText.style.opacity = '';
+                }
+                if (titleText) {
+                  titleText.style.color = '';
+                  titleText.style.opacity = '';
+                }
+                if (detailsText) {
+                  detailsText.style.color = '';
+                  // Keep details hidden - it starts with opacity-0 in the component
+                }
+              }, 700);
             }
             c.classList.remove('expanded', 'z-20', 'primary-bg', 'overflow-visible');
             c.classList.add('overflow-hidden');
@@ -383,6 +442,17 @@ const carouselItems = [
             container.style.height = `${currentWidth}px`;
             container.classList.remove('overflow-hidden');
             container.classList.add('expanded', 'z-20', 'primary-bg', 'overflow-visible');
+
+            // Change text color to white when expanded and show details
+            const indexText = container.querySelector('.index-text');
+            const titleText = container.querySelector('.title-text');
+            const detailsText = container.querySelector('.details-text');
+            if (indexText) indexText.style.color = 'white';
+            if (titleText) titleText.style.color = 'white';
+            if (detailsText) {
+              detailsText.style.color = 'white';
+              detailsText.style.opacity = '1';
+            }
 
             // Start Lottie animation
             const animation = astroLottie.getAnimation(lottieId);
