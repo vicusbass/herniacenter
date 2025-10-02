@@ -16,13 +16,13 @@ const { index, title, details, id, src, autoplay = false, loop = false } = Astro
 ---
 
 <div
-  class="animation-container border-custom relative z-10 flex-1 overflow-hidden border-b transition-all duration-700"
+  class="animation-container border-custom relative z-10 flex-1 cursor-pointer overflow-hidden border-b transition-all duration-700"
 >
   <span
     class="index-text absolute top-6 left-6 z-10 text-3xl font-bold transition-colors duration-700 2xl:text-4xl"
     >{index}</span
   >
-  <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-7 w-7 cursor-pointer" />
+  <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-7 w-7" />
   <h3
     class="title-text absolute left-6 z-10 text-3xl transition-colors duration-700 2xl:text-4xl"
     style="top: calc(12.5vw - 1.5rem - 2.25rem);"
