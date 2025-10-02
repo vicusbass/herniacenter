@@ -342,27 +342,33 @@ const reviews = testimonials.map((review) => ({
       <div class="hidden aspect-square sm:block"></div>
       <div class="col-span-1 flex flex-col flex-wrap pt-2 sm:col-span-6 sm:flex-row">
         {
-          reviews?.map((review) => (
-            <div class="border-custom flex flex-col border-t-0 border-r-0 border-b border-l-0 p-8 sm:aspect-square sm:w-93 sm:min-w-93 sm:border-t sm:border-r sm:border-l">
+          reviews?.map((review: any, index: number) => (
+            <div class=`
+              border-custom flex flex-col overflow-scroll p-8 sm:aspect-square sm:w-[25vw] sm:p-[2vw]
+              border-t-0 border-r-0 border-b border-l-0 sm:border-r
+              ${(index >= 0 && index < 3) ? '  sm:border-t' : ''}
+              ${(index % 3 === 0) ? ' sm:border-l' : ''}
+              `
+              >
               <div class="mb-4 flex shrink-0">
                 {review.imageUrl ? (
                   <Image
                     src={review.imageUrl}
                     alt={review.name}
                     inferSize
-                    class="mr-8 h-28 w-28 rounded-full object-cover sm:h-30 sm:w-30"
+                    class="mr-8 h-28 w-28 rounded-full object-cover sm:h-[7vw] sm:w-[7vw] sm:mr-[1.5vw]"
                   />
                 ) : (
-                  <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 sm:h-30 sm:w-30" />
+                  <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 sm:h-[7vw] sm:w-[7vw] sm:mr-[1.5vw]" />
                 )}
                 <div>
-                  <div class="stars-color text-lg">
+                  <div class="stars-color text-lg sm:text-[2.2vw] lg:text-[1.8vw] tracking-widest">
                     {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
                   </div>
-                  <div class="mt-1 text-2xl font-semibold">{review.name}</div>
+                  <div class="mt-1 text-2xl sm:text-[2.4vw] lg:text-[2vw] font-semibold">{review.name}</div>
                 </div>
               </div>
-              <div class="max-h-70 min-h-0 flex-1 overflow-auto pr-2 text-xl leading-snug">
+              <div class="max-h-70 min-h-0 flex-1 overflow-auto pr-2 text-xl sm:text-[2vw] lg:text-[1.7vw] leading-snug">
                 {review.description}
               </div>
             </div>
@@ -373,6 +379,7 @@ const reviews = testimonials.map((review) => ({
     </div>
   </section>
   <style>
+
     #scroll-title-wrapper {
       position: relative;
     }
