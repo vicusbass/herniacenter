@@ -83,9 +83,11 @@ const reviews = testimonials.map((review) => ({
         class="grid-cols2 absolute inset-0 grid w-full grid-rows-5 sm:grid-cols-8 sm:grid-rows-4"
       >
         <h1
-          class="col-span-2 col-start-1 row-span-3 row-start-1 self-start text-6xl leading-[0.8] font-bold tracking-tight sm:col-span-3 sm:col-start-3 sm:text-5xl lg:text-7xl"
+          class="col-span-2 col-start-1 row-span-3 row-start-1 self-start leading-[0.8] font-bold tracking-tight sm:col-span-3 sm:col-start-3
+          text-6xl sm:text-[clamp(2.75rem,5vw,4.5rem)] "
+          style="transform: translateY(clamp(2.2rem, 8.5vw, 10rem));"
         >
-          <p class="hidden sm:block" style="margin-top: calc(100% / 2 - 2.2em);"></p>
+          <p class="hidden sm:block"></p>
           <p>chirurgia</p>
           <p class="text-nowrap">minim invazivă</p>
           <p>a herniilor</p>
