@@ -29,7 +29,7 @@ const reviews = testimonials.map((review) => ({
   imageUrl: review?.image
     ? urlFor(review.image)?.auto('format').width(120).height(120).url()
     : null,
-  name: review.name,
+  name: review.name.replace(' ', '<br />'),
   description: review.description,
   rating: Math.max(Math.min(review?.rating || 5, 5), 1), // Clamp rating between 1 and 5
 }));
@@ -182,7 +182,7 @@ const reviews = testimonials.map((review) => ({
         <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
         <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
         <button
-          class="group col-span-2 flex aspect-[2/1] items-center justify-center bg-(--color-primary) transition-colors hover:opacity-90 sm:aspect-auto"
+          class="group primary-bg col-span-2 flex aspect-[2/1] items-center justify-center transition-colors hover:opacity-90 sm:aspect-auto"
           onclick="location.href='/interventii'"
         >
           <span class="responsive-button-text flex items-center text-white">
@@ -362,12 +362,10 @@ const reviews = testimonials.map((review) => ({
                   <div class="stars-color text-lg tracking-widest sm:text-[2.2vw] lg:text-[1.8vw]">
                     {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
                   </div>
-                  <div class="mt-1 text-2xl font-semibold sm:text-[2.4vw] lg:text-[2vw]">
-                    {review.name}
-                  </div>
+                  <div class="review-name mt-1 font-semibold" set:html={review.name} />
                 </div>
               </div>
-              <div class="max-h-70 min-h-0 flex-1 overflow-auto pr-2 text-xl leading-snug sm:text-[2vw] lg:text-[1.7vw]">
+              <div class="review-description max-h-70 min-h-0 flex-1 overflow-auto pr-2 leading-snug">
                 {review.description}
               </div>
             </div>
@@ -408,16 +406,24 @@ const reviews = testimonials.map((review) => ({
     }
 
     .benefits-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 0.8;
       text-align: left;
       margin-top: auto;
-      margin-bottom: auto;
-      transform: translateY(-10%);
     }
 
     .benefits-description {
-      margin-bottom: clamp(2rem, 3vw, 4rem);
+      margin-top: auto;
+      margin-bottom: 2rem;
+    }
+
+    .review-name {
+      font-size: clamp(1.5rem, 1.875vw, 2.25rem);
+      line-height: 1;
+    }
+
+    .review-description {
+      font-size: clamp(1rem, 1.146vw, 1.375rem);
     }
 
     @media (width >= 40rem) {
@@ -425,9 +431,29 @@ const reviews = testimonials.map((review) => ({
         padding: clamp(0.3rem, 2vw, 1.5rem);
       }
 
+      .benefits.hernia-container {
+        position: relative;
+      }
+
       .benefits-title {
         font-size: clamp(2.5rem, 4vw, 5.25rem);
         font-weight: 500;
+        position: absolute;
+        top: 30%;
+        left: 0;
+        right: 0;
+        padding: 0 clamp(0.3rem, 2vw, 1.5rem);
+        margin-top: 0;
+      }
+
+      .benefits-description {
+        position: absolute;
+        top: 65%;
+        left: 0;
+        right: 0;
+        padding: 0 clamp(0.3rem, 2vw, 1.5rem);
+        margin-bottom: clamp(2rem, 3vw, 4rem);
+        margin-top: 0;
       }
 
       .responsive-button-text {
