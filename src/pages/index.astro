@@ -29,7 +29,7 @@ const reviews = testimonials.map((review) => ({
   imageUrl: review?.image
     ? urlFor(review.image)?.auto('format').width(120).height(120).url()
     : null,
-  name: review.name,
+  name: review.name.replace(' ', '<br />'),
   description: review.description,
   rating: Math.max(Math.min(review?.rating || 5, 5), 1), // Clamp rating between 1 and 5
 }));
@@ -83,8 +83,7 @@ const reviews = testimonials.map((review) => ({
         class="grid-cols2 absolute inset-0 grid w-full grid-rows-5 sm:grid-cols-8 sm:grid-rows-4"
       >
         <h1
-          class="col-span-2 col-start-1 row-span-3 row-start-1 self-start leading-[0.8] font-bold tracking-tight sm:col-span-3 sm:col-start-3
-          text-6xl sm:text-[clamp(2.75rem,5vw,4.5rem)] "
+          class="col-span-2 col-start-1 row-span-3 row-start-1 self-start text-6xl leading-[0.8] font-bold tracking-tight sm:col-span-3 sm:col-start-3 sm:text-[clamp(2.75rem,5vw,4.5rem)]"
           style="transform: translateY(clamp(2.2rem, 8.5vw, 10rem));"
         >
           <p class="hidden sm:block"></p>
@@ -135,7 +134,7 @@ const reviews = testimonials.map((review) => ({
           [
             {
               title: 'hernie inghinală',
-              description: 'Cea mai frecventa formã, tratabilã eficient prin laparoscopie.',
+              description: 'Cea mai frecventa formă, tratabilã eficient prin laparoscopie.',
             },
             {
               title: 'hernie ombilicală',
@@ -143,7 +142,7 @@ const reviews = testimonials.map((review) => ({
             },
             {
               title: 'hernie hiatală',
-              description: 'Legatã de reflux gastric - corectabilà minim invaziv.',
+              description: 'Legatã de reflux gastric - corectabilă minim invaziv.',
             },
             {
               title: 'hernie incizională',
@@ -183,10 +182,10 @@ const reviews = testimonials.map((review) => ({
         <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
         <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
         <button
-          class="group col-span-2 flex aspect-[2/1] items-center justify-center bg-(--color-primary) transition-colors hover:opacity-90 sm:aspect-auto"
+          class="group primary-bg col-span-2 flex aspect-[2/1] items-center justify-center transition-colors hover:opacity-90 sm:aspect-auto"
           onclick="location.href='/interventii'"
         >
-          <span class="flex items-center text-3xl/6 text-white sm:text-xl/6 lg:text-3xl/6">
+          <span class="responsive-button-text flex items-center text-white">
             citește mai mult
             <ArrowRight
               class="mt-1 ml-4 scale-80 transition-all duration-300 ease-out group-hover:translate-x-3"
@@ -199,7 +198,7 @@ const reviews = testimonials.map((review) => ({
       </div>
       <div
         id="hernina-type-modal"
-        class="border-custom hernia-container absolute hidden cursor-pointer border bg-(--color-primary) p-7"
+        class="border-custom hernia-container primary-bg absolute hidden cursor-pointer border p-7"
       >
         <div class="flex justify-between">
           <div id="hernia-number" class="hernia-title"></div>
@@ -213,12 +212,12 @@ const reviews = testimonials.map((review) => ({
     <div class="relative mt-8 overflow-hidden">
       <div
         id="scroll-title-wrapper"
-        class="pointer-events-none leading-none font-bold whitespace-nowrap text-red-200 opacity-30 select-none"
+        class="stars-color pointer-events-none leading-none font-bold whitespace-nowrap opacity-30 select-none"
         style="--scroll-shift:0;"
       >
         <span
           id="scroll-title"
-          class="mx-8 inline-block translate-x-0 text-[12rem] will-change-transform sm:mx-16 lg:text-[20rem]"
+          class="scroll-title mx-8 inline-block translate-x-0 will-change-transform sm:mx-16"
           >hernia&nbsp;center</span
         >
       </div>
@@ -241,7 +240,7 @@ const reviews = testimonials.map((review) => ({
       <div class="hidden aspect-square sm:block"></div>
       <div class="hidden aspect-square sm:block"></div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col justify-between border-t border-l sm:col-span-3 sm:row-span-3"
+        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-l sm:col-span-3 sm:row-span-3"
         data-number="01"
         data-title="tehnici moderne"
         data-description="Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu instrumentar de finețe și tehnologii atraumatice."
@@ -253,17 +252,17 @@ const reviews = testimonials.map((review) => ({
             <TriangleBarsAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">tehnici moderne</h3>
-        <h3 class="hernia-text hidden sm:block">
+        <h3 class="benefits-title">tehnici<br />moderne</h3>
+        <h4 class="hernia-text benefits-description hidden sm:block">
           Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu
           instrumentar de finețe și tehnologii atraumatice.
-        </h3>
+        </h4>
       </div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col justify-between border-t border-r border-l sm:col-span-3 sm:row-span-3"
+        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-l sm:col-span-3 sm:row-span-3"
         data-number="02"
-        data-title="tehnici moderne"
-        data-description="Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu instrumentar de finețe și tehnologii atraumatice."
+        data-title="minim invaziv"
+        data-description="Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă."
       >
         <div class="flex justify-between">
           <div class="hernia-title font-semibold">02</div>
@@ -272,10 +271,10 @@ const reviews = testimonials.map((review) => ({
             <SquaresAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">minim invaziv</h3>
-        <h3 class="hernia-text hidden sm:block">
+        <h3 class="benefits-title">minim<br />invaziv</h3>
+        <h4 class="hernia-text benefits-description hidden sm:block">
           Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă.
-        </h3>
+        </h4>
       </div>
       <div class="hidden aspect-square sm:block"></div>
       <div class="hidden aspect-square sm:block"></div>
@@ -284,7 +283,7 @@ const reviews = testimonials.map((review) => ({
       <div class="hidden aspect-square sm:block"></div>
       <div class="hidden aspect-square sm:block"></div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col justify-between border-t border-b border-l sm:col-span-3 sm:row-span-3"
+        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-b border-l sm:col-span-3 sm:row-span-3"
         data-number="03"
         data-title="recuperare rapidă"
         data-description="Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi."
@@ -296,13 +295,13 @@ const reviews = testimonials.map((review) => ({
             <HeartAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">recuperare rapidă</h3>
-        <h3 class="hernia-text hidden sm:block">
+        <h3 class="benefits-title">recuperare<br />rapidă</h3>
+        <h4 class="hernia-text benefits-description hidden sm:block">
           Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi.
-        </h3>
+        </h4>
       </div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col justify-between border-t border-r border-b border-l sm:col-span-3 sm:row-span-3"
+        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-b border-l sm:col-span-3 sm:row-span-3"
         data-number="04"
         data-title="spital modern"
         data-description="Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere private și zone de relaxare."
@@ -314,11 +313,11 @@ const reviews = testimonials.map((review) => ({
             <PolygonAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">spital modern</h3>
-        <h3 class="hernia-text hidden sm:block">
+        <h3 class="benefits-title">spital<br />modern</h3>
+        <h4 class="hernia-text benefits-description hidden sm:block">
           Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere
           private și zone de relaxare.
-        </h3>
+        </h4>
       </div>
       <div class="hidden aspect-square sm:block"></div>
       <div class="hidden aspect-square sm:block"></div>
@@ -345,32 +344,28 @@ const reviews = testimonials.map((review) => ({
       <div class="col-span-1 flex flex-col flex-wrap pt-2 sm:col-span-6 sm:flex-row">
         {
           reviews?.map((review: any, index: number) => (
-            <div class=`
-              border-custom flex flex-col overflow-scroll p-8 sm:aspect-square sm:w-[25vw] sm:p-[2vw]
-              border-t-0 border-r-0 border-b border-l-0 sm:border-r
-              ${(index >= 0 && index < 3) ? '  sm:border-t' : ''}
-              ${(index % 3 === 0) ? ' sm:border-l' : ''}
-              `
-              >
+            <div
+              class={`border-custom flex flex-col overflow-scroll border-t-0 border-r-0 border-b border-l-0 p-8 sm:aspect-square sm:w-[25vw] sm:border-r sm:p-[2vw] ${index >= 0 && index < 3 ? 'sm:border-t' : ''} ${index % 3 === 0 ? 'sm:border-l' : ''} `}
+            >
               <div class="mb-4 flex shrink-0">
                 {review.imageUrl ? (
                   <Image
                     src={review.imageUrl}
                     alt={review.name}
                     inferSize
-                    class="mr-8 h-28 w-28 rounded-full object-cover sm:h-[7vw] sm:w-[7vw] sm:mr-[1.5vw]"
+                    class="mr-8 h-28 w-28 rounded-full object-cover sm:mr-[1.5vw] sm:h-[7vw] sm:w-[7vw]"
                   />
                 ) : (
-                  <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 sm:h-[7vw] sm:w-[7vw] sm:mr-[1.5vw]" />
+                  <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 sm:mr-[1.5vw] sm:h-[7vw] sm:w-[7vw]" />
                 )}
                 <div>
-                  <div class="stars-color text-lg sm:text-[2.2vw] lg:text-[1.8vw] tracking-widest">
+                  <div class="stars-color text-lg tracking-widest sm:text-[2.2vw] lg:text-[1.8vw]">
                     {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
                   </div>
-                  <div class="mt-1 text-2xl sm:text-[2.4vw] lg:text-[2vw] font-semibold">{review.name}</div>
+                  <div class="review-name mt-1 font-semibold" set:html={review.name} />
                 </div>
               </div>
-              <div class="max-h-70 min-h-0 flex-1 overflow-auto pr-2 text-xl sm:text-[2vw] lg:text-[1.7vw] leading-snug">
+              <div class="review-description max-h-70 min-h-0 flex-1 overflow-auto pr-2 leading-snug">
                 {review.description}
               </div>
             </div>
@@ -381,7 +376,6 @@ const reviews = testimonials.map((review) => ({
     </div>
   </section>
   <style>
-
     #scroll-title-wrapper {
       position: relative;
     }
@@ -399,22 +393,37 @@ const reviews = testimonials.map((review) => ({
     }
 
     .hernia-title {
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 2.5vw, 2.5rem);
       line-height: 0.4;
       text-align: left;
       margin-bottom: 0.5rem;
     }
 
     .hernia-text {
-      font-size: 2rem;
-      line-height: 0.8;
+      font-size: clamp(1.45rem, 1.875vw, 2.25rem);
+      line-height: 1.2;
       text-align: left;
     }
 
     .benefits-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 0.8;
       text-align: left;
+      margin-top: auto;
+    }
+
+    .benefits-description {
+      margin-top: auto;
+      margin-bottom: 2rem;
+    }
+
+    .review-name {
+      font-size: clamp(1.5rem, 1.875vw, 2.25rem);
+      line-height: 1;
+    }
+
+    .review-description {
+      font-size: clamp(1rem, 1.146vw, 1.375rem);
     }
 
     @media (width >= 40rem) {
@@ -422,23 +431,39 @@ const reviews = testimonials.map((review) => ({
         padding: clamp(0.3rem, 2vw, 1.5rem);
       }
 
-      .hernia-title {
-        font-size: clamp(2rem, 3.5vw, 4.25rem);
-        line-height: 0.4;
-        text-align: left;
-        margin-bottom: 0.5rem;
+      .benefits.hernia-container {
+        position: relative;
       }
 
       .benefits-title {
         font-size: clamp(2.5rem, 4vw, 5.25rem);
         font-weight: 500;
+        position: absolute;
+        top: 30%;
+        left: 0;
+        right: 0;
+        padding: 0 clamp(0.3rem, 2vw, 1.5rem);
+        margin-top: 0;
       }
 
-      .hernia-text {
-        font-size: clamp(1.45rem, 2.8vw, 2.25rem);
-        line-height: 0.8;
-        text-align: left;
+      .benefits-description {
+        position: absolute;
+        top: 65%;
+        left: 0;
+        right: 0;
+        padding: 0 clamp(0.3rem, 2vw, 1.5rem);
+        margin-bottom: clamp(2rem, 3vw, 4rem);
+        margin-top: 0;
       }
+
+      .responsive-button-text {
+        font-size: clamp(1.5rem, 2.1875vw, 2.625rem);
+        line-height: 1.2;
+      }
+    }
+
+    .scroll-title {
+      font-size: clamp(11.25rem, 25.52vw, 30.625rem);
     }
   </style>
 
