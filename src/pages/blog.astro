@@ -84,23 +84,23 @@ const [featuredArticle, ...otherArticles] = articles;
       </div>
       <div class="flex w-[25%] flex-col">
         <div class="flex-grow pt-4 pl-4">
-          <h2 class="text-2xl leading-tight font-semibold lg:text-3xl xl:text-4xl">
+          <h2 class="text-[clamp(1.2rem,2.5vw,2.8125rem)] leading-tight font-semibold">
             {featuredArticle?.title || PAGE.hero.heading}
           </h2>
-          <p class="pt-2 text-lg lg:pt-3 lg:text-base xl:pt-4 xl:text-lg">
+          <p class="pt-2 text-[clamp(1rem,1.75vw,1.7rem)] lg:pt-3 xl:pt-4">
             {featuredArticle?.description || PAGE.hero.copy}
           </p>
           <a
             href={featuredArticle?.slug?.current
               ? `/blog/${featuredArticle.slug.current}`
               : '/blog'}
-            class="inline-block pt-2 text-sm underline underline-offset-4 hover:text-blue-800 lg:text-base xl:text-lg"
+            class="inline-block pt-2 text-[clamp(1rem,1.75vw,1.7rem)] underline underline-offset-4 hover:text-blue-800"
           >
             citește mai mult
           </a>
         </div>
         <div class="pl-5">
-          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="responsive" />
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} />
         </div>
       </div>
       <div class="w-[12.5%] flex-none"></div>
@@ -175,7 +175,7 @@ const [featuredArticle, ...otherArticles] = articles;
           citește mai mult
         </a>
         <div class="mt-8">
-          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} size="medium" />
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} />
         </div>
       </div>
 
