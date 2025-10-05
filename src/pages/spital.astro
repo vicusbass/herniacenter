@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital.png';
+import ct from '../assets/spital/ct.jpg';
+import ecograph from '../assets/spital/ecograph.jpeg';
+import mri from '../assets/spital/mri.jpg';
 import hospital1 from '../assets/spital/hospital1.png';
 import device from '../assets/despre/device.png';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
@@ -35,8 +38,12 @@ const carouselItems = [
           <div class="px-4">
             <h1 class="text-5xl leading-none font-bold tracking-tight">spitalul</h1>
           </div>
-          <div class="w-full pt-8">
-            <Image src={spital} alt="Spital" class="w-full object-cover" />
+          <div class="sm:group w-full pt-8">
+            <Image
+              src={spital}
+              alt="Spital"
+              class="w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform sm:group-hover:scale-[1.5]"
+            />
           </div>
         </div>
 
@@ -56,9 +63,13 @@ const carouselItems = [
           <!-- Hospital image - spanning cells on desktop -->
           <div
             id="hospital-image"
-            class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] transition-all duration-300"
+            class="group absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] overflow-visible"
           >
-            <Image src={spital} alt="Spital" class="h-full w-full object-cover" />
+            <Image
+              src={spital}
+              alt="Spital"
+              class="h-full w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform md:group-hover:scale-[1.5]"
+            />
           </div>
         </div>
 
@@ -179,6 +190,7 @@ const carouselItems = [
       </section>
 
       <section id="animations" class="max-w-full px-0">
+        <div></div>
         <div
           class="border-custom relative hidden h-[12.5vw] divide-x overflow-visible border-t border-r border-l md:flex"
         >
@@ -231,7 +243,7 @@ const carouselItems = [
 
       <div class="flex max-w-full px-0">
         <div class="justify-left flex w-full items-center text-left md:w-[66.666%]">
-          <h3 class="description w-3/4">
+          <h3 class="description w-3/4 p-4 sm:p-0">
             Spitalul beneficiază și de acces imediat la servicii de imagistică de înaltă
             performanță, esențiale pentru un diagnostic corect și o planificare chirurgicală sigură.
           </h3>
@@ -243,6 +255,56 @@ const carouselItems = [
           <div class="border-custom aspect-square w-1/2 border-r border-b"></div>
         </div>
       </div>
+
+      <div class="mx-0 flex flex-col sm:mx-[12.5wv] sm:flex-row">
+        {
+          [
+            {
+              imgSrc: ecograph,
+              text: 'ecografie',
+            },
+            {
+              imgSrc: ct,
+              text: 'tomografie computerizată',
+            },
+            {
+              imgSrc: mri,
+              text: 'rezonanță magnetică',
+            },
+          ].map((item) => (
+            <div class="relative aspect-square md:w-[25vw]">
+              <Image src={item.imgSrc} alt={item.text} class="h-full w-full" />
+              <div class="absolute top-0 right-0 bottom-0 left-0 bg-black opacity-15" />
+              <h3 class="absolute bottom-6 left-5 text-5xl leading-10 text-white sm:bottom-4 sm:left-3 sm:text-[clamp(2.5rem,4vw,5.5rem)]">
+                {item.text}
+              </h3>
+            </div>
+          ))
+        }
+      </div>
+
+      <section class="max-w-full px-0">
+        <div class="flex w-full">
+          <div class="flex-1 pt-4 pl-4 text-left sm:pt-16">
+            <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
+              >03.</span
+            >
+            <div class="w-full sm:w-5/8">
+              <h2
+                class="leading-none font-bold tracking-normal"
+                style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
+              >
+                confort modern și funcționalitate medicală într-un singur spațiu
+              </h2>
+            </div>
+          </div>
+          <div class="hidden flex-col md:flex md:w-[12.5vw]">
+            <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+            <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+            <div class="border-custom aspect-square flex-1 border-r border-l"></div>
+          </div>
+        </div>
+      </section>
     </div>
     <div class="hidden md:block md:w-[12.5%]"></div>
   </div>
