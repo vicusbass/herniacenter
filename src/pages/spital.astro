@@ -8,6 +8,8 @@ import mri from '../assets/spital/mri.jpg';
 import hospital1 from '../assets/spital/hospital1.png';
 import device from '../assets/despre/device.png';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
+import ArrowDown from '../assets/arrow-down.svg';
+import ArrowRight from '../assets/arrow-right.svg';
 
 const carouselItems = [
   {
@@ -190,7 +192,84 @@ const carouselItems = [
       </section>
 
       <section id="animations" class="max-w-full px-0">
-        <div></div>
+        <div class="mt-10 block px-4 sm:hidden">
+          <div class="relative grid grid-cols-2">
+            {
+              [
+                {
+                  title: 'sisteme video 4K',
+                  details: 'pentru vizualizare de înaltă definiție',
+                },
+                {
+                  title: 'instrumentar dedicat',
+                  details: 'intervențiilor de finețe',
+                },
+                {
+                  title: 'sisteme avansate',
+                  details: 'de electrocauterizare și sigilare vasculară',
+                },
+                {
+                  title: 'plase chirurgicale',
+                  details: 'pentru vizualizare de înaltă definiție',
+                },
+                {
+                  title: 'tehnologii atraumatice',
+                  details: 'intervențiilor de finețe',
+                },
+              ].map(({ title, details }, index, items) => (
+                <button
+                  class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-l ${
+                    index === items.length - 1
+                      ? 'border-r border-b'
+                      : index % 2 === 1
+                        ? 'border-r sm:border-r-0'
+                        : ''
+                  } `}
+                  data-number={String(index + 1).padStart(2, '0')}
+                  data-title={title}
+                  data-description={details}
+                >
+                  <div class="flex justify-between">
+                    <div class="hernia-title font-semibold">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    <ArrowDown />
+                  </div>
+                  <h3 class="hernia-text">{title}</h3>
+                </button>
+              ))
+            }
+            <button
+              class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 sm:aspect-auto"
+              onclick="location.href='/interventii'"
+            >
+              <div
+                class="flex flex-col items-end justify-end text-2xl/6 text-white sm:text-xl/6 lg:text-3xl/6"
+              >
+                <ArrowRight
+                  class="mt-1 ml-4 scale-60 transition-all duration-300 ease-out group-hover:translate-x-3"
+                />
+                programează-te
+              </div>
+            </button>
+            <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
+            <div class="border-custom hidden aspect-square border-r border-b border-l sm:block">
+            </div>
+            <div class="hidden aspect-square sm:block"></div>
+          </div>
+          <div
+            id="hernina-type-modal"
+            class="border-custom hernia-container absolute hidden cursor-pointer border bg-(--color-primary) p-7"
+          >
+            <div class="flex justify-between">
+              <div id="hernia-number" class="hernia-title"></div>
+              <ArrowDown />
+            </div>
+            <h3 id="hernia-title" class="hernia-text"></h3>
+            <h3 id="hernia-description" class="hernia-text"></h3>
+          </div>
+        </div>
+
         <div
           class="border-custom relative hidden h-[12.5vw] divide-x overflow-visible border-t border-r border-l md:flex"
         >
@@ -542,11 +621,155 @@ const carouselItems = [
         }
       });
     });
+    // Track a detachable global click listener for modal close
+    let detachModalClose: (() => void) | null = null;
+
+    Array.from(document.getElementsByClassName('hernia-button')).forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const el = e.currentTarget as HTMLElement | null;
+        if (!el) return;
+
+        const modal = document.getElementById('hernina-type-modal') as HTMLElement | null;
+        if (!modal) return;
+
+        // If a previous close listener exists, remove it before re-opening
+        if (detachModalClose) {
+          detachModalClose();
+          detachModalClose = null;
+        }
+        if (modal.style.display === 'flex') {
+          // Ignore the very click that opened (listener added after frame)
+          // @ts-ignore
+          document.removeEventListener('click', docHandler, true);
+          // @ts-ignore
+          modal.removeEventListener('click', modalHandler, true);
+          detachModalClose = null;
+          close();
+          return;
+        }
+
+        // Extract data attributes
+        const number = el.getAttribute('data-number') || '';
+        const title = el.getAttribute('data-title') || '';
+        const description = el.getAttribute('data-description') || '';
+
+        // Populate modal content
+        const numEl = modal.querySelector('#hernia-number');
+        const titleEl = modal.querySelector('#hernia-title');
+        const descEl = modal.querySelector('#hernia-description');
+        if (numEl) numEl.textContent = number;
+        if (titleEl) titleEl.textContent = title;
+        if (descEl) descEl.textContent = description;
+
+        // Compute geometry (anchor top-left of button; modal doubled in size)
+        const rect = el.getBoundingClientRect();
+        const targetWidth = rect.width * 2;
+        const targetHeight = rect.height * 2;
+        const left = rect.left + window.scrollX;
+        const top = rect.top + window.scrollY;
+
+        const shouldAnchorRight = left + targetWidth > window.innerWidth;
+
+        // Apply positioning & size
+        Object.assign(modal.style, {
+          ...(shouldAnchorRight
+            ? { right: window.innerWidth - (left + rect.width) + 'px', left: 'auto' }
+            : { left: left + 'px' }),
+          top: top + 'px',
+          width: targetWidth + 'px',
+          height: targetHeight + 'px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          color: 'white',
+          zIndex: '60',
+          transformOrigin: `top ${shouldAnchorRight ? 'right' : 'left'}`,
+          position: 'absolute',
+          transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.2s ease',
+        } as CSSStyleDeclaration);
+
+        // Opening animation: start at original button scale (0.5 if doubling)
+        const scaleX = rect.width / targetWidth;
+        const scaleY = rect.height / targetHeight;
+        modal.style.opacity = '0';
+        modal.style.transform = `scale(${scaleX}, ${scaleY})`;
+
+        // Force reflow then animate
+        void modal.offsetWidth;
+        requestAnimationFrame(() => {
+          modal.style.opacity = '1';
+          modal.style.transform = 'scale(1,1)';
+
+          // After opening animation begins, register global click to close
+          const close = () => {
+            // Reverse animation
+            modal.style.transform = `scale(${scaleX}, ${scaleY})`;
+            modal.style.opacity = '0';
+            const handleEnd = (ev: TransitionEvent) => {
+              if (ev.propertyName === 'transform' || ev.propertyName === 'opacity') {
+                modal.removeEventListener('transitionend', handleEnd);
+                // Hide modal (kept in DOM for reuse)
+                modal.style.display = 'none';
+              }
+            };
+            modal.addEventListener('transitionend', handleEnd);
+          };
+
+          const docHandler = () => {
+            // Ignore the very click that opened (listener added after frame)
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+            detachModalClose = null;
+            close();
+          };
+
+          const modalHandler = () => {
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+            detachModalClose = null;
+            close();
+          };
+
+          // Use capture so we intercept before other handlers; ensures single fire
+          document.addEventListener('click', docHandler, true);
+          modal.addEventListener('click', modalHandler, true);
+
+          // Provide a detach function for subsequent opens
+          detachModalClose = () => {
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+          };
+        });
+      });
+    });
   });
 </script>
 
 <style>
   .description {
     font-size: clamp(1.25rem, 0.5rem + 1.302vw, 3rem);
+  }
+
+  .hernia-container {
+    padding: 1.5rem;
+  }
+
+  .hernia-title {
+    font-size: 2rem;
+    line-height: 0.4;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .hernia-text {
+    font-size: 1.8rem;
+    line-height: 0.8;
+    text-align: left;
+  }
+
+  .benefits-title {
+    font-size: 2rem;
+    line-height: 0.8;
+    text-align: left;
   }
 </style>
