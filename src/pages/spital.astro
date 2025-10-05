@@ -10,6 +10,17 @@ import device from '../assets/despre/device.png';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
 import ArrowDown from '../assets/arrow-down.svg';
 import ArrowRight from '../assets/arrow-right.svg';
+import multiroom from '../assets/spital/multiroom.jpg';
+import single from '../assets/spital/single.jpg';
+import relax from '../assets/spital/relax.jpg';
+import access from '../assets/spital/access.jpg';
+import network from '../assets/spital/network.jpg';
+import Carousel from '../components/Carousel.astro';
+import confort from '../assets/spital/confort.png';
+import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
+import SquaresAnimation from '../components/SquaresAnimation.astro';
+import HeartAnimation from '../components/HeartAnimation.astro';
+import PolygonAnimation from '../components/PolygonAnimation.astro';
 
 const carouselItems = [
   {
@@ -26,6 +37,34 @@ const carouselItems = [
     image: spital,
     description:
       'Am creat un traseu medical complet, într-un spațiu modern, sigur și bine organizat.',
+  },
+];
+
+const confortCarouselItems = [
+  {
+    image: multiroom,
+    title: 'saloane moderne',
+    description: 'baie proprie, pat electric, TV, Wi-Fi, sistem de apelare',
+  },
+  {
+    image: single,
+    title: 'camere private',
+    description: 'disponibile la cerere',
+  },
+  {
+    image: relax,
+    title: 'zone de relaxare',
+    description: 'sală de mese, bibliotecă, terasă exterioară',
+  },
+  {
+    image: access,
+    title: 'acces facil',
+    description: 'lift propriu, parcare pentru pacienți și aparținători',
+  },
+  {
+    image: network,
+    title: 'rețea digitală internă',
+    description: 'acces rapid la analize, imagistică, dosar medical și plan operator',
   },
 ];
 ---
@@ -98,71 +137,7 @@ const carouselItems = [
     <div class="hidden md:block md:w-[12.5%]"></div>
   </div>
 
-  <div id="carousel-1" class="relative w-full overflow-hidden pt-18">
-    <!-- Carousel Container -->
-    <div class="carousel-container relative overflow-hidden">
-      <div
-        class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth transition-transform duration-500 ease-in-out md:snap-none md:overflow-visible"
-      >
-        {
-          carouselItems.map((item, index) => (
-            <div class="carousel-slide flex h-[60vh] w-full flex-shrink-0 snap-start flex-col md:flex-row">
-              {/* <!-- Image Section - Top on mobile, Right two-thirds on desktop --> */}
-              <div class="relative order-1 h-1/2 w-full overflow-hidden md:order-2 md:h-full md:w-2/3">
-                <Image
-                  src={item.image}
-                  alt={`Slide ${index + 1}`}
-                  class="h-full w-full object-cover"
-                />
-              </div>
-
-              {/* <!-- Text Section - Bottom on mobile, Left third on desktop --> */}
-              <div class="primary-bg order-2 flex h-1/2 w-full items-center justify-center md:order-1 md:h-full md:w-1/3">
-                <div class="w-full max-w-md px-4 text-left md:ml-20 md:w-2/3">
-                  <p class="description leading-tight text-white">{item.description}</p>
-                </div>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- Navigation Buttons - Hidden on mobile -->
-    <button
-      id="prev-btn"
-      class="absolute left-6 z-10 hidden rounded-full bg-[#134368] p-3 shadow-lg transition-all hover:bg-white md:block"
-      style="top: calc(4.5rem + 30vh - 1.5rem);"
-    >
-      <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
-        ></path>
-      </svg>
-    </button>
-
-    <button
-      id="next-btn"
-      class="absolute right-6 z-10 hidden rounded-full bg-white/80 p-3 shadow-lg transition-all hover:bg-white md:block"
-      style="top: calc(4.5rem + 30vh - 1.5rem);"
-    >
-      <svg class="h-6 w-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-        ></path>
-      </svg>
-    </button>
-
-    <!-- Indicators - Centered on parent container -->
-    <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-4">
-      {
-        carouselItems.map((_, index) => (
-          <button
-            class="carousel-indicator h-3 w-3 rounded-full border-1 border-white bg-transparent transition-all"
-            data-slide={index}
-          />
-        ))
-      }
-    </div>
-  </div>
+  <Carousel class="mt-18" items={carouselItems} />
 
   <div id="section-2" class="flex w-full">
     <div class="hidden md:block md:w-[12.5%]"></div>
@@ -385,114 +360,73 @@ const carouselItems = [
         </div>
       </section>
     </div>
-    <div class="hidden md:block md:w-[12.5%]"></div>
+  </div>
+  <Carousel items={confortCarouselItems} />
+  <div class="hidden flex-row px-[12.5vw] sm:flex">
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b border-l"></div>
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
+    <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
+  </div>
+  <div class="flex flex-row sm:px-[12.5vw]">
+    <div
+      class="flex items-center px-4 py-4 text-[clamp(2rem,3.5vw,4rem)] leading-10 font-bold sm:aspect-[4/1] sm:h-[12.5vw] sm:p-0 sm:pr-2"
+    >
+      supraveghere medicală permanentă și echipă completă disponibilă 24/7
+    </div>
+    <div class="hidden aspect-[2/1] h-[12.5vw] bg-[var(--color-border-custom)] sm:block"></div>
+  </div>
+  <div class="flex flex-row flex-wrap sm:px-[12.5vw]">
+    <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
+    <div
+      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+    >
+      <SquaresAnimation />
+      <div class="mt-4 text-2xl leading-7">
+        Fiecare detaliu este gândit pentru a oferi pacienților o experiență cât mai plăcută, sigură
+        și lipsită de stres.
+      </div>
+    </div>
+    <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
+    <div
+      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+    >
+      <HeartAnimation />
+      <div class="mt-4 text-2xl leading-7">
+        După intervenție, pacienții beneficiază de monitorizare continuă, într-un spațiu complet
+        echipat și asistat medical.
+      </div>
+    </div>
+    <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
+    <Image src={confort} alt="Confort" class="hidden aspect-square w-full sm:block sm:w-[37.5vw]" />
+    <div
+      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+    >
+      <PolygonAnimation />
+      <div class="mt-4 text-2xl leading-7">
+        Asistența este prezentă permanent pe secție, iar echipa chirurgicală și echipa de terapie
+        intensivă se află fizic în spital, gata să intervină oricând este nevoie.
+      </div>
+    </div>
+    <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
+    <div
+      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+    >
+      <TriangleBarsAnimation />
+      <div class="mt-4 text-2xl leading-7">
+        Această prezență medicală constantă oferă pacienților siguranță, răspunsuri rapide și o
+        recuperare lipsită de stres, într-un mediu controlat și profesionist.
+      </div>
+    </div>
+    <Image src={confort} alt="Confort" class="hidden aspect-square w-[37.5vw] sm:block" />
   </div>
 </Layout>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    // Carousel functionality
-
-    const carouselTrack = document.querySelector('.carousel-track');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const nextBtn = document.getElementById('next-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const indicators = document.querySelectorAll('.carousel-indicator');
-
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-
-    function updateCarousel() {
-      if (!carouselTrack) return;
-
-      // Check if we're on desktop (md breakpoint and above)
-      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
-
-      if (isDesktop) {
-        // Desktop: use transform with CSS transition
-        const translateX = -currentSlide * 100;
-        // Clear any existing transform and ensure proper styling
-        carouselTrack.style.transition = 'transform 500ms ease-in-out';
-        carouselTrack.style.transform = `translateX(${translateX}%)`;
-        // Reset scroll position to prevent conflicts
-        carouselTrack.scrollLeft = 0;
-      } else {
-        // Mobile: use scroll - clear transform to prevent conflicts
-        carouselTrack.style.transform = '';
-        const slideWidth = carouselTrack.clientWidth;
-        carouselTrack.scrollTo({
-          left: currentSlide * slideWidth,
-          behavior: 'smooth',
-        });
-      }
-
-      // Update indicators
-      indicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-          indicator.classList.add('peach-bg');
-        } else {
-          indicator.classList.remove('peach-bg');
-        }
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateCarousel();
-    }
-
-    function goToSlide(slideIndex) {
-      currentSlide = slideIndex;
-      updateCarousel();
-    }
-
-    // Event listeners
-    nextBtn?.addEventListener('click', nextSlide);
-    prevBtn?.addEventListener('click', prevSlide);
-
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => goToSlide(index));
-    });
-
-    // Add scroll event listener for mobile to sync currentSlide with actual scroll position
-    let scrollTimeout;
-    carouselTrack.addEventListener('scroll', () => {
-      // Only handle scroll events on mobile
-      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
-      if (isDesktop) return;
-
-      // Debounce scroll events to avoid excessive updates
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        const slideWidth = carouselTrack.clientWidth;
-        const scrollLeft = carouselTrack.scrollLeft;
-        const newSlide = Math.round(scrollLeft / slideWidth);
-
-        // Update currentSlide only if it actually changed
-        if (newSlide !== currentSlide && newSlide >= 0 && newSlide < totalSlides) {
-          currentSlide = newSlide;
-          // Update indicators without scrolling again
-          indicators.forEach((indicator, index) => {
-            if (index === currentSlide) {
-              indicator.classList.add('peach-bg');
-            } else {
-              indicator.classList.remove('peach-bg');
-            }
-          });
-        }
-      }, 50);
-    });
-
-    // Initialize carousel
-    updateCarousel();
-
     // Animations
-
     const animationContainers = document.querySelectorAll('.animation-container');
     const animationsWrapper = document.querySelector('#animations > div');
 
