@@ -114,7 +114,7 @@ const confortCarouselItems = [
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
         </div>
-        <div class="pt-4 pl-4 text-left sm:pt-16">
+        <div class="pt-4 pl-4 text-left sm:pt-[12.5vw]">
           <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
             >01.</span
           >
@@ -163,7 +163,7 @@ const confortCarouselItems = [
 
       <section id="animations" class="max-w-full px-0">
         <div class="mt-10 block px-4 sm:hidden">
-          <div class="relative grid grid-cols-2">
+          <div class="grid grid-cols-2">
             {
               [
                 {
@@ -334,7 +334,7 @@ const confortCarouselItems = [
 
       <section class="max-w-full px-0">
         <div class="flex w-full">
-          <div class="flex-1 pt-4 pl-4 text-left sm:pt-16">
+          <div class="flex-1 py-8 pl-4 text-left sm:pt-16">
             <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
               >03.</span
             >
@@ -376,20 +376,20 @@ const confortCarouselItems = [
   <div class="flex flex-row flex-wrap sm:px-[12.5vw]">
     <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
     >
       <SquaresAnimation />
-      <div class="mt-4 text-2xl leading-7">
+      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
         Fiecare detaliu este gândit pentru a oferi pacienților o experiență cât mai plăcută, sigură
         și lipsită de stres.
       </div>
     </div>
     <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
     >
       <HeartAnimation />
-      <div class="mt-4 text-2xl leading-7">
+      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
         După intervenție, pacienții beneficiază de monitorizare continuă, într-un spațiu complet
         echipat și asistat medical.
       </div>
@@ -397,26 +397,117 @@ const confortCarouselItems = [
     <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
     <Image src={confort} alt="Confort" class="hidden aspect-square w-full sm:block sm:w-[37.5vw]" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
     >
       <PolygonAnimation />
-      <div class="mt-4 text-2xl leading-7">
+      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
         Asistența este prezentă permanent pe secție, iar echipa chirurgicală și echipa de terapie
         intensivă se află fizic în spital, gata să intervină oricând este nevoie.
       </div>
     </div>
     <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-4 pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
     >
       <TriangleBarsAnimation />
-      <div class="mt-4 text-2xl leading-7">
+      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
         Această prezență medicală constantă oferă pacienților siguranță, răspunsuri rapide și o
         recuperare lipsită de stres, într-un mediu controlat și profesionist.
       </div>
     </div>
     <Image src={confort} alt="Confort" class="hidden aspect-square w-[37.5vw] sm:block" />
   </div>
+  <section class="max-w-full md:px-[12.5vw]">
+    <div class="flex w-full">
+      <div class="flex-1 py-8 pl-4 text-left sm:pt-16">
+        <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
+          >04.</span
+        >
+        <div class="w-full sm:w-5/8">
+          <h2
+            class="leading-none font-bold tracking-normal"
+            style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
+          >
+            de ce aleg pacienții Hernia Center?
+          </h2>
+        </div>
+      </div>
+      <div class="hidden flex-col md:flex md:w-[12.5vw]">
+        <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+        <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-6">
+      {
+        [
+          {
+            title: 'acces',
+            details: 'la cea mai avansată tehnologie pentru tratamentul herniilor',
+          },
+          {
+            title: 'echipamente',
+            details: 'dedicate exclusiv chirurgiei minim invazive',
+          },
+          {
+            title: 'recuperare',
+            details: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          },
+          {
+            title: 'eficiență',
+            details: 'în fiecare etapă, într-un singur loc',
+          },
+          {
+            title: 'comunicare',
+            details: 'directă cu echipa medicală, pe tot parcursul procesului',
+          },
+        ].map(({ title, details }, index, items) => (
+          <button
+            class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-l sm:border-b ${
+              index === items.length - 1
+                ? 'border-r border-b'
+                : index % 2 === 1
+                  ? 'border-r sm:border-r-0'
+                  : ''
+            } `}
+            data-number={String(index + 1).padStart(2, '0')}
+            data-title={title}
+            data-description={details}
+            data-modal-id="reasons-modal"
+          >
+            <div class="flex justify-between">
+              <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
+              <ArrowDown />
+            </div>
+            <h3 class="hernia-text">{title}</h3>
+          </button>
+        ))
+      }
+      <button
+        class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 sm:aspect-auto"
+        onclick="location.href='/interventii'"
+      >
+        <div
+          class="flex flex-col items-end justify-end text-2xl/6 text-white sm:text-xl/6 lg:text-3xl/6"
+        >
+          <ArrowRight
+            class="mt-1 ml-4 scale-60 transition-all duration-300 ease-out group-hover:translate-x-3"
+          />
+          citeste mai mult
+        </div>
+      </button>
+      <div
+        id="reasons-modal"
+        class="border-custom hernia-container absolute hidden cursor-pointer border bg-(--color-primary) p-7"
+      >
+        <div class="flex justify-between">
+          <div id="hernia-number" class="hernia-title"></div>
+          <ArrowDown />
+        </div>
+        <h3 id="hernia-title" class="hernia-text"></h3>
+        <h3 id="hernia-description" class="hernia-text"></h3>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script>
@@ -558,7 +649,8 @@ const confortCarouselItems = [
         const el = e.currentTarget as HTMLElement | null;
         if (!el) return;
 
-        const modal = document.getElementById('hernina-type-modal') as HTMLElement | null;
+        const modalId = el.getAttribute('data-modal-id') || 'hernina-type-modal';
+        const modal = document.getElementById(modalId) as HTMLElement | null;
         if (!modal) return;
 
         // If a previous close listener exists, remove it before re-opening
@@ -679,15 +771,19 @@ const confortCarouselItems = [
     font-size: clamp(1.25rem, 0.5rem + 1.302vw, 3rem);
   }
 
-  .hernia-container {
-    padding: 1.5rem;
-  }
-
   .hernia-title {
     font-size: 2rem;
     line-height: 0.4;
     text-align: left;
     margin-bottom: 0.5rem;
+  }
+  .hernia-container {
+    padding: 1.5rem;
+  }
+  @media (width >= 40rem) {
+    .hernia-container {
+      padding: clamp(0.5rem, 1.5vw, 1.5rem);
+    }
   }
 
   .hernia-text {
