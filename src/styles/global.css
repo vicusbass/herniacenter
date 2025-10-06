@@ -70,6 +70,10 @@
 }
 
 @layer components {
+  .page-header {
+    font-size: clamp(2.25rem, 4.6875vw, 5.625rem);
+    transform: translateY(clamp(8px, 0.5vw, 12px));
+  }
 }
 
 @layer utilities {
@@ -101,5 +105,9 @@
 
   .primary-bg {
     background-color: var(--color-primary);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
   }
 }
