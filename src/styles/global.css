@@ -106,4 +106,8 @@
   .primary-bg {
     background-color: var(--color-primary);
   }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
 }
