@@ -173,7 +173,7 @@ const reviews = testimonials.map((review) => ({
                 <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
                 <ArrowDown />
               </div>
-              <h3 class="hernia-text">{title}</h3>
+              <h3 class="hernia-text" set:html={title.replace(' ', '<br />')} />
             </button>
           ))
         }

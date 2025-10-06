@@ -87,9 +87,9 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
         <div class="hidden justify-start px-0 py-0 md:flex">
           <div class="border-custom flex w-2/3 items-center">
             <h2
-              class="text-left text-[clamp(1.5rem,4vw,3rem)] leading-[1.1] font-bold tracking-tight"
+              class="text-left text-[clamp(1.5rem,3.385vw,65px)] leading-[1.1] font-bold tracking-tight"
             >
-              excelența în tratamentul herniilor,<br />
+              excelență în tratamentul herniilor,<br />
               de la diagnostic la recuperare
             </h2>
           </div>
@@ -126,7 +126,7 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
             </div>
 
             <div class="absolute right-4 bottom-20 left-12">
-              <p>
+              <p class="text-clamp-36">
                 La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
                 abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
                 pacient.
@@ -166,7 +166,7 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
             </div>
 
             <div class="absolute right-4 bottom-20 left-12">
-              <p>
+              <p class="text-clamp-36">
                 Tratăm toate tipurile de hernii - de la cele frecvente, precum herniile inghinale și
                 ombilicale, până la forme mai rare sau complexe - utilizând metode chirurgicale
                 minim invazive care reduc semnificativ durerea postoperatorie și accelerează
@@ -205,7 +205,7 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
             </div>
 
             <div class="absolute right-4 bottom-20 left-12">
-              <p>
+              <p class="text-clamp-36">
                 Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
                 laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și
                 cu un rezultat estetic optim.
@@ -242,7 +242,7 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
             </div>
 
             <div class="absolute right-4 bottom-20 left-12">
-              <p>
+              <p class="text-clamp-36">
                 Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
                 sale, într-un spațiu dedicat, modern și prietenos.
               </p>
@@ -279,7 +279,7 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
           </div>
 
           <div class="absolute right-4 bottom-20 left-12">
-            <p>
+            <p class="text-clamp-36">
               Obiectivul nostru este simplu: o recuperare rapidă, fără durere, o experiență medicală
               pozitivă și o calitate a vieții cât mai bună după operația de hernie.
             </p>
@@ -302,6 +302,10 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
         p {
           font-size: clamp(1.4rem, 2.2vw, 1.5rem);
         }
+      }
+
+      .text-clamp-36 {
+        font-size: clamp(1.5rem, 1.875vw, 36px);
       }
     </style>
 
