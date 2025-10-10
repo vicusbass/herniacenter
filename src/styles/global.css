@@ -52,6 +52,10 @@
   --color-text-body: #374151;
   /* Use it for numbering h2 headings */
   --color-heading-number: #cfdce5;
+
+  --scrollbar-width: calc(100vw - 100%);
+  /* to be used for gutters and mind scrollbar width*/
+  --one-eigth-width: calc(12.5vw - var(--scrollbar-width) / 2);
 }
 
 @layer base {
