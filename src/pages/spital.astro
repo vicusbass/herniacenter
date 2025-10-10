@@ -79,11 +79,11 @@ const confortCarouselItems = [
           <div class="px-4">
             <h1 class="text-6xl leading-none font-bold tracking-tight">spitalul</h1>
           </div>
-          <div class="sm:group w-full pt-8">
+          <div class="md:group w-full pt-8">
             <Image
               src={spital}
               alt="Spital"
-              class="w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform sm:group-hover:scale-[1.5]"
+              class="w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform md:group-hover:scale-[1.5]"
             />
           </div>
         </div>
@@ -114,11 +114,11 @@ const confortCarouselItems = [
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
           <div class="border-custom aspect-square w-[12.5vw] border-b border-l"></div>
         </div>
-        <div class="pt-4 pl-4 text-left sm:pt-[12.5vw]">
+        <div class="pt-4 pl-4 text-left md:pt-[12.5vw]">
           <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
             >01.</span
           >
-          <div class="w-full sm:w-3/5">
+          <div class="w-full md:w-3/5">
             <h2
               class="leading-none font-bold tracking-normal"
               style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
@@ -140,11 +140,11 @@ const confortCarouselItems = [
     <div id="section-2-main-content" class="w-full md:w-[75%]">
       <section class="max-w-full px-0">
         <div class="flex w-full">
-          <div class="flex-1 pt-4 pl-4 text-left sm:pt-16">
+          <div class="flex-1 pt-4 pl-4 text-left md:pt-16">
             <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
               >02.</span
             >
-            <div class="w-full sm:w-5/8">
+            <div class="w-full md:w-5/8">
               <h2
                 class="leading-none font-bold tracking-normal"
                 style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
@@ -162,7 +162,7 @@ const confortCarouselItems = [
       </section>
 
       <section id="animations" class="max-w-full px-0">
-        <div class="mt-10 block px-4 sm:hidden">
+        <div class="mt-10 block px-4 md:hidden">
           <div class="grid grid-cols-2">
             {
               [
@@ -192,7 +192,7 @@ const confortCarouselItems = [
                     index === items.length - 1
                       ? 'border-r border-b'
                       : index % 2 === 1
-                        ? 'border-r sm:border-r-0'
+                        ? 'border-r md:border-r-0'
                         : ''
                   } `}
                   data-number={String(index + 1).padStart(2, '0')}
@@ -210,11 +210,11 @@ const confortCarouselItems = [
               ))
             }
             <button
-              class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 sm:aspect-auto"
+              class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 md:aspect-auto"
               onclick="location.href='/interventii'"
             >
               <div
-                class="flex flex-col items-end justify-end text-2xl/6 text-white sm:text-xl/6 lg:text-3xl/6"
+                class="flex flex-col items-end justify-end text-2xl/6 text-white md:text-xl/6 lg:text-3xl/6"
               >
                 <ArrowRight
                   class="mt-1 ml-4 scale-60 transition-all duration-300 ease-out group-hover:translate-x-3"
@@ -222,10 +222,10 @@ const confortCarouselItems = [
                 programează-te
               </div>
             </button>
-            <div class="border-custom hidden aspect-square border-b border-l sm:block"></div>
-            <div class="border-custom hidden aspect-square border-r border-b border-l sm:block">
+            <div class="border-custom hidden aspect-square border-b border-l md:block"></div>
+            <div class="border-custom hidden aspect-square border-r border-b border-l md:block">
             </div>
-            <div class="hidden aspect-square sm:block"></div>
+            <div class="hidden aspect-square md:block"></div>
           </div>
           <div
             id="hernina-type-modal"
@@ -292,7 +292,7 @@ const confortCarouselItems = [
 
       <div class="flex max-w-full px-0">
         <div class="justify-left flex w-full items-center text-left md:w-[66.666%]">
-          <h3 class="description w-3/4 p-4 sm:p-0">
+          <h3 class="description w-3/4 p-4 md:p-0">
             Spitalul beneficiază și de acces imediat la servicii de imagistică de înaltă
             performanță, esențiale pentru un diagnostic corect și o planificare chirurgicală sigură.
           </h3>
@@ -305,7 +305,7 @@ const confortCarouselItems = [
         </div>
       </div>
 
-      <div class="mx-0 flex flex-col sm:mx-[12.5wv] sm:flex-row">
+      <div class="mx-0 flex flex-col md:mx-[12.5wv] md:flex-row">
         {
           [
             {
@@ -324,7 +324,7 @@ const confortCarouselItems = [
             <div class="relative aspect-square md:w-[25vw]">
               <Image src={item.imgSrc} alt={item.text} class="h-full w-full" />
               <div class="absolute top-0 right-0 bottom-0 left-0 bg-black opacity-15" />
-              <h3 class="absolute bottom-6 left-5 text-5xl leading-[clamp(2rem,3vw,4rem)] text-white sm:bottom-[1.5vw] sm:left-[1.2vw] sm:text-[clamp(2.5rem,4vw,5.5rem)]">
+              <h3 class="absolute bottom-6 left-5 text-5xl leading-[clamp(2rem,3vw,4rem)] text-white md:bottom-[1.5vw] md:left-[1.2vw] md:text-[clamp(2.5rem,4vw,5.5rem)]">
                 {item.text}
               </h3>
             </div>
@@ -334,11 +334,11 @@ const confortCarouselItems = [
 
       <section class="max-w-full px-0">
         <div class="flex w-full">
-          <div class="flex-1 py-8 pl-4 text-left sm:pt-16">
+          <div class="flex-1 py-8 pl-4 text-left md:pt-16">
             <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
               >03.</span
             >
-            <div class="w-full sm:w-5/8">
+            <div class="w-full md:w-5/8">
               <h2
                 class="leading-none font-bold tracking-normal"
                 style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
@@ -357,7 +357,7 @@ const confortCarouselItems = [
     </div>
   </div>
   <Carousel items={confortCarouselItems} />
-  <div class="hidden flex-row px-(--one-eigth-width) sm:flex">
+  <div class="hidden flex-row px-(--one-eigth-width) md:flex">
     <div class="border-custom aspect-square flex-1 border-t border-r border-b border-l"></div>
     <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
     <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
@@ -365,65 +365,65 @@ const confortCarouselItems = [
     <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
     <div class="border-custom aspect-square flex-1 border-t border-r border-b"></div>
   </div>
-  <div class="flex flex-row sm:px-(--one-eigth-width)">
+  <div class="flex flex-row md:px-(--one-eigth-width)">
     <div
-      class="flex items-center px-4 py-4 text-[clamp(2rem,3.5vw,4rem)] leading-10 font-bold sm:aspect-[4/1] sm:h-[12.5vw] sm:p-0 sm:pr-2"
+      class="flex items-center px-4 py-4 text-[clamp(2rem,3.5vw,4rem)] leading-10 font-bold md:aspect-[4/1] md:h-[12.5vw] md:p-0 md:pr-2"
     >
       supraveghere medicală permanentă și echipă completă disponibilă 24/7
     </div>
-    <div class="hidden aspect-[2/1] h-[12.5vw] bg-[var(--color-border-custom)] sm:block"></div>
+    <div class="hidden aspect-[2/1] h-[12.5vw] bg-[var(--color-border-custom)] md:block"></div>
   </div>
-  <div class="flex flex-row flex-wrap sm:px-(--one-eigth-width)">
-    <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
+  <div class="flex flex-row flex-wrap md:px-(--one-eigth-width)">
+    <Image src={confort} alt="Confort" class="aspect-square w-full md:w-[37.5vw]" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <SquaresAnimation />
-      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
+      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
         Fiecare detaliu este gândit pentru a oferi pacienților o experiență cât mai plăcută, sigură
         și lipsită de stres.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
+    <Image src={confort} alt="Confort" class="aspect-square w-full md:hidden" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <HeartAnimation />
-      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
+      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
         După intervenție, pacienții beneficiază de monitorizare continuă, într-un spațiu complet
         echipat și asistat medical.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full sm:w-[37.5vw]" />
-    <Image src={confort} alt="Confort" class="hidden aspect-square w-full sm:block sm:w-[37.5vw]" />
+    <Image src={confort} alt="Confort" class="aspect-square w-full md:w-[37.5vw]" />
+    <Image src={confort} alt="Confort" class="hidden aspect-square w-full md:block md:w-[37.5vw]" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <PolygonAnimation />
-      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
+      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
         Asistența este prezentă permanent pe secție, iar echipa chirurgicală și echipa de terapie
         intensivă se află fizic în spital, gata să intervină oricând este nevoie.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full sm:hidden" />
+    <Image src={confort} alt="Confort" class="aspect-square w-full md:hidden" />
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 sm:aspect-square sm:w-[37.5vw] sm:pt-4"
+      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <TriangleBarsAnimation />
-      <div class="mt-4 text-2xl leading-7 sm:text-xl md:text-2xl">
+      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
         Această prezență medicală constantă oferă pacienților siguranță, răspunsuri rapide și o
         recuperare lipsită de stres, într-un mediu controlat și profesionist.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="hidden aspect-square w-[37.5vw] sm:block" />
+    <Image src={confort} alt="Confort" class="hidden aspect-square w-[37.5vw] md:block" />
   </div>
   <section class="max-w-full md:px-(--one-eigth-width)">
     <div class="flex w-full">
-      <div class="flex-1 py-8 pl-4 text-left sm:pt-16">
+      <div class="flex-1 py-8 pl-4 text-left md:pt-16">
         <span class="text-heading-number font-bold" style="font-size: clamp(2rem, 6vw, 4rem);"
           >04.</span
         >
-        <div class="w-full sm:w-5/8">
+        <div class="w-full md:w-5/8">
           <h2
             class="leading-none font-bold tracking-normal"
             style="font-size: clamp(1.875rem, 4vw, 3.75rem);"
@@ -437,7 +437,7 @@ const confortCarouselItems = [
         <div class="border-custom aspect-square flex-1 border-r border-b border-l"></div>
       </div>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-6">
+    <div class="grid grid-cols-2 md:grid-cols-6">
       {
         [
           {
@@ -462,11 +462,11 @@ const confortCarouselItems = [
           },
         ].map(({ title, details }, index, items) => (
           <button
-            class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-l sm:border-b ${
+            class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-l md:border-b ${
               index === items.length - 1
                 ? 'border-r border-b'
                 : index % 2 === 1
-                  ? 'border-r sm:border-r-0'
+                  ? 'border-r md:border-r-0'
                   : ''
             } `}
             data-number={String(index + 1).padStart(2, '0')}
@@ -483,11 +483,11 @@ const confortCarouselItems = [
         ))
       }
       <button
-        class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 sm:aspect-auto"
+        class="group flex aspect-square flex-col justify-end bg-(--color-primary) p-4 transition-colors hover:opacity-90 md:aspect-auto"
         onclick="location.href='/interventii'"
       >
         <div
-          class="flex flex-col items-end justify-end text-2xl/6 text-white sm:text-xl/6 lg:text-3xl/6"
+          class="flex flex-col items-end justify-end text-2xl/6 text-white md:text-xl/6 lg:text-3xl/6"
         >
           <ArrowRight
             class="mt-1 ml-4 scale-60 transition-all duration-300 ease-out group-hover:translate-x-3"

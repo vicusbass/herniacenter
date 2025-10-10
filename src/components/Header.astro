@@ -12,9 +12,9 @@ const menuItems = [
 ];
 ---
 
-<header class="border-custom bg-white sm:border-b">
+<header class="border-custom bg-white md:border-b">
   <!-- Top navigation bar -->
-  <nav class="relative max-w-full px-4 sm:px-0">
+  <nav class="relative max-w-full px-4 md:px-0">
     <div class="flex min-h-40 items-stretch">
       <div class="flex aspect-square w-[12.5%] flex-none items-center justify-center">
         <div class="flex h-12 w-12 items-center justify-center">
@@ -25,10 +25,10 @@ const menuItems = [
       </div>
 
       <!-- Desktop Navigation - Spans 6 columns with flex layout -->
-      <div class="border-custom hidden w-full border-r border-l sm:block">
+      <div class="border-custom hidden w-full border-r border-l md:block">
         <div
           id="desktop-menu"
-          class="menu-hidden hidden h-full flex-1 items-center justify-evenly space-x-4 sm:flex md:space-x-8"
+          class="menu-hidden hidden h-full flex-1 items-center justify-evenly space-x-4 md:flex md:space-x-8"
         >
           {
             menuItems.map((item) => (
@@ -44,7 +44,7 @@ const menuItems = [
       </div>
 
       <!-- Empty spaces for mobile - spans 6 columns -->
-      <div class="flex-1 sm:hidden"></div>
+      <div class="flex-1 md:hidden"></div>
 
       <!-- Hamburger menu button -->
       <div
@@ -197,8 +197,8 @@ const menuItems = [
 
     let isMenuOpen = false;
 
-    // Function to check if we're on a small screen or larger (sm breakpoint = 640px)
-    const isLargeScreen = () => window.innerWidth >= 640;
+    // Function to check if we're on a small screen or larger
+    const isLargeScreen = () => window.innerWidth >= 768;
 
     const computeTransformOrigin = () => {
       if (!toggleButton || !modal) return;
