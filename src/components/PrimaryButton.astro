@@ -7,38 +7,32 @@ export interface Props {
   target?: string;
 }
 
-const {
-  text,
-  icon: Icon,
-  class: className = '',
-  href = '#',
-  target = '_blank',
-} = Astro.props;
+const { text, icon: Icon, class: className = '', href = '#', target = '_blank' } = Astro.props;
 ---
 
 <a
   href={href}
   target={target}
-  class={`primary-button rounded-4xl flex items-center justify-center bg-main-btn font-medium text-white transition-colors hover:opacity-90 ${className}`}
+  class={`primary-button rounded-4xl flex items-center bg-main-btn text-white transition-colors hover:opacity-90 ${className}`}
 >
   {Icon && <Icon class="button-icon" />}
-  <span>{text}</span>
+  <span class="mb-1">{text}</span>
 </a>
 
 <style>
   .primary-button {
     width: fit-content;
     min-width: clamp(12.5rem, 12.5vw, 15rem);
-    height: clamp(2.5rem, 3.5vw, 4rem);
-    font-size: clamp(0.875rem, 1.3vw, 1.5rem);
-    padding: 0 clamp(1rem, 1.5vw, 2rem);
+    height: 3rem;
+    font-size: 1.5rem;
+    padding: 0 clamp(1.5rem, 1.5vw, 2rem);
     white-space: nowrap;
   }
 
   .button-icon {
-    width: clamp(1rem, 1.25vw, 1.5rem);
-    height: clamp(1rem, 1.25vw, 1.5rem);
-    margin-right: clamp(0.5rem, 0.625vw, 0.75rem);
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.75rem;
     flex-shrink: 0;
   }
 </style>
