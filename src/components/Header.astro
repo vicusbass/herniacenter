@@ -25,7 +25,7 @@ const menuItems = [
       </div>
 
       <!-- Desktop Navigation - Spans 6 columns with flex layout -->
-      <div class="border-custom hidden w-full border-r border-l md:block">
+      <div class="border-custom hidden w-full border-r border-l md:block" transition:persist>
         <div
           id="desktop-menu"
           class="menu-hidden hidden h-full flex-1 items-center justify-evenly space-x-4 md:flex md:space-x-8"
@@ -49,6 +49,7 @@ const menuItems = [
       <!-- Hamburger menu button -->
       <div
         class="border-custom relative flex aspect-square w-[12.5%] flex-none items-center justify-center"
+        transition:persist
       >
         <button
           id="mobile-menu-toggle"
@@ -99,6 +100,16 @@ const menuItems = [
 <style>
   .menu-link {
     font-size: clamp(1rem, 1.5vw, 2.1875rem);
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
+  }
+
+  .menu-link.visible {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .menu-item {
@@ -195,10 +206,36 @@ const menuItems = [
     const iconContainer = document.querySelector('.icon-container');
     const desktopMenu = document.getElementById('desktop-menu');
 
+    const MENU_STATE_KEY = 'desktopMenuOpen';
+    const MENU_INITIALIZED_KEY = 'desktopMenuInitialized';
+
     let isMenuOpen = false;
 
     // Function to check if we're on a small screen or larger
     const isLargeScreen = () => window.innerWidth >= 768;
+
+    // Save menu state to sessionStorage
+    const saveMenuState = (state: boolean) => {
+      if (isLargeScreen()) {
+        sessionStorage.setItem(MENU_STATE_KEY, state.toString());
+      }
+    };
+
+    // Get menu state from sessionStorage
+    const getMenuState = () => {
+      const saved = sessionStorage.getItem(MENU_STATE_KEY);
+      return saved === 'true';
+    };
+
+    // Check if this is the first load
+    const isFirstLoad = () => {
+      return !sessionStorage.getItem(MENU_INITIALIZED_KEY);
+    };
+
+    // Mark as initialized
+    const markAsInitialized = () => {
+      sessionStorage.setItem(MENU_INITIALIZED_KEY, 'true');
+    };
 
     const computeTransformOrigin = () => {
       if (!toggleButton || !modal) return;
@@ -245,16 +282,25 @@ const menuItems = [
       }
     };
 
-    const toggleDesktopMenu = () => {
+    const toggleDesktopMenu = (skipSave = false) => {
       if (desktopMenu && iconContainer && isLargeScreen()) {
+        const desktopMenuLinks = desktopMenu.querySelectorAll('.menu-link');
+
         if (isMenuOpen) {
           isMenuOpen = false;
           iconContainer.classList.remove('active');
+          desktopMenuLinks.forEach((link) => link.classList.remove('visible'));
           desktopMenu.classList.add('menu-hidden');
+          if (!skipSave) saveMenuState(false);
         } else {
           isMenuOpen = true;
           iconContainer.classList.add('active');
           desktopMenu.classList.remove('menu-hidden');
+          // Stagger the animation of menu links
+          desktopMenuLinks.forEach((link, index) => {
+            setTimeout(() => link.classList.add('visible'), index * 100);
+          });
+          if (!skipSave) saveMenuState(true);
         }
       }
     };
@@ -281,9 +327,18 @@ const menuItems = [
         menuItems.forEach((item) => {
           item.classList.remove('visible');
         });
-        // Reset desktop menu visibility
-        if (desktopMenu && isMenuOpen) {
-          desktopMenu.classList.remove('menu-hidden');
+        // Restore desktop menu state from sessionStorage
+        const savedState = getMenuState();
+        if (desktopMenu) {
+          if (savedState) {
+            isMenuOpen = true;
+            iconContainer?.classList.add('active');
+            desktopMenu.classList.remove('menu-hidden');
+          } else {
+            isMenuOpen = false;
+            iconContainer?.classList.remove('active');
+            desktopMenu.classList.add('menu-hidden');
+          }
         }
       } else {
         // On small screens, ensure desktop menu is visible and reset desktop state
@@ -294,13 +349,13 @@ const menuItems = [
         if (isMenuOpen && modal) {
           modal.classList.add('hidden');
         }
+        // Reset icon and menu state for mobile
+        if (iconContainer) {
+          iconContainer.classList.remove('active');
+        }
+        isMenuOpen = false;
       }
 
-      // Reset icon and menu state
-      if (iconContainer) {
-        iconContainer.classList.remove('active');
-      }
-      isMenuOpen = false;
       // recompute origin if menu is about to be opened again
       computeTransformOrigin();
     };
@@ -311,10 +366,35 @@ const menuItems = [
     window.addEventListener('resize', handleResize);
 
     // Initial setup
-    handleResize();
+    if (isLargeScreen()) {
+      // Check if this is the first load in the session
+      if (isFirstLoad()) {
+        // First load: open menu with animation after delay
+        markAsInitialized();
+        setTimeout(() => {
+          toggleDesktopMenu();
+        }, 500);
+      } else {
+        // Subsequent loads: restore state immediately
+        const savedState = getMenuState();
+        const desktopMenuLinks = desktopMenu?.querySelectorAll('.menu-link');
 
-    // on desktop version open the menu after a bit to make it discoverable
-    if (window.innerWidth >= 768) setTimeout(toggleDesktopMenu, 2000);
+        if (savedState) {
+          isMenuOpen = true;
+          if (iconContainer) iconContainer.classList.add('active');
+          if (desktopMenu) desktopMenu.classList.remove('menu-hidden');
+          // Show links immediately without animation on subsequent loads
+          desktopMenuLinks?.forEach((link) => link.classList.add('visible'));
+        } else {
+          isMenuOpen = false;
+          if (iconContainer) iconContainer.classList.remove('active');
+          if (desktopMenu) desktopMenu.classList.add('menu-hidden');
+          desktopMenuLinks?.forEach((link) => link.classList.remove('visible'));
+        }
+      }
+    } else {
+      handleResize();
+    }
   }
 
   document.addEventListener('astro:page-load', setupMenu);
