@@ -312,6 +312,9 @@ const menuItems = [
 
     // Initial setup
     handleResize();
+
+    // on desktop version open the menu after a bit to make it discoverable
+    if (window.innerWidth >= 768) setTimeout(toggleDesktopMenu, 2000);
   }
 
   document.addEventListener('astro:page-load', setupMenu);
