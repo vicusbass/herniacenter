@@ -339,39 +339,38 @@ const reviews = testimonials.map((review) => ({
   </section>
 
   <section id="recenzii">
-    <div id="testimonials" class="grid grid-cols-1 md:grid-cols-6 md:px-(--one-eigth-width)">
-      <div class="col-span-1 flex flex-col flex-wrap pt-2 md:col-span-6 md:flex-row">
-        {
-          reviews?.map((review: any, index: number) => (
-            <div
-              class={`border-custom flex flex-col border-t-0 border-r-0 border-b border-l-0 p-8 md:aspect-square md:w-[25vw] md:border-r md:p-[2vw] ${index >= 0 && index < 3 ? 'md:border-t' : ''} ${index % 3 === 0 ? 'md:border-l' : ''} `}
-            >
-              <div class="mb-4 flex shrink-0">
-                {review.imageUrl ? (
-                  <Image
-                    src={review.imageUrl}
-                    alt={review.name}
-                    inferSize
-                    class="mr-8 h-28 w-28 rounded-full object-cover md:mr-[1.5vw] md:h-[7vw] md:w-[7vw]"
-                  />
-                ) : (
-                  <div class="mr-8 h-28 w-28 rounded-full bg-gray-300 md:mr-[1.5vw] md:h-[7vw] md:w-[7vw]" />
-                )}
-                <div>
-                  <div class="stars-color text-lg tracking-widest md:text-[2.2vw] lg:text-[1.8vw]">
-                    {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
-                  </div>
-                  <div class="review-name mt-1 font-semibold" set:html={review.name} />
+    <div class="flex flex-col flex-wrap pt-2 md:flex-row md:px-(--one-eigth-width)">
+      {
+        reviews?.map((review: any, index: number) => (
+          <div
+            class={`border-custom flex flex-col border-t-0 border-r-0 border-b border-l-0 p-8 md:aspect-square md:w-[25vw] md:border-r md:p-[2vw] ${index >= 0 && index < 3 ? 'md:border-t' : ''} ${index % 3 === 0 ? 'md:border-l' : ''} `}
+          >
+            <div class="mb-4 flex shrink-0">
+              {review.imageUrl ? (
+                <Image
+                  src={review.imageUrl}
+                  alt={review.name}
+                  inferSize
+                  class="mr-8 h-28 w-28 rounded-full object-cover md:mr-[1.5vw] md:h-[7vw] md:w-[7vw]"
+                />
+              ) : (
+                <div class="mr-8 flex h-28 w-28 items-center-safe justify-center rounded-full bg-gray-300 text-[6rem] leading-10 text-gray-600 md:mr-[1.5vw] md:h-[7vw] md:w-[7vw] md:text-[6vw]">
+                  <div class="mt-[-0.8rem]">{review.name?.charAt(0).toUpperCase() || '?'}</div>
                 </div>
-              </div>
-              <div class="review-description max-h-70 min-h-0 flex-1 overflow-auto pr-2 leading-snug">
-                {review.description}
+              )}
+              <div>
+                <div class="stars-color text-lg tracking-widest md:text-[2.2vw] lg:text-[1.8vw]">
+                  {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
+                </div>
+                <div class="review-name mt-1 font-semibold" set:html={review.name} />
               </div>
             </div>
-          ))
-        }
-      </div>
-      <div class="hidden aspect-square md:block"></div>
+            <div class="review-description max-h-70 min-h-0 flex-1 overflow-auto pr-2 leading-snug">
+              {review.description}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </section>
   <style>
