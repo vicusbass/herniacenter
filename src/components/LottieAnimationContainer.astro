@@ -19,18 +19,18 @@ const { index, title, details, id, src, autoplay = false, loop = false } = Astro
   class="animation-container border-custom relative z-10 flex-1 cursor-pointer overflow-hidden border-b transition-all duration-700"
 >
   <span
-    class="index-text absolute top-6 left-6 z-10 text-3xl font-bold transition-colors duration-700 2xl:text-4xl"
+    class="index-text absolute top-6 left-6 z-10 text-2xl font-bold transition-colors duration-700 xl:text-3xl 2xl:text-4xl"
     >{index}</span
   >
   <DownArrow class="arrow-trigger absolute top-6 right-6 z-10 h-7 w-7" />
   <h3
-    class="title-text absolute left-6 z-10 text-3xl transition-colors duration-700 2xl:text-4xl"
+    class="title-text absolute left-6 z-10 text-2xl transition-colors duration-700 xl:text-3xl 2xl:text-4xl"
     style="top: calc(12.5vw - 1.5rem - 2.25rem);"
   >
     {title}
   </h3>
   <span
-    class="details-text absolute bottom-6 left-6 z-10 w-2/3 text-left text-3xl opacity-0 transition-colors duration-700 2xl:text-4xl"
+    class="details-text absolute bottom-6 left-6 z-10 w-3/4 text-left text-2xl opacity-0 transition-colors duration-700 xl:text-3xl 2xl:text-4xl"
     >{details}</span
   >
   <div class="absolute inset-0 h-full w-full">

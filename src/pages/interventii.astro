@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import type { SanityDocument } from '@sanity/client';
 import { loadQuery } from '../utils/loadQuery';
+import { toHTML } from '@portabletext/to-html';
 
 import Layout from '../layouts/Layout.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
@@ -151,7 +152,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
                 <span>0{hernia.order}.</span>
               </div>
               <h2 class="text-primary mb-6 text-4xl font-bold">{hernia.name}</h2>
-              <p class="text-2xl leading-relaxed">{hernia.description}</p>
+              <div class="text-2xl leading-relaxed" set:html={toHTML(hernia.description)} />
             </div>
           </div>
         </div>
@@ -227,7 +228,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
                   {hernia.name.split(' ').slice(1).join(' ')}
                 </span>
               </h2>
-              <p class="hernia-description pt-8 pr-16">{hernia.description}</p>
+              <div class="hernia-description pt-8 pr-16" set:html={toHTML(hernia.description)} />
             </div>
 
             <div class="flex w-[50%] flex-col py-12">
@@ -384,7 +385,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
   }
 
   .cell-value {
-    font-size: clamp(1.25rem, 3vw, 3.75rem);
+    font-size: clamp(1.25rem, 2.5vw, 3.75rem);
     text-align: left;
     font-weight: bold;
     padding-left: 1rem;
