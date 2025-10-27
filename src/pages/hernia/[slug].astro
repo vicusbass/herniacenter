@@ -34,7 +34,7 @@ const { hernia } = Astro.props;
 
 <Layout title={`Hernia Center - ${hernia.title}`}>
   <main>
-    <div class="px-4 py-8 md:mx-auto md:max-w-4xl md:px-0 md:py-16">
+    <div class="px-8 py-8 md:mx-auto md:max-w-6xl md:px-0 md:py-16">
       <header class="mb-8">
         <h1 class="text-3xl leading-tight font-bold md:text-6xl">
           {hernia.title}
@@ -42,7 +42,7 @@ const { hernia } = Astro.props;
       </header>
 
       <article
-        class="article-content prose prose-xl md:prose-2xl prose-headings:font-bold prose-p:leading-relaxed prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
+        class="article-content prose prose-xl md:prose-2xl prose-headings:font-bold prose-p:leading-tight prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
       >
         {hernia.body && <PortableText value={hernia.body} />}
       </article>
@@ -53,8 +53,8 @@ const { hernia } = Astro.props;
 <style>
   /* Reduce spacing between paragraphs */
   .article-content :global(p) {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   /* Add more spacing before headings */
@@ -72,39 +72,62 @@ const { hernia } = Astro.props;
 
   /* Tighter spacing for bullet points (paragraphs starting with •) */
   .article-content :global(p) {
-    line-height: 1.6;
+    line-height: 1.1;
+  }
+
+  /* Remove gaps between list items */
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .article-content :global(li) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1.1 !important;
+  }
+
+  .article-content :global(li > p) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.1 !important;
   }
 
   @media (min-width: 768px) {
     .article-content {
       font-size: 2rem;
-      line-height: 2rem;
+      line-height: 1;
     }
 
     .article-content :global(h2) {
       font-size: 2.5rem;
-      line-height: 3rem;
+      line-height: 1.1;
       margin-top: 3rem;
       margin-bottom: 1.5rem;
     }
 
     .article-content :global(h3) {
       font-size: 2rem;
-      line-height: 2.5rem;
+      line-height: 1.1;
       margin-top: 2.5rem;
       margin-bottom: 1rem;
     }
 
     .article-content :global(h4) {
       font-size: 1.5rem;
-      line-height: 2rem;
+      line-height: 1.1;
       margin-top: 2rem;
       margin-bottom: 0.75rem;
     }
 
     .article-content :global(p) {
-      margin-top: 0.75rem;
-      margin-bottom: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 </style>
