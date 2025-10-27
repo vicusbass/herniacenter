@@ -1,0 +1,110 @@
+---
+import type { SanityDocument } from '@sanity/client';
+import { loadQuery } from '../../utils/loadQuery';
+import Layout from '../../layouts/Layout.astro';
+import { PortableText } from 'astro-portabletext';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const { data: hernias } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "hernia"]{
+      _id,
+      title,
+      slug,
+      body
+    }`,
+  });
+
+  return hernias.map((hernia) => {
+    const herniaData = {
+      title: hernia.title,
+      body: hernia.body,
+      slug: hernia.slug,
+    };
+
+    return {
+      params: { slug: hernia.slug?.current || '' },
+      props: { hernia: herniaData },
+    };
+  });
+}
+
+const { hernia } = Astro.props;
+---
+
+<Layout title={`Hernia Center - ${hernia.title}`}>
+  <main>
+    <div class="px-4 py-8 md:mx-auto md:max-w-4xl md:px-0 md:py-16">
+      <header class="mb-8">
+        <h1 class="text-3xl leading-tight font-bold md:text-6xl">
+          {hernia.title}
+        </h1>
+      </header>
+
+      <article
+        class="article-content prose prose-xl md:prose-2xl prose-headings:font-bold prose-p:leading-relaxed prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
+      >
+        {hernia.body && <PortableText value={hernia.body} />}
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Reduce spacing between paragraphs */
+  .article-content :global(p) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Add more spacing before headings */
+  .article-content :global(h2),
+  .article-content :global(h3),
+  .article-content :global(h4) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Remove spacing from empty paragraphs */
+  .article-content :global(p:empty) {
+    display: none;
+  }
+
+  /* Tighter spacing for bullet points (paragraphs starting with •) */
+  .article-content :global(p) {
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .article-content {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+
+    .article-content :global(h2) {
+      font-size: 2.5rem;
+      line-height: 3rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-content :global(h3) {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-content :global(h4) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-content :global(p) {
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+</style>

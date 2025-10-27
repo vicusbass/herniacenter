@@ -153,6 +153,12 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
               </div>
               <h2 class="text-primary mb-6 text-4xl font-bold">{hernia.name}</h2>
               <div class="text-2xl leading-relaxed" set:html={toHTML(hernia.description)} />
+              <a
+                href={`/hernia/${hernia.id}`}
+                class="inline-block pt-4 text-2xl underline underline-offset-4 hover:text-blue-800"
+              >
+                citește mai mult
+              </a>
             </div>
           </div>
         </div>
@@ -229,6 +235,12 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
                 </span>
               </h2>
               <div class="hernia-description pt-8 pr-16" set:html={toHTML(hernia.description)} />
+              <a
+                href={`/hernia/${hernia.id}`}
+                class="inline-block pt-4 text-[clamp(1.25rem,2vw,1.9rem)] underline underline-offset-4 hover:text-blue-800"
+              >
+                citește mai mult
+              </a>
             </div>
 
             <div class="flex w-[50%] flex-col py-12">
