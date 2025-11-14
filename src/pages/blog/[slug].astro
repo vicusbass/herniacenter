@@ -56,7 +56,7 @@ const { article } = Astro.props;
             alt={article.title}
             width={1200}
             height={600}
-            class="h-64 w-full object-cover md:h-96 md:w-3/4"
+            class="w-full object-contain md:h-[36rem] md:w-3/4 md:object-cover"
           />
         </div>
       )
@@ -73,7 +73,7 @@ const { article } = Astro.props;
 
       <!-- Article Content -->
       <article
-        class="article-content prose prose-xl md:prose-2xl prose-headings:font-bold prose-p:leading-relaxed prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
+        class="article-content prose prose-2xl prose-headings:font-bold prose-p:leading-tight prose-a:no-underline hover:prose-a:text-blue-800 prose-strong:font-semibold prose-blockquote:border-l-blue-500 prose-img:rounded-lg max-w-none"
       >
         {article.body && <PortableText value={article.body} />}
       </article>
@@ -82,20 +82,83 @@ const { article } = Astro.props;
 </Layout>
 
 <style>
+  /* Reduce spacing between paragraphs */
+  .article-content :global(p) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Add more spacing before headings */
+  .article-content :global(h2),
+  .article-content :global(h3),
+  .article-content :global(h4) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Remove spacing from empty paragraphs */
+  .article-content :global(p:empty) {
+    display: none;
+  }
+
+  /* Tighter spacing for bullet points (paragraphs starting with •) */
+  .article-content :global(p) {
+    line-height: 1.1;
+  }
+
+  /* Remove gaps between list items */
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .article-content :global(li) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1.1 !important;
+  }
+
+  .article-content :global(li > p) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.1 !important;
+  }
+
   @media (min-width: 768px) {
     .article-content {
       font-size: 2rem;
-      line-height: 2rem;
+      line-height: 1;
     }
 
     .article-content :global(h2) {
       font-size: 2.5rem;
-      line-height: 3rem;
+      line-height: 1.1;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
     }
 
     .article-content :global(h3) {
       font-size: 2rem;
-      line-height: 2.5rem;
+      line-height: 1.1;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-content :global(h4) {
+      font-size: 2rem;
+      line-height: 1.1;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-content :global(p) {
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 </style>
