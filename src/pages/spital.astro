@@ -5,8 +5,8 @@ import spital from '../assets/spitalul-panoramic.jpg';
 import ct from '../assets/spital/ct.jpg';
 import ecograph from '../assets/spital/ecograph.jpeg';
 import mri from '../assets/spital/mri.jpg';
-import hospital1 from '../assets/spital/hospital1.png';
-import device from '../assets/despre/device.png';
+import hospital1 from '../assets/spital/sala_operatii.jpg';
+import device from '../assets/spital/doctor_device.jpg';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
 import ArrowDown from '../assets/arrow-down.svg';
 import ArrowRight from '../assets/arrow-right.svg';
@@ -99,13 +99,9 @@ const confortCarouselItems = [
           <!-- Hospital image - spanning cells on desktop -->
           <div
             id="hospital-image"
-            class="group absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] overflow-visible"
+            class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%] transition-all duration-300"
           >
-            <Image
-              src={spital}
-              alt="Spital"
-              class="h-full w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform md:group-hover:scale-[1.5]"
-            />
+            <Image src={spital} alt="Spital" class="h-full w-full object-cover" />
           </div>
         </div>
 
@@ -517,6 +513,24 @@ const confortCarouselItems = [
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    // Hospital image hover effect
+    const hospitalImage = document.getElementById('hospital-image');
+
+    // Only add hover events on desktop (md breakpoint and up)
+    if (hospitalImage && window.innerWidth >= 768) {
+      hospitalImage.addEventListener('mouseenter', () => {
+        hospitalImage.style.height = '300%';
+        hospitalImage.style.width = '100%';
+        hospitalImage.style.left = '0';
+      });
+
+      hospitalImage.addEventListener('mouseleave', () => {
+        hospitalImage.style.height = '200%';
+        hospitalImage.style.width = '66.667%';
+        hospitalImage.style.left = '33.333%';
+      });
+    }
+
     // Animations
     const animationContainers = document.querySelectorAll('.animation-container');
     const animationsWrapper = document.querySelector('#animations > div');
