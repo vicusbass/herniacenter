@@ -58,7 +58,7 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
           <div class="border-custom aspect-square w-[16.666%] border-b border-l"></div>
           <div id="hospital-image" class="absolute top-0 left-[33.333%] z-10 h-[200%] w-[66.667%]">
             <div class="bg-contact flex h-full flex-col items-start justify-center px-[6vw]">
-              <p class="text-left text-2xl">
+              <p class="text-left text-3xl">
                 Află totul despre operația minim invazivă pentru hernia inghinală. Programează-te la
                 Hernia Center pentru tratamente moderne și recuperare rapidă.
               </p>
@@ -415,5 +415,15 @@ const { data: hernii } = await loadQuery<SanityDocument[]>({
   .hernia-description {
     font-size: clamp(1.25rem, 2vw, 1.9rem);
     line-height: 1.6;
+  }
+
+  #hospital-image {
+    transition: none !important;
+  }
+
+  #hospital-image:hover {
+    height: 200% !important;
+    width: 66.667% !important;
+    left: 33.333% !important;
   }
 </style>
