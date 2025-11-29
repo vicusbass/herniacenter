@@ -10,13 +10,14 @@ import device from '../assets/spital/doctor_device.jpg';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
 import ArrowDown from '../assets/arrow-down.svg';
 import ArrowRight from '../assets/arrow-right.svg';
-import multiroom from '../assets/spital/multiroom.jpg';
-import single from '../assets/spital/single.jpg';
+import multiroom from '../assets/spital/salon.jpg';
+import single from '../assets/spital/salon_privat.jpg';
 import relax from '../assets/spital/relax.jpg';
-import access from '../assets/spital/access.jpg';
+import access from '../assets/spital/spital_night_2.jpg';
 import network from '../assets/spital/network.jpg';
 import Carousel from '../components/Carousel.astro';
 import confort from '../assets/spital/confort.png';
+import monitoring from '../assets/spital/monitoring.jpg';
 import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
 import SquaresAnimation from '../components/SquaresAnimation.astro';
 import HeartAnimation from '../components/HeartAnimation.astro';
@@ -395,8 +396,16 @@ const confortCarouselItems = [
         echipat și asistat medical.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full md:w-[37.5vw]" />
-    <Image src={confort} alt="Confort" class="hidden aspect-square w-full md:block md:w-[37.5vw]" />
+    <Image
+      src={monitoring}
+      alt="Monitorizare"
+      class="aspect-square w-full object-cover md:w-[37.5vw]"
+    />
+    <Image
+      src={monitoring}
+      alt="Monitorizare"
+      class="hidden aspect-square w-full object-cover md:block md:w-[37.5vw]"
+    />
     <div
       class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
