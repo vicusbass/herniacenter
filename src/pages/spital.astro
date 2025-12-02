@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import spital from '../assets/spitalul-panoramic.jpg';
 import ct from '../assets/spital/ct.jpg';
 import ecograph from '../assets/spital/ecograph.jpeg';
+import hol from '../assets/spital/hol.jpg';
+import robot from '../assets/spital/robot.jpg';
 import mri from '../assets/spital/mri.jpg';
 import hospital1 from '../assets/spital/sala_operatii.jpg';
 import device from '../assets/spital/doctor_device.jpg';
@@ -80,12 +82,8 @@ const confortCarouselItems = [
           <div class="px-4">
             <h1 class="text-6xl leading-none font-bold tracking-tight">spitalul</h1>
           </div>
-          <div class="md:group w-full pt-8">
-            <Image
-              src={spital}
-              alt="Spital"
-              class="w-full origin-top-right object-cover transition-transform duration-500 ease-out will-change-transform md:group-hover:scale-[1.5]"
-            />
+          <div class="w-full pt-8">
+            <Image src={spital} alt="Spital" class="aspect-video w-full object-cover" />
           </div>
         </div>
 
@@ -376,7 +374,7 @@ const confortCarouselItems = [
     <div class="hidden aspect-[2/1] h-[12.5vw] bg-[var(--color-border-custom)] md:block"></div>
   </div>
   <div class="flex flex-row flex-wrap md:px-(--one-eigth-width)">
-    <Image src={confort} alt="Confort" class="aspect-square w-full md:w-[37.5vw]" />
+    <Image src={confort} alt="Confort" class="hidden aspect-square w-full md:block md:w-[37.5vw]" />
     <div
       class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
@@ -396,11 +394,7 @@ const confortCarouselItems = [
         echipat și asistat medical.
       </div>
     </div>
-    <Image
-      src={monitoring}
-      alt="Monitorizare"
-      class="aspect-square w-full object-cover md:w-[37.5vw]"
-    />
+    <Image src={robot} alt="Robot" class="aspect-square w-full object-cover md:w-[37.5vw]" />
     <Image
       src={monitoring}
       alt="Monitorizare"
@@ -415,7 +409,7 @@ const confortCarouselItems = [
         intensivă se află fizic în spital, gata să intervină oricând este nevoie.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full md:hidden" />
+    <Image src={hol} alt="Hol" class="aspect-square w-full md:hidden" />
     <div
       class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
@@ -425,7 +419,12 @@ const confortCarouselItems = [
         recuperare lipsită de stres, într-un mediu controlat și profesionist.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="hidden aspect-square w-[37.5vw] md:block" />
+    <Image
+      src={monitoring}
+      alt="Monitorizare"
+      class="aspect-square w-full object-cover md:hidden"
+    />
+    <Image src={hol} alt="Hol" class="hidden aspect-square w-[37.5vw] md:block" />
   </div>
   <section class="max-w-full md:px-(--one-eigth-width)">
     <div class="flex w-full">
