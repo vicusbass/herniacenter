@@ -374,57 +374,65 @@ const confortCarouselItems = [
     <div class="hidden aspect-[2/1] h-[12.5vw] bg-[var(--color-border-custom)] md:block"></div>
   </div>
   <div class="flex flex-row flex-wrap md:px-(--one-eigth-width)">
-    <Image src={confort} alt="Confort" class="hidden aspect-square w-full md:block md:w-[37.5vw]" />
+    <!-- Row 1: Image left, Text right (desktop) / Text then Image (mobile) -->
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
+      class="mobile-animate border-custom order-1 flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:order-2 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <SquaresAnimation />
-      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
+      <div class="mt-4 text-2xl leading-7 md:text-xl">
         Fiecare detaliu este gândit pentru a oferi pacienților o experiență cât mai plăcută, sigură
         și lipsită de stres.
       </div>
     </div>
-    <Image src={confort} alt="Confort" class="aspect-square w-full md:hidden" />
+    <Image
+      src={confort}
+      alt="Confort"
+      class="order-2 aspect-square w-full md:order-1 md:w-[37.5vw]"
+    />
+
+    <!-- Row 2: Text left, Image right (desktop) / Text then Image (mobile) -->
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
+      class="mobile-animate border-custom order-3 flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <HeartAnimation />
-      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
+      <div class="mt-4 text-2xl leading-7 md:text-xl">
         După intervenție, pacienții beneficiază de monitorizare continuă, într-un spațiu complet
         echipat și asistat medical.
       </div>
     </div>
-    <Image src={robot} alt="Robot" class="aspect-square w-full object-cover md:w-[37.5vw]" />
     <Image
-      src={monitoring}
-      alt="Monitorizare"
-      class="hidden aspect-square w-full object-cover md:block md:w-[37.5vw]"
+      src={robot}
+      alt="Robot"
+      class="order-4 aspect-square w-full object-cover md:w-[37.5vw]"
     />
+
+    <!-- Row 3: Image left, Text right (desktop) / Text then Image (mobile) -->
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
+      class="mobile-animate border-custom order-5 flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:order-6 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <PolygonAnimation />
-      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
+      <div class="mt-4 text-2xl leading-7 md:text-xl">
         Asistența este prezentă permanent pe secție, iar echipa chirurgicală și echipa de terapie
         intensivă se află fizic în spital, gata să intervină oricând este nevoie.
       </div>
     </div>
-    <Image src={hol} alt="Hol" class="aspect-square w-full md:hidden" />
+    <Image
+      src={monitoring}
+      alt="Monitorizare"
+      class="order-6 aspect-square w-full object-cover md:order-5 md:w-[37.5vw]"
+    />
+
+    <!-- Row 4: Text left, Image right (desktop) / Text then Image (mobile) -->
     <div
-      class="border-custom flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
+      class="mobile-animate border-custom order-7 flex w-full flex-col justify-end border p-[clamp(1rem,4vw,4rem)] pt-30 md:aspect-square md:w-[37.5vw] md:pt-4"
     >
       <TriangleBarsAnimation />
-      <div class="mt-4 text-2xl leading-7 md:text-2xl md:text-xl">
+      <div class="mt-4 text-2xl leading-7 md:text-xl">
         Această prezență medicală constantă oferă pacienților siguranță, răspunsuri rapide și o
         recuperare lipsită de stres, într-un mediu controlat și profesionist.
       </div>
     </div>
-    <Image
-      src={monitoring}
-      alt="Monitorizare"
-      class="aspect-square w-full object-cover md:hidden"
-    />
-    <Image src={hol} alt="Hol" class="hidden aspect-square w-[37.5vw] md:block" />
+    <Image src={hol} alt="Hol" class="order-8 aspect-square w-full object-cover md:w-[37.5vw]" />
   </div>
   <section class="max-w-full md:px-(--one-eigth-width)">
     <div class="flex w-full">
@@ -790,6 +798,29 @@ const confortCarouselItems = [
         });
       });
     });
+
+    // Mobile animation observer - only on mobile devices
+    if (window.innerWidth < 768) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '-120px',
+        }
+      );
+
+      // Observe all mobile animation containers
+      const mobileAnimations = document.querySelectorAll('.mobile-animate');
+      mobileAnimations.forEach((animation) => {
+        observer.observe(animation);
+      });
+    }
   });
 </script>
 
