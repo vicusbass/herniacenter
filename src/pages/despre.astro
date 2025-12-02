@@ -2,9 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spital/spital_night.jpg';
-import hands from '../assets/despre/hands.png';
 import morehands from '../assets/despre/morehands.png';
-import device from '../assets/despre/device.png';
+import monitoring from '../assets/despre/monitoring.jpg';
+import consult from '../assets/despre/dr-consult.jpg';
+import salon from '../assets/despre/salon.jpg';
+import device from '../assets/despre/device.jpg';
 import HeartAnimation from '../components/HeartAnimation.astro';
 import SquaresAnimation from '../components/SquaresAnimation.astro';
 import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
@@ -93,193 +95,108 @@ import PolygonAnimation from '../components/PolygonAnimation.astro';
           <div class="border-custom gray-bg aspect-square w-1/6"></div>
         </div>
 
-        <!-- Section 1 -->
-        <div class="md:flex">
-          <div class="aspect-square w-full md:w-1/2">
-            <Image src={hands} alt="Hands" class="h-full w-full object-cover" />
-          </div>
-
-          <!-- Animation - Mobile only -->
-          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
-            <HeartAnimation />
-          </div>
-
-          <!-- Text - Mobile only -->
-          <div class="px-4 pb-8 md:hidden">
-            <p>
+        <!-- Section 1: Image left, Text right (desktop) / Text then Image (mobile) -->
+        <div class="flex flex-wrap md:flex-nowrap">
+          <!-- Text + Animation block -->
+          <div
+            class="mobile-animate order-1 flex w-full flex-col justify-end px-4 py-8 md:relative md:order-2 md:aspect-square md:w-1/2 md:p-0"
+          >
+            <div class="md:absolute md:top-8 md:left-12">
+              <HeartAnimation />
+            </div>
+            <p class="md:text-clamp-36 mt-4 md:absolute md:right-4 md:bottom-20 md:left-12 md:mt-0">
               La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
               abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
               pacient.
             </p>
           </div>
-
-          <!-- Animation + Text - Desktop only -->
-          <div
-            class="border-custom relative hidden aspect-square w-full border-t border-r md:block md:w-1/2"
-          >
-            <div class="absolute top-8 left-12">
-              <HeartAnimation />
-            </div>
-
-            <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-clamp-36">
-                La Hernia Center, ne concentrăm exclusiv pe diagnosticul și tratamentul herniilor
-                abdominale, abordând fiecare caz cu profesionalism, precizie și grijă reală față de
-                pacient.
-              </p>
-            </div>
+          <!-- Image -->
+          <div class="order-2 aspect-square w-full md:order-1 md:w-1/2">
+            <Image src={monitoring} alt="Monitoring" class="h-full w-full object-cover" />
           </div>
         </div>
 
-        <!-- Section 2: Mobile (image, animation, text) | Desktop (animation left, image right) -->
-        <div class="md:flex">
-          <!-- Image -->
-          <div class="aspect-square w-full md:order-2 md:w-1/2">
-            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
-          </div>
-
-          <!-- Animation - Mobile only -->
-          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
-            <SquaresAnimation />
-          </div>
-
-          <!-- Text - Mobile only -->
-          <div class="px-4 pb-8 md:hidden">
-            <p>
+        <!-- Section 2: Text left, Image right (desktop) / Text then Image (mobile) -->
+        <div class="flex flex-wrap md:flex-nowrap">
+          <!-- Text + Animation block -->
+          <div
+            class="mobile-animate order-1 flex w-full flex-col justify-end px-4 py-8 md:relative md:aspect-square md:w-1/2 md:p-0"
+          >
+            <div class="md:absolute md:top-8 md:left-12">
+              <SquaresAnimation />
+            </div>
+            <p class="md:text-clamp-36 mt-4 md:absolute md:right-4 md:bottom-20 md:left-12 md:mt-0">
               Tratăm toate tipurile de hernii – de la cele frecvente, precum herniile inghinale și
               ombilicale, până la forme mai rare sau complexe – utilizând metode chirurgicale minim
               invazive care reduc semnificativ durerea postoperatorie și accelerează procesul de
               recuperare.
             </p>
           </div>
-
-          <!-- Animation + Text - Desktop only -->
-          <div
-            class="border-custom relative hidden aspect-square w-full border-l md:order-1 md:block md:w-1/2"
-          >
-            <div class="absolute top-8 left-12">
-              <SquaresAnimation />
-            </div>
-
-            <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-clamp-36">
-                Tratăm toate tipurile de hernii – de la cele frecvente, precum herniile inghinale și
-                ombilicale, până la forme mai rare sau complexe – utilizând metode chirurgicale
-                minim invazive care reduc semnificativ durerea postoperatorie și accelerează
-                procesul de recuperare.
-              </p>
-            </div>
+          <!-- Image -->
+          <div class="order-2 aspect-square w-full md:w-1/2">
+            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
           </div>
         </div>
 
-        <!-- Section 3 -->
-        <div class="md:flex">
-          <div class="aspect-square w-full md:w-1/2">
-            <Image src={device} alt="Device" class="h-full w-full object-cover" />
-          </div>
-
-          <!-- Animation - Mobile only -->
-          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
-            <TriangleBarsAnimation />
-          </div>
-
-          <!-- Text - Mobile only -->
-          <div class="px-4 pb-8 md:hidden">
-            <p>
+        <!-- Section 3: Image left, Text right (desktop) / Text then Image (mobile) -->
+        <div class="flex flex-wrap md:flex-nowrap">
+          <!-- Text + Animation block -->
+          <div
+            class="mobile-animate order-1 flex w-full flex-col justify-end px-4 py-8 md:relative md:order-2 md:aspect-square md:w-1/2 md:p-0"
+          >
+            <div class="md:absolute md:top-8 md:left-12">
+              <TriangleBarsAnimation />
+            </div>
+            <p class="md:text-clamp-36 mt-4 md:absolute md:right-4 md:bottom-20 md:left-12 md:mt-0">
               Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
               laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și cu
               un rezultat estetic superior.
             </p>
           </div>
-
-          <!-- Animation + Text - Desktop only -->
-          <div
-            class="border-custom relative hidden aspect-square w-full border-r md:block md:w-1/2"
-          >
-            <div class="absolute top-8 left-12">
-              <TriangleBarsAnimation />
-            </div>
-
-            <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-clamp-36">
-                Folosim echipamente de ultimă generație și aplicăm tehnici moderne de chirurgie
-                laparoscopică și robotică, pentru a oferi intervenții cât mai sigure, eficiente și
-                cu un rezultat estetic superior.
-              </p>
-            </div>
+          <!-- Image -->
+          <div class="order-2 aspect-square w-full md:order-1 md:w-1/2">
+            <Image src={device} alt="Device" class="h-full w-full object-cover" />
           </div>
         </div>
 
-        <!-- Section 4 -->
-        <div class="md:flex">
-          <div class="aspect-square w-full md:order-2 md:w-1/2">
-            <Image src={morehands} alt="Hands" class="h-full w-full object-cover" />
-          </div>
-
-          <!-- Animation - Mobile only -->
-          <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
-            <PolygonAnimation />
-          </div>
-
-          <!-- Text - Mobile only -->
-          <div class="px-4 pb-8 md:hidden">
-            <p>
+        <!-- Section 4: Text left, Image right (desktop) / Text then Image (mobile) -->
+        <div class="flex flex-wrap md:flex-nowrap">
+          <!-- Text + Animation block -->
+          <div
+            class="mobile-animate order-1 flex w-full flex-col justify-end px-4 py-8 md:relative md:aspect-square md:w-1/2 md:p-0"
+          >
+            <div class="md:absolute md:top-8 md:left-12">
+              <PolygonAnimation />
+            </div>
+            <p class="md:text-clamp-36 mt-4 md:absolute md:right-4 md:bottom-20 md:left-12 md:mt-0">
               Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
               sale, într-un spațiu dedicat, modern și prietenos.
             </p>
           </div>
-
-          <!-- Animation + Text - Desktop only -->
-          <div
-            class="border-custom relative hidden aspect-square w-full border-l md:order-1 md:block md:w-1/2"
-          >
-            <div class="absolute top-8 left-12">
-              <PolygonAnimation />
-            </div>
-
-            <div class="absolute right-4 bottom-20 left-12">
-              <p class="text-clamp-36">
-                Fiecare pacient beneficiază de un plan personalizat de tratament, adaptat nevoilor
-                sale, într-un spațiu dedicat, modern și prietenos.
-              </p>
-            </div>
+          <!-- Image -->
+          <div class="order-2 aspect-square w-full md:w-1/2">
+            <Image src={salon} alt="Salon" class="h-full w-full object-cover" />
           </div>
         </div>
       </section>
 
-      <!-- Section 5 -->
-      <div class="md:flex">
-        <div class="aspect-square w-full md:w-1/2">
-          <Image src={device} alt="Device" class="h-full w-full object-cover" />
-        </div>
-
-        <!-- Animation - Mobile only -->
-        <div class="mobile-animate flex justify-start py-8 pl-4 md:hidden">
-          <TriangleBarsAnimation />
-        </div>
-
-        <!-- Text - Mobile only -->
-        <div class="px-4 pb-8 md:hidden">
-          <p>
+      <!-- Section 5: Image left, Text right (desktop) / Text then Image (mobile) -->
+      <div class="flex flex-wrap md:flex-nowrap">
+        <!-- Text + Animation block -->
+        <div
+          class="mobile-animate order-1 flex w-full flex-col justify-end px-4 py-8 md:relative md:order-2 md:aspect-square md:w-1/2 md:p-0"
+        >
+          <div class="md:absolute md:top-8 md:left-12">
+            <TriangleBarsAnimation />
+          </div>
+          <p class="md:text-clamp-36 mt-4 md:absolute md:right-4 md:bottom-20 md:left-12 md:mt-0">
             Obiectivul nostru este simplu: o recuperare rapidă, fără durere, o experiență medicală
             pozitivă și o calitate a vieții cât mai bună după operația de hernie.
           </p>
         </div>
-
-        <!-- Animation + Text - Desktop only -->
-        <div
-          class="border-custom relative hidden aspect-square w-full border-r border-b md:block md:w-1/2"
-        >
-          <div class="absolute top-8 left-12">
-            <TriangleBarsAnimation />
-          </div>
-
-          <div class="absolute right-4 bottom-20 left-12">
-            <p class="text-clamp-36">
-              Obiectivul nostru este simplu: o recuperare rapidă, fără durere, o experiență medicală
-              pozitivă și o calitate a vieții cât mai bună după operația de hernie.
-            </p>
-          </div>
+        <!-- Image -->
+        <div class="order-2 aspect-square w-full md:order-1 md:w-1/2">
+          <Image src={consult} alt="Consult" class="h-full w-full object-cover" />
         </div>
       </div>
 
