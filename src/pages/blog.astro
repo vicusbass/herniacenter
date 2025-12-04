@@ -9,6 +9,7 @@ import PrimaryButton from '../components/PrimaryButton.astro';
 import Separator from '../components/Separator.astro';
 import WhatsAppIcon from '../assets/whatsapp-icon.svg';
 import { urlFor } from '../utils/sanityImageUrl';
+import contact from '../config/contact';
 
 const PAGE = {
   title: 'blog',
@@ -100,7 +101,7 @@ const [featuredArticle, ...otherArticles] = articles;
           </a>
         </div>
         <div class="pl-5">
-          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} />
+          <PrimaryButton text={PAGE.cta.text} icon={WhatsAppIcon} href={contact.whatsapp} />
         </div>
       </div>
       <div class="w-[12.5%] flex-none"></div>

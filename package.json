@@ -11,6 +11,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/darker-grotesque": "^5.2.6",
     "@iconify-json/mdi": "^1.2.3",
     "@portabletext/types": "^2.0.15",

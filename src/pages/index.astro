@@ -14,6 +14,7 @@ import TriangleBarsAnimation from '../components/TriangleBarsAnimation.astro';
 import SquaresAnimation from '../components/SquaresAnimation.astro';
 import HeartAnimation from '../components/HeartAnimation.astro';
 import PolygonAnimation from '../components/PolygonAnimation.astro';
+import contact from '../config/contact';
 
 const { data: testimonials } = await loadQuery<SanityDocument[]>({
   query: `*[_type == "review"] | order(priority asc)[0...3] {
@@ -121,7 +122,7 @@ const reviews = testimonials.map((review) => ({
         <div
           class="col-span-2 col-start-1 row-start-2 mt-10 md:col-span-1 md:col-start-3 md:row-start-3 md:mt-0"
         >
-          <PrimaryButton text="WhatsApp" icon={WhatsAppIcon} />
+          <PrimaryButton text="WhatsApp" icon={WhatsAppIcon} href={contact.whatsapp} />
         </div>
       </div>
     </div>

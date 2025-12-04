@@ -14,17 +14,78 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const siteUrl = 'https://herniacenter.ro';
+const description = 'Hernia Center - chirurgie minim invazivă a herniilor - Cluj-Napoca';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
 
 <!doctype html>
 <html lang="ro">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Hernia Center - chirurgie minim invazivă a herniilor" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- SEO -->
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="hernie, chirurgie hernie, hernie inghinală, hernie ombilicală, hernie incizională, laparoscopie, chirurgie minim invazivă, Cluj-Napoca, Dr. Trif"
+    />
+    <meta name="author" content="Dr. Trif - Hernia Center" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Geo tags -->
+    <meta name="geo.region" content="RO-CJ" />
+    <meta name="geo.placename" content="Cluj-Napoca" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/og.png`} />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content="Hernia Center" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og.png`} />
+
+    <!-- Structured Data / JSON-LD -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'MedicalClinic',
+        name: 'Hernia Center',
+        description: description,
+        url: siteUrl,
+        image: `${siteUrl}/og.png`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Cluj-Napoca',
+          addressRegion: 'Cluj',
+          addressCountry: 'RO',
+        },
+        medicalSpecialty: 'Chirurgie generală',
+        availableService: {
+          '@type': 'MedicalProcedure',
+          name: 'Chirurgie minim invazivă a herniilor',
+          procedureType: 'Laparoscopic',
+        },
+      })}
+    />
+
     <ClientRouter />
   </head>
   <body class="flex min-h-screen flex-col font-sans">
