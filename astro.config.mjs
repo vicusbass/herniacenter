@@ -12,8 +12,12 @@ dotenv.config({ path: '.env' });
 
 import sanity from '@sanity/astro';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://herniacenter.ro',
+
   vite: {
     plugins: [tailwindcss()],
   },
@@ -26,5 +30,6 @@ export default defineConfig({
       useCdn: false,
     }),
     lottie(),
+    sitemap(),
   ],
 });
