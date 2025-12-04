@@ -467,7 +467,7 @@ const confortCarouselItems = [
           },
           {
             title: 'recuperare',
-            details: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            details: 'rapidă și confortabilă, cu revenire la activitățile zilnice în timp scurt',
           },
           {
             title: 'eficiență',
@@ -719,18 +719,21 @@ const confortCarouselItems = [
 
         // Compute geometry (anchor top-left of button; modal doubled in size)
         const rect = el.getBoundingClientRect();
-        const targetWidth = rect.width * 2;
+        const isMobile = window.innerWidth < 768;
+
+        // On mobile, use full viewport width; on desktop, double the button width
+        const targetWidth = isMobile ? window.innerWidth : rect.width * 2;
         const targetHeight = rect.height * 2;
-        const left = rect.left + window.scrollX;
+        const left = isMobile ? 0 : rect.left + window.scrollX;
         const top = rect.top + window.scrollY;
 
-        const shouldAnchorRight = left + targetWidth > window.innerWidth;
+        const shouldAnchorRight = !isMobile && left + targetWidth > window.innerWidth;
 
         // Apply positioning & size
         Object.assign(modal.style, {
           ...(shouldAnchorRight
             ? { right: window.innerWidth - (left + rect.width) + 'px', left: 'auto' }
-            : { left: left + 'px' }),
+            : { left: left + 'px', right: 'auto' }),
           top: top + 'px',
           width: targetWidth + 'px',
           height: targetHeight + 'px',
@@ -739,7 +742,7 @@ const confortCarouselItems = [
           justifyContent: 'space-between',
           color: 'white',
           zIndex: '60',
-          transformOrigin: `top ${shouldAnchorRight ? 'right' : 'left'}`,
+          transformOrigin: isMobile ? 'top left' : `top ${shouldAnchorRight ? 'right' : 'left'}`,
           position: 'absolute',
           transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.2s ease',
         } as CSSStyleDeclaration);
