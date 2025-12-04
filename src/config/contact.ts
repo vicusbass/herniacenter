@@ -4,6 +4,6 @@ export default {
   phone,
   email: 'contact@herniacenter.ro',
   whatsapp: `https://wa.me/4${phone}`,
-  facebook: 'https://www.facebook.com/herniacenter',
-  instagram: 'https://www.instagram.com/herniacenter',
+  facebook: 'https://www.facebook.com/HerniaCenter.Cluj',
+  instagram: 'https://www.instagram.com/herniacenter.spital',
 };
