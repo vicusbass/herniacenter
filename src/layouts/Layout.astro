@@ -15,7 +15,8 @@ interface Props {
 
 const { title } = Astro.props;
 
-const siteUrl = 'https://herniacenter.ro';
+// TODO change to production URL
+const siteUrl = 'https://herniacenter.vercel.app';
 const description = 'Hernia Center - chirurgie minim invazivă a herniilor - Cluj-Napoca';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
