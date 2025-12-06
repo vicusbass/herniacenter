@@ -2,7 +2,7 @@ const phone = '0740387931';
 
 export default {
   phone,
-  email: 'contact@herniacenter.ro',
+  email: 'herniacentercluj@gmail.com',
   whatsapp: `https://wa.me/4${phone}`,
   facebook: 'https://www.facebook.com/HerniaCenter.Cluj',
   instagram: 'https://www.instagram.com/herniacenter.spital',

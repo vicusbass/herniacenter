@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vercel": "^9.0.2",
     "@fontsource-variable/darker-grotesque": "^5.2.6",
     "@iconify-json/mdi": "^1.2.3",
     "@portabletext/types": "^2.0.15",
@@ -29,6 +30,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-is": "^19.1.1",
+    "resend": "^6.5.2",
     "sanity": "^4.9.0",
     "styled-components": "^6.1.19",
     "tailwindcss": "^4.1.13"

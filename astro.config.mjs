@@ -14,12 +14,18 @@ import sanity from '@sanity/astro';
 
 import sitemap from '@astrojs/sitemap';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://herniacenter.ro',
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  image: {
+    domains: ['cdn.sanity.io'],
   },
 
   integrations: [
@@ -32,4 +38,6 @@ export default defineConfig({
     lottie(),
     sitemap(),
   ],
+
+  adapter: vercel(),
 });
