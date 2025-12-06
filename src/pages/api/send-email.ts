@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import contact from '../../config/contact';
 
 // This is necessary for the API route to be server-rendered
 export const prerender = false;
@@ -31,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { data, error } = await resend.emails.send({
       from: `${firstName} ${lastName} <request@herniacenter.ro>`,
-      to: 'herniacentercluj@gmail.com',
+      to: contact.email,
       replyTo: email,
       subject: `Mesaj nou de la ${firstName} ${lastName} - ${subject}`,
       html: `

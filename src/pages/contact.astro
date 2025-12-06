@@ -32,13 +32,13 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
               </p>
             </div>
 
-            <form class="space-y-4" method="POST" action="/api/contact">
+            <form id="contact-form-element" class="space-y-4">
               <div class="flex space-x-4">
                 <div class="flex-1">
                   <input
                     type="text"
-                    name="nume"
-                    placeholder="Nume"
+                    name="firstName"
+                    placeholder="Prenume"
                     required
                     class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                   />
@@ -46,8 +46,8 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
                 <div class="flex-1">
                   <input
                     type="text"
-                    name="prenume"
-                    placeholder="Prenume"
+                    name="lastName"
+                    placeholder="Nume"
                     required
                     class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                   />
@@ -57,22 +57,29 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
               <input
                 type="email"
                 name="email"
-                placeholder="e-mail"
+                placeholder="E-mail"
                 required
                 class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
               />
 
               <input
                 type="tel"
-                name="telefon"
-                placeholder="telefon"
+                name="phone"
+                placeholder="Telefon"
+                class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+              />
+
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subiect"
                 required
                 class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
               />
 
               <textarea
-                name="mesaj"
-                placeholder="lasă-ne un mesaj"
+                name="message"
+                placeholder="Lasă-ne un mesaj"
                 rows="4"
                 required
                 class="w-full border border-gray-300 bg-white px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
@@ -81,22 +88,23 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
               <div class="flex items-start space-x-3">
                 <input
                   type="checkbox"
-                  id="privacy"
-                  name="privacy"
+                  id="terms"
+                  name="terms"
                   required
                   class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
-                <label for="privacy" class="text-sm text-gray-600">
+                <label for="terms" class="text-sm text-gray-600">
                   Sunt de acord cu termenii și condițiile
                 </label>
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-[#003055] px-6 py-2 text-2xl font-medium text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                class="w-full bg-[#003055] px-6 py-2 text-2xl font-medium text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Trimite
               </button>
+
             </form>
           </div>
         </div>
@@ -115,3 +123,46 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
     </div>
   </section>
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('contact-form-element') as HTMLFormElement | null;
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Se trimite...';
+
+      const formData = new FormData(form);
+      const data = {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+        terms: formData.get('terms') === 'on',
+      };
+
+      try {
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          window.location.href = '/thank-you?status=success';
+        } else {
+          window.location.href = '/thank-you?status=error';
+        }
+      } catch {
+        window.location.href = '/thank-you?status=error';
+      }
+    });
+  });
+</script>

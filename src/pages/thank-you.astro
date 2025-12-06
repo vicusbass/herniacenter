@@ -1,22 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import contact from '../config/contact';
 ---
 
-<Layout title="Thank You | Symbold">
+<Layout title="Mulțumim | Hernia Center">
   <main class="flex min-h-screen items-center justify-center px-6 py-24">
     <div class="max-w-2xl text-center">
       <!-- Success state -->
       <div id="success-state" class="hidden">
         <div class="mb-8 text-6xl">✓</div>
-        <h1 class="mb-6 text-5xl font-bold md:text-7xl">Thank You!</h1>
+        <h1 class="mb-6 text-5xl font-bold md:text-7xl">Mulțumim!</h1>
         <p class="mb-8 text-xl leading-relaxed text-gray-700 md:text-2xl">
-          Your message has been successfully sent. We'll get back to you as soon as possible.
+          Mesajul tău a fost trimis cu succes. Te vom contacta în cel mai scurt timp posibil.
         </p>
         <a
           href="/"
-          class="inline-block border-1 border-black bg-accent px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
+          class="bg-accent inline-block border-1 border-black px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
         >
-          Back to Home
+          Înapoi la pagina principală
         </a>
       </div>
 
@@ -25,44 +26,44 @@ import Layout from '../layouts/Layout.astro';
         <div class="mb-8 text-6xl">✕</div>
         <h1 class="mb-6 text-5xl font-bold md:text-7xl">Oops!</h1>
         <p class="mb-4 text-xl leading-relaxed text-gray-700 md:text-2xl">
-          Something went wrong while sending your message.
+          A apărut o eroare la trimiterea mesajului.
         </p>
         <p class="mb-8 text-lg text-gray-600">
-          Please contact us directly at
+          Te rugăm să ne contactezi direct la
           <a
-            href="mailto:symboldstudio@gmail.com"
+            href={`mailto:${contact.email}`}
             class="font-semibold text-black underline hover:text-gray-700"
           >
-            symboldstudio@gmail.com
+            {contact.email}
           </a>
         </p>
         <div class="flex flex-col gap-4 md:flex-row md:justify-center">
           <a
             href="/contact"
-            class="inline-block border-1 border-black bg-accent px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
+            class="bg-accent inline-block border-1 border-black px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
           >
-            Try Again
+            Încearcă din nou
           </a>
           <a
             href="/"
             class="inline-block border-1 border-black bg-white px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
           >
-            Back to Home
+            Înapoi la pagina principală
           </a>
         </div>
       </div>
 
       <!-- Default state -->
       <div id="default-state" class="hidden">
-        <h1 class="mb-6 text-5xl font-bold md:text-7xl">Page Not Found</h1>
+        <h1 class="mb-6 text-5xl font-bold md:text-7xl">Pagină negăsită</h1>
         <p class="mb-8 text-xl leading-relaxed text-gray-700 md:text-2xl">
-          This page requires a status parameter.
+          Această pagină necesită un parametru de status.
         </p>
         <a
           href="/"
-          class="inline-block border-1 border-black bg-accent px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
+          class="bg-accent inline-block border-1 border-black px-10 py-4 text-base font-semibold uppercase transition-all hover:bg-black hover:text-white"
         >
-          Back to Home
+          Înapoi la pagina principală
         </a>
       </div>
     </div>
