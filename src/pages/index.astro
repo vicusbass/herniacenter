@@ -174,9 +174,9 @@ const reviews = testimonials.map((review) => ({
               data-title={title}
               data-description={description}
             >
-              <div class="flex justify-between">
+              <div class="flex w-full justify-between">
                 <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
-                <ArrowDown />
+                <ArrowDown class="arrow-icon" />
               </div>
               <h3 class="hernia-text" set:html={title.replace(' ', '<br />')} />
             </button>
@@ -207,7 +207,7 @@ const reviews = testimonials.map((review) => ({
       >
         <div class="flex justify-between">
           <div id="hernia-number" class="hernia-title"></div>
-          <ArrowDown />
+          <ArrowDown class="arrow-icon" />
         </div>
         <h3 id="hernia-title" class="hernia-text"></h3>
         <h3 id="hernia-description" class="hernia-text"></h3>
@@ -431,6 +431,10 @@ const reviews = testimonials.map((review) => ({
       font-size: clamp(1rem, 1.146vw, 1.375rem);
     }
 
+    .arrow-icon.rotated {
+      transform: rotate(180deg);
+    }
+
     @media (width >= 40rem) {
       .hernia-container {
         padding: clamp(0.3rem, 2vw, 1.5rem);
@@ -532,12 +536,18 @@ const reviews = testimonials.map((review) => ({
           const modal = document.getElementById('hernina-type-modal') as HTMLElement | null;
           if (!modal) return;
 
+          const btnArrow = el.querySelector('.arrow-icon');
+          const modalArrow = modal.querySelector('.arrow-icon');
+
           // If a previous close listener exists, remove it before re-opening
           if (detachModalClose) {
             detachModalClose();
             detachModalClose = null;
           }
           if (modal.style.display === 'flex') {
+            // Remove rotation when closing
+            btnArrow?.classList.remove('rotated');
+            modalArrow?.classList.remove('rotated');
             // Ignore the very click that opened (listener added after frame)
             // @ts-ignore
             document.removeEventListener('click', docHandler, true);
@@ -547,6 +557,10 @@ const reviews = testimonials.map((review) => ({
             close();
             return;
           }
+
+          // Add rotation when opening
+          btnArrow?.classList.add('rotated');
+          modalArrow?.classList.add('rotated');
 
           // Extract data attributes
           const number = el.getAttribute('data-number') || '';
@@ -605,6 +619,9 @@ const reviews = testimonials.map((review) => ({
 
             // After opening animation begins, register global click to close
             const close = () => {
+              // Remove rotation when closing
+              btnArrow?.classList.remove('rotated');
+              modalArrow?.classList.remove('rotated');
               // Reverse animation
               modal.style.transform = `scale(${scaleX}, ${scaleY})`;
               modal.style.opacity = '0';

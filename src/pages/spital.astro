@@ -214,7 +214,7 @@ const confortCarouselItems = [
               onclick="location.href='/interventii'"
             >
               <div
-                class="flex flex-col items-end justify-end text-2xl/6 text-white md:text-xl/6 lg:text-3xl/6"
+                class="flex-colitems-end flex justify-end text-2xl/6 text-white md:text-xl/6 lg:text-3xl/6"
               >
                 <ArrowRight
                   class="mt-1 ml-4 scale-60 transition-all duration-300 ease-out group-hover:translate-x-3"
@@ -283,9 +283,13 @@ const confortCarouselItems = [
             details="tehnologii atraumatice care reduc durerea postoperatorie și accelerează vindecarea."
           />
           <div
-            class="primary-bg border-custom relative z-10 flex flex-1 items-center justify-center overflow-hidden border-b"
+            class="group primary-bg border-custom relative z-10 flex flex-1 cursor-pointer items-center justify-center overflow-hidden border-b"
+            onclick="location.href='/interventii'"
           >
-            <h3 class="text-center text-4xl text-white">programeaza-te</h3>
+            <h3 class="text-center text-3xl text-white">programează-te</h3>
+            <ArrowRight
+              class="mt-2 scale-70 transition-all duration-300 ease-out group-hover:translate-x-3"
+            />
           </div>
         </div>
       </section>
