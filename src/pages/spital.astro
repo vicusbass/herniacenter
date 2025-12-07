@@ -10,6 +10,7 @@ import mri from '../assets/spital/mri.jpg';
 import hospital1 from '../assets/spital/sala_operatii.jpg';
 import device from '../assets/spital/doctor_device.jpg';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
+import HerniaButton from '../components/HerniaButton.astro';
 import ArrowDown from '../assets/arrow-down.svg';
 import ArrowRight from '../assets/arrow-right.svg';
 import multiroom from '../assets/spital/salon.jpg';
@@ -233,7 +234,7 @@ const confortCarouselItems = [
           >
             <div class="flex justify-between">
               <div id="hernia-number" class="hernia-title"></div>
-              <ArrowDown />
+              <ArrowDown class="arrow-icon" />
             </div>
             <h3 id="hernia-title" class="hernia-text"></h3>
             <h3 id="hernia-description" class="hernia-text"></h3>
@@ -482,25 +483,21 @@ const confortCarouselItems = [
             details: 'directă cu echipa medicală, pe tot parcursul procesului',
           },
         ].map(({ title, details }, index, items) => (
-          <button
-            class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between border-t border-l md:border-b ${
+          <HerniaButton
+            number={index + 1}
+            title={title}
+            description={details}
+            borderClasses={`border-t border-l md:border-b ${
               index === items.length - 1
                 ? 'border-r border-b'
                 : index % 2 === 1
                   ? 'border-r md:border-r-0'
                   : ''
-            } `}
-            data-number={String(index + 1).padStart(2, '0')}
-            data-title={title}
-            data-description={details}
-            data-modal-id="reasons-modal"
-          >
-            <div class="flex justify-between">
-              <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
-              <ArrowDown />
-            </div>
-            <h3 class="hernia-text">{title}</h3>
-          </button>
+            }`}
+            modalId="reasons-modal"
+            hasArrowClass={true}
+            innerDivFullWidth={true}
+          />
         ))
       }
       <button
@@ -522,7 +519,7 @@ const confortCarouselItems = [
       >
         <div class="flex justify-between">
           <div id="hernia-number" class="hernia-title"></div>
-          <ArrowDown />
+          <ArrowDown class="arrow-icon" />
         </div>
         <h3 id="hernia-title" class="hernia-text"></h3>
         <h3 id="hernia-description" class="hernia-text"></h3>
@@ -678,131 +675,6 @@ const confortCarouselItems = [
             }
           });
         }
-      });
-    });
-    // Track a detachable global click listener for modal close
-    let detachModalClose: (() => void) | null = null;
-
-    Array.from(document.getElementsByClassName('hernia-button')).forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const el = e.currentTarget as HTMLElement | null;
-        if (!el) return;
-
-        const modalId = el.getAttribute('data-modal-id') || 'hernina-type-modal';
-        const modal = document.getElementById(modalId) as HTMLElement | null;
-        if (!modal) return;
-
-        // If a previous close listener exists, remove it before re-opening
-        if (detachModalClose) {
-          detachModalClose();
-          detachModalClose = null;
-        }
-        if (modal.style.display === 'flex') {
-          // Ignore the very click that opened (listener added after frame)
-          // @ts-ignore
-          document.removeEventListener('click', docHandler, true);
-          // @ts-ignore
-          modal.removeEventListener('click', modalHandler, true);
-          detachModalClose = null;
-          close();
-          return;
-        }
-
-        // Extract data attributes
-        const number = el.getAttribute('data-number') || '';
-        const title = el.getAttribute('data-title') || '';
-        const description = el.getAttribute('data-description') || '';
-
-        // Populate modal content
-        const numEl = modal.querySelector('#hernia-number');
-        const titleEl = modal.querySelector('#hernia-title');
-        const descEl = modal.querySelector('#hernia-description');
-        if (numEl) numEl.textContent = number;
-        if (titleEl) titleEl.textContent = title;
-        if (descEl) descEl.textContent = description;
-
-        // Compute geometry (anchor top-left of button; modal doubled in size)
-        const rect = el.getBoundingClientRect();
-        const isMobile = window.innerWidth < 768;
-
-        // On mobile, use full viewport width; on desktop, double the button width
-        const targetWidth = isMobile ? window.innerWidth : rect.width * 2;
-        const targetHeight = rect.height * 2;
-        const left = isMobile ? 0 : rect.left + window.scrollX;
-        const top = rect.top + window.scrollY;
-
-        const shouldAnchorRight = !isMobile && left + targetWidth > window.innerWidth;
-
-        // Apply positioning & size
-        Object.assign(modal.style, {
-          ...(shouldAnchorRight
-            ? { right: window.innerWidth - (left + rect.width) + 'px', left: 'auto' }
-            : { left: left + 'px', right: 'auto' }),
-          top: top + 'px',
-          width: targetWidth + 'px',
-          height: targetHeight + 'px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          color: 'white',
-          zIndex: '60',
-          transformOrigin: isMobile ? 'top left' : `top ${shouldAnchorRight ? 'right' : 'left'}`,
-          position: 'absolute',
-          transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.2s ease',
-        } as CSSStyleDeclaration);
-
-        // Opening animation: start at original button scale (0.5 if doubling)
-        const scaleX = rect.width / targetWidth;
-        const scaleY = rect.height / targetHeight;
-        modal.style.opacity = '0';
-        modal.style.transform = `scale(${scaleX}, ${scaleY})`;
-
-        // Force reflow then animate
-        void modal.offsetWidth;
-        requestAnimationFrame(() => {
-          modal.style.opacity = '1';
-          modal.style.transform = 'scale(1,1)';
-
-          // After opening animation begins, register global click to close
-          const close = () => {
-            // Reverse animation
-            modal.style.transform = `scale(${scaleX}, ${scaleY})`;
-            modal.style.opacity = '0';
-            const handleEnd = (ev: TransitionEvent) => {
-              if (ev.propertyName === 'transform' || ev.propertyName === 'opacity') {
-                modal.removeEventListener('transitionend', handleEnd);
-                // Hide modal (kept in DOM for reuse)
-                modal.style.display = 'none';
-              }
-            };
-            modal.addEventListener('transitionend', handleEnd);
-          };
-
-          const docHandler = () => {
-            // Ignore the very click that opened (listener added after frame)
-            document.removeEventListener('click', docHandler, true);
-            modal.removeEventListener('click', modalHandler, true);
-            detachModalClose = null;
-            close();
-          };
-
-          const modalHandler = () => {
-            document.removeEventListener('click', docHandler, true);
-            modal.removeEventListener('click', modalHandler, true);
-            detachModalClose = null;
-            close();
-          };
-
-          // Use capture so we intercept before other handlers; ensures single fire
-          document.addEventListener('click', docHandler, true);
-          modal.addEventListener('click', modalHandler, true);
-
-          // Provide a detach function for subsequent opens
-          detachModalClose = () => {
-            document.removeEventListener('click', docHandler, true);
-            modal.removeEventListener('click', modalHandler, true);
-          };
-        });
       });
     });
 

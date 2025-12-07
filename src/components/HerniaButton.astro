@@ -1,0 +1,213 @@
+---
+import ArrowDown from '../assets/arrow-down.svg';
+
+interface Props {
+  number: string | number;
+  title: string;
+  description: string;
+  borderClasses?: string;
+  modalId?: string;
+  hasArrowClass?: boolean;
+  titleBreak?: boolean;
+  innerDivFullWidth?: boolean;
+}
+
+const {
+  number,
+  title,
+  description,
+  borderClasses = '',
+  modalId,
+  hasArrowClass = false,
+  titleBreak = false,
+  innerDivFullWidth = false,
+} = Astro.props;
+
+const formattedNumber = String(number).padStart(2, '0');
+---
+
+<button
+  class={`hernia-button border-custom hernia-container flex aspect-square cursor-pointer flex-col justify-between ${borderClasses}`}
+  data-number={formattedNumber}
+  data-title={title}
+  data-description={description}
+  data-modal-id={modalId}
+>
+  <div class={`flex justify-between${innerDivFullWidth ? ' w-full' : ''}`}>
+    <div class="hernia-title font-semibold">{formattedNumber}</div>
+    {hasArrowClass ? <ArrowDown class="arrow-icon" /> : <ArrowDown />}
+  </div>
+  {
+    titleBreak ? (
+      <h3 class="hernia-text" set:html={title.replace(' ', '<br />')} />
+    ) : (
+      <h3 class="hernia-text">{title}</h3>
+    )
+  }
+</button>
+
+<script>
+  let detachModalClose: (() => void) | null = null;
+
+  function initHerniaButtons() {
+    document.querySelectorAll('.hernia-button').forEach((btn) => {
+      // Skip if already initialized
+      if (btn.hasAttribute('data-initialized')) return;
+      btn.setAttribute('data-initialized', 'true');
+
+      btn.addEventListener('click', (e) => {
+        const el = e.currentTarget as HTMLElement | null;
+        if (!el) return;
+
+        const modalId = el.getAttribute('data-modal-id') || 'hernina-type-modal';
+        const modal = document.getElementById(modalId) as HTMLElement | null;
+        if (!modal) return;
+
+        const btnArrow = el.querySelector('.arrow-icon');
+        const modalArrow = modal.querySelector('.arrow-icon');
+
+        if (detachModalClose) {
+          detachModalClose();
+          detachModalClose = null;
+        }
+
+        if (modal.style.display === 'flex') {
+          // Remove rotation when closing
+          btnArrow?.classList.remove('rotated');
+          modalArrow?.classList.remove('rotated');
+          closeModal(modal);
+          return;
+        }
+
+        btnArrow?.classList.add('rotated');
+        modalArrow?.classList.add('rotated');
+
+        const number = el.getAttribute('data-number') || '';
+        const title = el.getAttribute('data-title') || '';
+        const description = el.getAttribute('data-description') || '';
+
+        const numEl = modal.querySelector('#hernia-number');
+        const titleEl = modal.querySelector('#hernia-title');
+        const descEl = modal.querySelector('#hernia-description');
+        if (numEl) numEl.textContent = number;
+        if (titleEl) titleEl.textContent = title;
+        if (descEl) descEl.textContent = description;
+
+        const rect = el.getBoundingClientRect();
+        const isMobile = window.innerWidth < 768;
+
+        const targetWidth = isMobile ? window.innerWidth : rect.width * 2;
+        const targetHeight = rect.height * 2;
+        const left = isMobile ? 0 : rect.left + window.scrollX;
+        const top = rect.top + window.scrollY;
+
+        const shouldAnchorRight = !isMobile && left + targetWidth > window.innerWidth;
+
+        Object.assign(modal.style, {
+          ...(shouldAnchorRight
+            ? { right: window.innerWidth - (left + rect.width) + 'px', left: 'auto' }
+            : { left: left + 'px', right: 'auto' }),
+          top: top + 'px',
+          width: targetWidth + 'px',
+          height: targetHeight + 'px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          color: 'white',
+          zIndex: '60',
+          transformOrigin: isMobile ? 'top left' : `top ${shouldAnchorRight ? 'right' : 'left'}`,
+          position: 'absolute',
+          transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.2s ease',
+        } as CSSStyleDeclaration);
+
+        // Opening animation
+        const scaleX = rect.width / targetWidth;
+        const scaleY = rect.height / targetHeight;
+        modal.style.opacity = '0';
+        modal.style.transform = `scale(${scaleX}, ${scaleY})`;
+
+        void modal.offsetWidth;
+        requestAnimationFrame(() => {
+          modal.style.opacity = '1';
+          modal.style.transform = 'scale(1,1)';
+
+          const close = () => {
+            btnArrow?.classList.remove('rotated');
+            modalArrow?.classList.remove('rotated');
+            closeModal(modal, scaleX, scaleY);
+          };
+
+          const docHandler = () => {
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+            detachModalClose = null;
+            close();
+          };
+
+          const modalHandler = () => {
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+            detachModalClose = null;
+            close();
+          };
+
+          document.addEventListener('click', docHandler, true);
+          modal.addEventListener('click', modalHandler, true);
+
+          detachModalClose = () => {
+            document.removeEventListener('click', docHandler, true);
+            modal.removeEventListener('click', modalHandler, true);
+          };
+        });
+      });
+    });
+  }
+
+  function closeModal(modal: HTMLElement, scaleX = 0.5, scaleY = 0.5) {
+    modal.style.transform = `scale(${scaleX}, ${scaleY})`;
+    modal.style.opacity = '0';
+    const handleEnd = (ev: TransitionEvent) => {
+      if (ev.propertyName === 'transform' || ev.propertyName === 'opacity') {
+        modal.removeEventListener('transitionend', handleEnd);
+        modal.style.display = 'none';
+      }
+    };
+    modal.addEventListener('transitionend', handleEnd);
+  }
+
+  document.addEventListener('astro:page-load', initHerniaButtons);
+  initHerniaButtons();
+</script>
+
+<style>
+  .hernia-container {
+    padding: 2rem;
+  }
+
+  .hernia-title {
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
+    line-height: 0.4;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .hernia-text {
+    font-size: clamp(1.45rem, 1.875vw, 2.25rem);
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  :global(.arrow-icon) {
+    transition: transform 0.3s ease;
+  }
+
+  :global(.arrow-icon.rotated) {
+    transform: rotate(180deg);
+  }
+
+  @media (width >= 40rem) {
+    .hernia-container {
+      padding: clamp(0.3rem, 2vw, 1.5rem);
+    }
+  }
+</style>
