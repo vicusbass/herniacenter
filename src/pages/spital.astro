@@ -726,12 +726,12 @@ const confortCarouselItems = [
         const isMobile = window.innerWidth < 768;
 
         // On mobile, use full viewport width; on desktop, double the button width
-        const targetWidth = isMobile ? window.innerWidth : rect.width * 2;
+        const targetWidth = rect.width * 2;
         const targetHeight = rect.height * 2;
-        const left = isMobile ? 0 : rect.left + window.scrollX;
+        const left = rect.left + window.scrollX;
         const top = rect.top + window.scrollY;
 
-        const shouldAnchorRight = !isMobile && left + targetWidth > window.innerWidth;
+        const shouldAnchorRight = left + targetWidth > window.innerWidth;
 
         // Apply positioning & size
         Object.assign(modal.style, {
@@ -746,7 +746,7 @@ const confortCarouselItems = [
           justifyContent: 'space-between',
           color: 'white',
           zIndex: '60',
-          transformOrigin: isMobile ? 'top left' : `top ${shouldAnchorRight ? 'right' : 'left'}`,
+          transformOrigin: `top ${shouldAnchorRight ? 'right' : 'left'}`,
           position: 'absolute',
           transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.2s ease',
         } as CSSStyleDeclaration);
