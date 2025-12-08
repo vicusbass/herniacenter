@@ -174,9 +174,9 @@ const reviews = testimonials.map((review) => ({
               data-title={title}
               data-description={description}
             >
-              <div class="flex justify-between">
+              <div class="flex w-full justify-between">
                 <div class="hernia-title font-semibold">{String(index + 1).padStart(2, '0')}</div>
-                <ArrowDown />
+                <ArrowDown class="arrow-icon" />
               </div>
               <h3 class="hernia-text" set:html={title.replace(' ', '<br />')} />
             </button>
@@ -207,7 +207,7 @@ const reviews = testimonials.map((review) => ({
       >
         <div class="flex justify-between">
           <div id="hernia-number" class="hernia-title"></div>
-          <ArrowDown />
+          <ArrowDown class="arrow-icon" />
         </div>
         <h3 id="hernia-title" class="hernia-text"></h3>
         <h3 id="hernia-description" class="hernia-text"></h3>
@@ -245,10 +245,10 @@ const reviews = testimonials.map((review) => ({
       <div class="hidden aspect-square md:block"></div>
       <div class="hidden aspect-square md:block"></div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-l md:col-span-3 md:row-span-3"
+        class="hernia-button mobile-expandable-only benefits border-custom hernia-container flex aspect-square flex-col border-t border-l md:col-span-3 md:row-span-3"
         data-number="01"
-        data-title="tehnici moderne"
-        data-description="Echipamente de ultimă generație pentru chirurgie laparoscopică și robotică, cu instrumentar de finețe și tehnologii atraumatice."
+        data-title="recuperare rapidă"
+        data-description="Tehnici moderne minim invazive, incizii mici, durere redusă, spitalizare scurtă, rezultat estetic superior."
       >
         <div class="flex justify-between">
           <div class="hernia-title font-semibold">01</div>
@@ -264,10 +264,10 @@ const reviews = testimonials.map((review) => ({
         </h4>
       </div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-l md:col-span-3 md:row-span-3"
+        class="hernia-button mobile-expandable-only benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-l md:col-span-3 md:row-span-3"
         data-number="02"
-        data-title="minim invaziv"
-        data-description="Incizii mici, durere redusă, estetică excelentă și risc scăzut de recidivă."
+        data-title="aparatură de ultimă generație"
+        data-description="Tehnologii atraumatice pentru chirurgie robotică și laparoscopică, imagistică avansată (ecografie, computer tomograf, rezonanță magnetică)."
       >
         <div class="flex justify-between">
           <div class="hernia-title font-semibold">02</div>
@@ -276,10 +276,10 @@ const reviews = testimonials.map((review) => ({
             <SquaresAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">minim<br />invaziv</h3>
+        <h3 class="benefits-title">aparatură de<br />ultimă generație</h3>
         <h4 class="hernia-text benefits-description hidden md:block">
-          Tehnologii atraumatice pentru chirurgie robotica si laparoscopică, imagistica avansată
-          (ecografie, computer tomograf, rezonanță magnetică)
+          Tehnologii atraumatice pentru chirurgie robotică și laparoscopică, imagistică avansată
+          (ecografie, computer tomograf, rezonanță magnetică).
         </h4>
       </div>
       <div class="hidden aspect-square md:block"></div>
@@ -289,10 +289,10 @@ const reviews = testimonials.map((review) => ({
       <div class="hidden aspect-square md:block"></div>
       <div class="hidden aspect-square md:block"></div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-b border-l md:col-span-3 md:row-span-3"
+        class="hernia-button mobile-expandable-only benefits border-custom hernia-container flex aspect-square flex-col border-t border-b border-l md:col-span-3 md:row-span-3"
         data-number="03"
-        data-title="recuperare rapidă"
-        data-description="Pacienții își reiau activitățile în doar câteva zile. Internarea e de obicei 1 zi."
+        data-title="spital modern"
+        data-description="Saloane confortabile dotate cu baie proprie, TV, Wi-Fi, spații de relaxare, restaurant și parcare, pentru o experiență medicală plăcută și sigură."
       >
         <div class="flex justify-between">
           <div class="hernia-title font-semibold">03</div>
@@ -301,17 +301,17 @@ const reviews = testimonials.map((review) => ({
             <HeartAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">recuperare<br />rapidă</h3>
+        <h3 class="benefits-title">spital<br />modern</h3>
         <h4 class="hernia-text benefits-description hidden md:block">
-          Tehnici moderne minim invazive, incizii mici, durere redusa, spitalizare scurta, rezultat
-          estetic superior.
+          Saloane confortabile dotate cu baie proprie, TV, Wi-Fi, spații de relaxare, restaurant și
+          parcare, pentru o experiență medicală plăcută și sigură.
         </h4>
       </div>
       <div
-        class="hernia-button benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-b border-l md:col-span-3 md:row-span-3"
+        class="hernia-button mobile-expandable-only benefits border-custom hernia-container flex aspect-square flex-col border-t border-r border-b border-l md:col-span-3 md:row-span-3"
         data-number="04"
-        data-title="spital modern"
-        data-description="Bloc operator complet echipat, saloane cu baie proprie, rețea digitală internă, camere private și zone de relaxare."
+        data-title="discreție și confort"
+        data-description="Respectăm intimitatea fiecărui pacient și oferim o experiență medicală discretă și confortabilă, cu programări rapide și contact direct cu medicul chirurg."
       >
         <div class="flex justify-between">
           <div class="hernia-title font-semibold">04</div>
@@ -320,10 +320,10 @@ const reviews = testimonials.map((review) => ({
             <PolygonAnimation />
           </div>
         </div>
-        <h3 class="benefits-title">spital<br />modern</h3>
+        <h3 class="benefits-title">discreție<br />și confort</h3>
         <h4 class="hernia-text benefits-description hidden md:block">
-          Saloane confortabile dotate cu baie proprie, TV, Wi-Fi, spații de relaxare, restaurant și
-          parcare, pentru o experiență medicală plăcută și sigură.
+          Respectăm intimitatea fiecărui pacient și oferim o experiență medicală discretă și
+          confortabilă, cu programări rapide și contact direct cu medicul chirurg.
         </h4>
       </div>
       <div class="hidden aspect-square md:block"></div>
@@ -431,6 +431,10 @@ const reviews = testimonials.map((review) => ({
       font-size: clamp(1rem, 1.146vw, 1.375rem);
     }
 
+    .arrow-icon.rotated {
+      transform: rotate(180deg);
+    }
+
     @media (width >= 40rem) {
       .hernia-container {
         padding: clamp(0.3rem, 2vw, 1.5rem);
@@ -525,6 +529,8 @@ const reviews = testimonials.map((review) => ({
 
       Array.from(document.getElementsByClassName('hernia-button')).forEach((btn) => {
         if (btn.classList.contains('benefits') && window.innerWidth > smallScreen) return;
+        if (btn.classList.contains('mobile-expandable-only') && window.innerWidth > smallScreen)
+          return;
         btn.addEventListener('click', (e) => {
           const el = e.currentTarget as HTMLElement | null;
           if (!el) return;
@@ -532,12 +538,18 @@ const reviews = testimonials.map((review) => ({
           const modal = document.getElementById('hernina-type-modal') as HTMLElement | null;
           if (!modal) return;
 
+          const btnArrow = el.querySelector('.arrow-icon');
+          const modalArrow = modal.querySelector('.arrow-icon');
+
           // If a previous close listener exists, remove it before re-opening
           if (detachModalClose) {
             detachModalClose();
             detachModalClose = null;
           }
           if (modal.style.display === 'flex') {
+            // Remove rotation when closing
+            btnArrow?.classList.remove('rotated');
+            modalArrow?.classList.remove('rotated');
             // Ignore the very click that opened (listener added after frame)
             // @ts-ignore
             document.removeEventListener('click', docHandler, true);
@@ -547,6 +559,10 @@ const reviews = testimonials.map((review) => ({
             close();
             return;
           }
+
+          // Add rotation when opening
+          btnArrow?.classList.add('rotated');
+          modalArrow?.classList.add('rotated');
 
           // Extract data attributes
           const number = el.getAttribute('data-number') || '';
@@ -605,6 +621,9 @@ const reviews = testimonials.map((review) => ({
 
             // After opening animation begins, register global click to close
             const close = () => {
+              // Remove rotation when closing
+              btnArrow?.classList.remove('rotated');
+              modalArrow?.classList.remove('rotated');
               // Reverse animation
               modal.style.transform = `scale(${scaleX}, ${scaleY})`;
               modal.style.opacity = '0';
