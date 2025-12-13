@@ -1,4 +1,4 @@
-const phone = '0740387931';
+const phone = '0722777542';
 
 export default {
   phone,
