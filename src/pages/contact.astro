@@ -129,15 +129,19 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
     const form = document.getElementById('contact-form-element') as HTMLFormElement | null;
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    // Remove any existing submit handler to prevent duplicates (Safari fix)
+    const newForm = form.cloneNode(true) as HTMLFormElement;
+    form.parentNode?.replaceChild(newForm, form);
+
+    newForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const submitButton = newForm.querySelector('button[type="submit"]') as HTMLButtonElement;
       const originalText = submitButton.textContent;
       submitButton.disabled = true;
       submitButton.textContent = 'Se trimite...';
 
-      const formData = new FormData(form);
+      const formData = new FormData(newForm);
       const data = {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
