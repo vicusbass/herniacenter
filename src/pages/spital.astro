@@ -2,11 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import spital from '../assets/spitalul-panoramic.jpg';
-import ct from '../assets/spital/ct.jpg';
-import ecograph from '../assets/spital/ecograph.jpeg';
+import tomografie from '../assets/spital/tomografie.jpg';
+import ecografie from '../assets/spital/ecografie.jpg';
 import hol from '../assets/spital/hol.jpg';
 import robot from '../assets/spital/robot.jpg';
-import mri from '../assets/spital/mri.jpg';
+import rezonanta from '../assets/spital/rezonanta.jpg';
 import hospital1 from '../assets/spital/sala_operatii.jpg';
 import device from '../assets/spital/doctor_device.jpg';
 import LottieAnimationContainer from '../components/LottieAnimationContainer.astro';
@@ -309,19 +309,19 @@ const confortCarouselItems = [
         </div>
       </div>
 
-      <div class="mx-0 flex flex-col md:mx-[12.5wv] md:flex-row">
+      <div class="mx-0 flex flex-col md:mx-[12.5wv] md:flex-row md:gap-1">
         {
           [
             {
-              imgSrc: ecograph,
+              imgSrc: ecografie,
               text: 'ecografie',
             },
             {
-              imgSrc: ct,
+              imgSrc: tomografie,
               text: 'tomografie computerizată',
             },
             {
-              imgSrc: mri,
+              imgSrc: rezonanta,
               text: 'rezonanță magnetică',
             },
           ].map((item) => (
