@@ -125,6 +125,8 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
 </Layout>
 
 <script>
+  import { conversions } from '../config/analytics';
+
   document.addEventListener('astro:page-load', () => {
     const form = document.getElementById('contact-form-element') as HTMLFormElement | null;
     if (!form) return;
@@ -160,7 +162,25 @@ import spitalImage from '../assets/spital/spital_morning.jpg';
         });
 
         if (response.ok) {
-          window.location.href = '/thank-you?status=success';
+          // Fire the Google Ads conversion, then redirect. event_callback keeps
+          // the redirect from racing the beacon; setTimeout is the fallback if
+          // gtag is blocked or slow.
+          const redirect = () => {
+            window.location.href = '/thank-you?status=success';
+          };
+          const gtag = (window as any).gtag;
+          if (typeof gtag === 'function' && conversions.form) {
+            let done = false;
+            const go = () => {
+              if (done) return;
+              done = true;
+              redirect();
+            };
+            gtag('event', 'conversion', { send_to: conversions.form, event_callback: go });
+            setTimeout(go, 900);
+          } else {
+            redirect();
+          }
         } else {
           window.location.href = '/thank-you?status=error';
         }

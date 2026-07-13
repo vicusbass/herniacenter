@@ -7,6 +7,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyWhatsApp from '../assets/sticky-whatsapp.svg';
 import contact from '../config/contact';
+import { conversions } from '../config/analytics';
 
 interface Props {
   title: string;
@@ -25,6 +26,18 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-11007801742"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'AW-11007801742');
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -108,5 +121,59 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <StickyWhatsApp class="h-12 w-12 md:h-16 md:w-16" />
       </a>
     </div>
+
+    <!-- Google Ads conversion tracking for WhatsApp + call (tel:) link clicks -->
+    <script define:vars={{ conversions }}>
+      (function () {
+        // The delegated listener lives on `document`, which survives Astro's
+        // ClientRouter navigations. Guard so it is attached exactly once even if
+        // this inline script re-runs on a page transition.
+        if (window.__adsClickTrackingInit) return;
+        window.__adsClickTrackingInit = true;
+
+        function trackClick(sendTo, link, event) {
+          if (typeof window.gtag !== 'function' || !sendTo) return;
+
+          // Links opening a new tab/window keep this page alive, so the beacon
+          // sends on its own — just fire the event and let navigation proceed.
+          var opensNewContext =
+            link.target === '_blank' ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.button === 1;
+
+          if (opensNewContext) {
+            window.gtag('event', 'conversion', { send_to: sendTo });
+            return;
+          }
+
+          // Same-tab navigation: hold it until the event is sent, with a
+          // timeout fallback so a blocked/slow gtag never traps the user.
+          var url = link.href;
+          var navigated = false;
+          var go = function () {
+            if (navigated) return;
+            navigated = true;
+            window.location.href = url;
+          };
+          event.preventDefault();
+          window.gtag('event', 'conversion', { send_to: sendTo, event_callback: go });
+          setTimeout(go, 900);
+        }
+
+        document.addEventListener('click', function (event) {
+          var target = event.target;
+          var link = target && target.closest ? target.closest('a[href]') : null;
+          if (!link) return;
+          var href = link.getAttribute('href') || '';
+          if (href.indexOf('https://wa.me/') === 0) {
+            trackClick(conversions.whatsapp, link, event);
+          } else if (href.indexOf('tel:') === 0) {
+            trackClick(conversions.call, link, event);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

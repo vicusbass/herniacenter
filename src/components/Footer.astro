@@ -68,7 +68,12 @@ import LocationMap from '../assets/location.png';
                 >
                   <Icon name="mdi:whatsapp" class="h-6 w-6" />
                 </a>
-                <span class="text-xl">{contact.phone}</span>
+                <a
+                  href={`tel:${contact.phone}`}
+                  class="text-xl transition-colors hover:text-blue-700"
+                >
+                  {contact.phone}
+                </a>
               </div>
               <a
                 href={contact.facebook}
@@ -170,7 +175,12 @@ import LocationMap from '../assets/location.png';
               >
                 <Icon name="mdi:whatsapp" class="h-5 w-5" />
               </a>
-              <span class="text-xl">{contact.phone}</span>
+              <a
+                href={`tel:${contact.phone}`}
+                class="text-xl transition-colors hover:text-blue-700"
+              >
+                {contact.phone}
+              </a>
             </div>
             <a
               href={contact.facebook}
