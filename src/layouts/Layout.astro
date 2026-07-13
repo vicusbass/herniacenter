@@ -7,7 +7,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyWhatsApp from '../assets/sticky-whatsapp.svg';
 import contact from '../config/contact';
-import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title: string;
@@ -109,6 +108,5 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <StickyWhatsApp class="h-12 w-12 md:h-16 md:w-16" />
       </a>
     </div>
-    <SpeedInsights />
   </body>
 </html>

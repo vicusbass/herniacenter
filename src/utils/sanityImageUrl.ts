@@ -1,15 +1,15 @@
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 import { sanityClient } from 'sanity:client';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { SanityImageSource } from '@sanity/image-url';
 
 const clientConfig = sanityClient.config();
 const projectId = clientConfig.projectId;
 const dataset = clientConfig.dataset;
 
-let builder: ReturnType<typeof imageUrlBuilder> | null = null;
+let builder: ReturnType<typeof createImageUrlBuilder> | null = null;
 
 if (projectId && dataset) {
-  builder = imageUrlBuilder({ projectId, dataset });
+  builder = createImageUrlBuilder({ projectId, dataset });
 } else {
   console.warn(
     'Sanity `projectId` or `dataset` not found in `sanityClient` configuration. ' +
