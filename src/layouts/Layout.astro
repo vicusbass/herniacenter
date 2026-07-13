@@ -36,6 +36,32 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       }
       gtag('js', new Date());
       gtag('config', 'AW-11007801742');
+
+      // Call conversion tracking via dynamic number insertion ("Calls from a
+      // website"). For visitors arriving from a Google Ad, Google supplies a
+      // forwarding number; the callback rewrites the displayed number and tel:
+      // links (marked with .js-call-number) so calls route through it and are
+      // counted. Non-ad visitors keep the normal number untouched.
+      (function () {
+        var forwarding = null;
+        function applyForwardingNumber() {
+          if (!forwarding) return;
+          var els = document.getElementsByClassName('js-call-number');
+          for (var i = 0; i < els.length; i++) {
+            els[i].setAttribute('href', 'tel:' + forwarding.mobile);
+            els[i].textContent = forwarding.formatted;
+          }
+        }
+        gtag('config', 'AW-11007801742/dgy-CP6W_fkDEI7z9oAp', {
+          phone_conversion_number: '0722 777 542',
+          phone_conversion_callback: function (formatted_number, mobile_number) {
+            forwarding = { formatted: formatted_number, mobile: mobile_number };
+            applyForwardingNumber();
+          },
+        });
+        // Re-apply after client-side (ClientRouter) navigations swap the DOM.
+        document.addEventListener('astro:page-load', applyForwardingNumber);
+      })();
     </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -122,7 +148,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       </a>
     </div>
 
-    <!-- Google Ads conversion tracking for WhatsApp + call (tel:) link clicks -->
+    <!-- Google Ads conversion tracking for WhatsApp link clicks -->
     <script define:vars={{ conversions }}>
       (function () {
         // The delegated listener lives on `document`, which survives Astro's
@@ -169,8 +195,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
           var href = link.getAttribute('href') || '';
           if (href.indexOf('https://wa.me/') === 0) {
             trackClick(conversions.whatsapp, link, event);
-          } else if (href.indexOf('tel:') === 0) {
-            trackClick(conversions.call, link, event);
           }
         });
       })();
