@@ -15,9 +15,9 @@ export const GOOGLE_ADS_ID = 'AW-11007801742';
 
 export const conversions = {
   // Click on any WhatsApp link (sticky button, footer, PrimaryButton CTAs).
-  whatsapp: `${GOOGLE_ADS_ID}/REPLACE_WITH_WHATSAPP_LABEL`,
+  whatsapp: `${GOOGLE_ADS_ID}/5LzpCOnnktAcEI7z9oAp`,
   // Successful contact form submission.
-  form: `${GOOGLE_ADS_ID}/REPLACE_WITH_FORM_LABEL`,
+  form: `${GOOGLE_ADS_ID}/1Q6aCM6a-c8cEI7z9oAp`,
 };
 
 export default { GOOGLE_ADS_ID, conversions };
